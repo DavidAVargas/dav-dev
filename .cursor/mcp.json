@@ -3,6 +3,10 @@
     "context7": {
       "url": "https://mcp.context7.com/mcp"
     },
+    "storybook-mcp": {
+      "type": "http",
+      "url": "http://localhost:6006/mcp"
+    },
     "vercel": {
       "url": "https://mcp.vercel.com"
     },

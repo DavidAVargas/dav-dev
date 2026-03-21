@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     "@storybook/addon-themes",
     "storybook-addon-test-codegen",
     "@whitespace/storybook-addon-html",
+    "@storybook/addon-mcp"
   ],
   framework: {
     name: "@storybook/nextjs-vite",
