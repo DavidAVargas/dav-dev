@@ -47,9 +47,41 @@ function useTypewriter(phrases: string[]) {
   return text;
 }
 
+const GLITCH_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&";
+
+function useGlitchText(original: string) {
+  const [display, setDisplay] = useState(original);
+  const frameRef = useRef<ReturnType<typeof setInterval>>(undefined);
+
+  const glitch = () => {
+    let iterations = 0;
+    clearInterval(frameRef.current);
+    frameRef.current = setInterval(() => {
+      setDisplay(
+        original
+          .split("")
+          .map((char, i) => {
+            if (char === " " || char === ".") return char;
+            if (iterations > i * 0.6) return original[i];
+            return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+          })
+          .join("")
+      );
+      iterations += 0.8;
+      if (iterations > original.length) {
+        clearInterval(frameRef.current);
+        setDisplay(original);
+      }
+    }, 35);
+  };
+
+  return { display, glitch };
+}
+
 export function Hero() {
   const typed = useTypewriter(PHRASES);
   const [scanned, setScanned] = useState(false);
+  const { display: nameDisplay, glitch } = useGlitchText("DAVID A. VARGAS");
 
   useEffect(() => {
     const t = setTimeout(() => setScanned(true), 1800);
@@ -86,14 +118,15 @@ export function Hero() {
         </p>
 
         {/* Name */}
-        <HudFrame cornerColor="gold" className="px-8 py-4">
+        <HudFrame cornerColor="gold" className="px-8 py-4 cursor-none">
           <h1
             className={cn(
               "font-mono font-bold tracking-[0.15em] text-hud-gold text-glow-gold animate-flicker",
-              "text-4xl sm:text-6xl lg:text-7xl"
+              "text-4xl sm:text-6xl lg:text-7xl select-none"
             )}
+            onMouseEnter={glitch}
           >
-            DAVID A. VARGAS
+            {nameDisplay}
           </h1>
         </HudFrame>
 

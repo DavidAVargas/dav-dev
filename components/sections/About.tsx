@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
+import { HexPhoto } from "@/components/ui/HexPhoto";
 
 const STATS = [
   { label: "YEARS IN HEALTHCARE", value: 5,    suffix: "+",  display: "5+"    },
@@ -119,7 +120,12 @@ export function About() {
 
           {/* Stats + Timeline */}
           <div className="flex flex-col gap-8">
-            {/* Stats grid — count-up on scroll */}
+            {/* Hex photo */}
+            <div className="flex justify-center mb-4">
+              <HexPhoto />
+            </div>
+
+          {/* Stats grid — count-up on scroll */}
             <div className="grid grid-cols-2 gap-4">
               {STATS.map((s) => (
                 <CountUpStat
