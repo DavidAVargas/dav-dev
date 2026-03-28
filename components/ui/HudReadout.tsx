@@ -9,7 +9,7 @@ const SECTION_LABELS: Record<string, string> = {
   initiative: "INITIATIVE",
   skills:     "CAPABILITIES",
   about:      "ABOUT",
-  services:   "SERVICES",
+  services:   "SIDE MISSIONS",
   contact:    "CONTACT",
 };
 

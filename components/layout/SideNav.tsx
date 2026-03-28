@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { id: "initiative", label: "INITIATIVE" },
   { id: "skills",     label: "SKILLS" },
   { id: "about",      label: "ABOUT" },
-  { id: "services",   label: "SERVICES" },
+  { id: "services",   label: "SIDE MISSIONS" },
   { id: "contact",    label: "CONTACT" },
 ];
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
 import { HexPhoto } from "@/components/ui/HexPhoto";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 const STATS = [
   { label: "YEARS IN HEALTHCARE", value: 5,    suffix: "+",  display: "5+"    },
@@ -74,6 +75,7 @@ export function About() {
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
         </div>
 
+        <FadeIn>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Story */}
           <div className="flex flex-col gap-8">
@@ -187,6 +189,7 @@ export function About() {
             </div>
           </div>
         </div>
+        </FadeIn>
       </div>
     </section>
   );

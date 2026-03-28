@@ -1,0 +1,58 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+
+interface FadeInProps {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number; // ms
+  direction?: "up" | "left" | "none";
+}
+
+export function FadeIn({
+  children,
+  className,
+  delay = 0,
+  direction = "up",
+}: FadeInProps) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const initial =
+    direction === "up"
+      ? "opacity-0 translate-y-6"
+      : direction === "left"
+        ? "opacity-0 -translate-x-6"
+        : "opacity-0";
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out",
+        visible ? "opacity-100 translate-y-0 translate-x-0" : initial,
+        className
+      )}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}

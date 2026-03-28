@@ -15,7 +15,7 @@ function MobileTopBar({ active }: { active: string }) {
 
   const LABELS: Record<string, string> = {
     hero: "HOME", projects: "PROJECTS", initiative: "INITIATIVE",
-    skills: "SKILLS", about: "ABOUT", services: "SERVICES", contact: "CONTACT",
+    skills: "SKILLS", about: "ABOUT", services: "SIDE MISSIONS", contact: "CONTACT",
   };
 
   return (
@@ -38,7 +38,7 @@ const NAV_ITEMS = [
   { id: "initiative", label: "INITIATIVE", module: "02" },
   { id: "skills",     label: "SKILLS",     module: "03" },
   { id: "about",      label: "ABOUT",      module: "04" },
-  { id: "services",   label: "SERVICES",   module: "05" },
+  { id: "services",   label: "SIDE MISSIONS", module: "05" },
   { id: "contact",    label: "CONTACT",    module: "06" },
 ];
 

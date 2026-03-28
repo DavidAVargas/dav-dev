@@ -6,6 +6,7 @@ import { HudReadout } from "@/components/ui/HudReadout";
 import { BootSequence } from "@/components/ui/BootSequence";
 import { CursorTrail } from "@/components/ui/CursorTrail";
 import { SystemClock } from "@/components/ui/SystemClock";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.variable}>
         <BootSequence />
+        <ScrollProgress />
         <CursorTrail />
         <SystemClock />
         <HudReadout />

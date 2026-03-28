@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
 import { ProjectModal, type ProjectData } from "@/components/ui/ProjectModal";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { cn } from "@/lib/utils";
 
 const PROJECTS: ProjectData[] = [
@@ -123,24 +124,27 @@ export function Projects() {
       <section id="projects" className="min-h-screen py-24 px-6 hud-grid-bg">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="mb-16">
-            <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
-              MODULE 02
-            </p>
-            <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-              <span className="text-hud-cyan text-glow-cyan">/</span> PROJECTS
-            </h2>
-            <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
-          </div>
+          <FadeIn>
+            <div className="mb-16">
+              <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
+                MODULE 02
+              </p>
+              <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+                <span className="text-hud-cyan text-glow-cyan">/</span> PROJECTS
+              </h2>
+              <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
+            </div>
+          </FadeIn>
 
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PROJECTS.map((p) => (
-              <ProjectCard
-                key={p.id}
-                project={p}
-                onClick={() => setSelected(p)}
-              />
+            {PROJECTS.map((p, i) => (
+              <FadeIn key={p.id} delay={i * 100}>
+                <ProjectCard
+                  project={p}
+                  onClick={() => setSelected(p)}
+                />
+              </FadeIn>
             ))}
           </div>
         </div>

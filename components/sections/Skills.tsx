@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 type Skill = {
   name: string;
@@ -286,8 +287,10 @@ export function Skills() {
 
         {/* Categories grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {CATEGORIES.map((cat) => (
-            <CategoryBlock key={cat.id} category={cat} />
+          {CATEGORIES.map((cat, i) => (
+            <FadeIn key={cat.id} delay={i * 120}>
+              <CategoryBlock category={cat} />
+            </FadeIn>
           ))}
         </div>
 

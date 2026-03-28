@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 type InitiativeCard = {
   id: string;
@@ -171,8 +172,10 @@ export function Initiative() {
 
         {/* Initiative cards */}
         <div className="flex flex-col gap-8">
-          {INITIATIVES.map((card) => (
-            <InitiativeItem key={card.id} card={card} />
+          {INITIATIVES.map((card, i) => (
+            <FadeIn key={card.id} delay={i * 150}>
+              <InitiativeItem card={card} />
+            </FadeIn>
           ))}
         </div>
       </div>
