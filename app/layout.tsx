@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "@/utils/fonts";
 import { SideNav } from "@/components/layout/SideNav";
+import { MobileNav } from "@/components/layout/MobileNav";
 import { HudReadout } from "@/components/ui/HudReadout";
 import { BootSequence } from "@/components/ui/BootSequence";
 import { CursorTrail } from "@/components/ui/CursorTrail";
@@ -27,6 +28,7 @@ export default function RootLayout({
         <SystemClock />
         <HudReadout />
         <SideNav />
+        <MobileNav />
         <main>{children}</main>
         <Toaster position="top-right" theme="dark" />
       </body>

@@ -16,7 +16,7 @@ export function ArcReactor({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="relative w-[520px] h-[520px]" style={{ opacity: 0.08 }}>
+      <div className="relative w-[280px] h-[280px] sm:w-[520px] sm:h-[520px]" style={{ opacity: 0.08 }}>
         {RINGS.map((ring, i) => (
           <div
             key={i}

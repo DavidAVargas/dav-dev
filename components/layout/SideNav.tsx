@@ -46,7 +46,7 @@ export function SideNav() {
   };
 
   return (
-    <nav className="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-7">
+    <nav className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 flex-col gap-7">
       {NAV_ITEMS.map(({ id, label }) => {
         const isActive = active === id;
         return (

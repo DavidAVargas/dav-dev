@@ -52,7 +52,7 @@ export function HudReadout() {
   }, []);
 
   return (
-    <div className="fixed top-6 left-6 z-40 pointer-events-none select-none">
+    <div className="hidden md:block fixed top-6 left-6 z-40 pointer-events-none select-none">
       <div
         className={cn(
           "font-mono text-[10px] tracking-[0.25em] transition-opacity duration-200",

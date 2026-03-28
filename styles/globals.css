@@ -12,10 +12,12 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply font-body bg-background text-foreground antialiased;
     background-color: var(--hud-dark);
+    overflow-x: hidden;
   }
   button {
     @apply cursor-pointer;

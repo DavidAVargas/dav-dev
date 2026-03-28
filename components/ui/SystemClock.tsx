@@ -26,7 +26,7 @@ export function SystemClock() {
   }, []);
 
   return (
-    <div className="fixed top-6 right-16 z-40 pointer-events-none select-none text-right">
+    <div className="hidden md:block fixed top-6 right-16 z-40 pointer-events-none select-none text-right">
       <p className="font-mono text-sm text-hud-cyan tracking-widest">
         {time}
       </p>

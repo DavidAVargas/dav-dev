@@ -66,8 +66,8 @@ export function HexPhoto({ src, alt = "David A. Vargas", className }: HexPhotoPr
         />
       </div>
 
-      {/* Status labels */}
-      <div className="absolute -right-4 top-8 flex flex-col gap-2 translate-x-full">
+      {/* Status labels — desktop only */}
+      <div className="hidden md:flex absolute -right-4 top-8 flex-col gap-2 translate-x-full">
         <div className="flex items-center gap-2">
           <div className="w-6 h-px bg-hud-cyan/40" />
           <span className="font-mono text-[9px] text-hud-cyan/60 tracking-[0.15em] whitespace-nowrap">
