@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface HudFrameProps {
+interface HudFrameProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   cornerColor?: "cyan" | "gold";
@@ -15,6 +15,7 @@ export const HudFrame = forwardRef<HTMLDivElement, HudFrameProps>(function HudFr
   className,
   cornerColor = "cyan",
   animate = false,
+  ...props
 }, ref) {
   const cornerClass =
     cornerColor === "gold"
@@ -29,6 +30,7 @@ export const HudFrame = forwardRef<HTMLDivElement, HudFrameProps>(function HudFr
         animate && "animate-glow-cyan",
         className
       )}
+      {...props}
     >
       {/* Top-left */}
       <span

@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const SECTION_LABELS: Record<string, string> = {
-  hero:     "HOME",
-  projects: "PROJECTS",
-  about:    "ABOUT",
-  services: "SERVICES",
-  contact:  "CONTACT",
+  hero:       "HOME",
+  projects:   "PROJECTS",
+  initiative: "INITIATIVE",
+  skills:     "CAPABILITIES",
+  about:      "ABOUT",
+  services:   "SERVICES",
+  contact:    "CONTACT",
 };
 
 const SECTIONS = Object.keys(SECTION_LABELS);
@@ -18,27 +20,35 @@ export function HudReadout() {
   const [flash, setFlash] = useState(false);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    let lastActive = "";
 
-    SECTIONS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    const getActive = () => {
+      const center = window.scrollY + window.innerHeight / 2;
+      let closest = SECTIONS[0];
+      let closestDist = Infinity;
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActive(id);
-            setFlash(true);
-            setTimeout(() => setFlash(false), 400);
-          }
-        },
-        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
+      SECTIONS.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const elCenter = el.offsetTop + el.offsetHeight / 2;
+        const dist = Math.abs(center - elCenter);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = id;
+        }
+      });
 
-    return () => observers.forEach((o) => o.disconnect());
+      if (closest !== lastActive) {
+        lastActive = closest;
+        setActive(closest);
+        setFlash(true);
+        setTimeout(() => setFlash(false), 400);
+      }
+    };
+
+    getActive();
+    window.addEventListener("scroll", getActive, { passive: true });
+    return () => window.removeEventListener("scroll", getActive);
   }, []);
 
   return (

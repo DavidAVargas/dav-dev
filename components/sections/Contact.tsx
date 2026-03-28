@@ -12,7 +12,7 @@ export function Contact() {
         {/* Section header */}
         <div className="mb-16">
           <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
-            MODULE 05
+            MODULE 06
           </p>
           <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
             <span className="text-hud-gold text-glow-gold">/</span> CONTACT

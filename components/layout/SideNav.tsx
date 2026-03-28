@@ -4,35 +4,41 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { id: "hero",     label: "HOME" },
-  { id: "projects", label: "PROJECTS" },
-  { id: "about",    label: "ABOUT" },
-  { id: "services", label: "SERVICES" },
-  { id: "contact",  label: "CONTACT" },
+  { id: "hero",       label: "HOME" },
+  { id: "projects",   label: "PROJECTS" },
+  { id: "initiative", label: "INITIATIVE" },
+  { id: "skills",     label: "SKILLS" },
+  { id: "about",      label: "ABOUT" },
+  { id: "services",   label: "SERVICES" },
+  { id: "contact",    label: "CONTACT" },
 ];
 
 export function SideNav() {
   const [active, setActive] = useState("hero");
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const getActive = () => {
+      const center = window.scrollY + window.innerHeight / 2;
+      let closest = NAV_ITEMS[0].id;
+      let closestDist = Infinity;
 
-    NAV_ITEMS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+      NAV_ITEMS.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const elCenter = el.offsetTop + el.offsetHeight / 2;
+        const dist = Math.abs(center - elCenter);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = id;
+        }
+      });
 
-      // Fires when the section crosses the middle band of the viewport
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(id);
-        },
-        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
+      setActive(closest);
+    };
 
-    return () => observers.forEach((o) => o.disconnect());
+    getActive();
+    window.addEventListener("scroll", getActive, { passive: true });
+    return () => window.removeEventListener("scroll", getActive);
   }, []);
 
   const scrollTo = (id: string) => {
