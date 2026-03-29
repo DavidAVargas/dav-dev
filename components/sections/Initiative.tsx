@@ -10,6 +10,7 @@ type InitiativeCard = {
   outcome: string;
   status: string;
   statusColor: "gold" | "cyan" | "muted";
+  github?: string;
 };
 
 const INITIATIVES: InitiativeCard[] = [
@@ -25,15 +26,16 @@ const INITIATIVES: InitiativeCard[] = [
       "Presented the prototype to management and senior leadership. They responded positively to the concept. Implementation was paused over patient data privacy concerns — a valid call, and one that taught me how to think about security and compliance from the start.",
     status: "PROTOTYPE — PRESENTED TO LEADERSHIP",
     statusColor: "gold",
+    github: "https://github.com/DavidAVargas/Hope-Auto-Check-In",
   },
   {
     id: "INI-002",
     industry: "TBD",
-    tags: ["COMING SOON"],
-    problem: "Placeholder — add your next real-world initiative here.",
-    built: "What did you build or propose? Describe it simply and clearly.",
-    outcome: "What happened as a result? Even partial outcomes count.",
-    status: "IN PROGRESS",
+    tags: ["LOADING..."],
+    problem: "Another one is coming. Every place I've worked, I've spotted something worth fixing.",
+    built: "Currently identifying the next gap worth building for.",
+    outcome: "To be filed.",
+    status: "CLASSIFIED",
     statusColor: "muted",
   },
 ];
@@ -122,6 +124,20 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
           </div>
         ))}
       </div>
+
+      {/* GitHub link */}
+      {!isPlaceholder && card.github && (
+        <div className="flex justify-end">
+          <a
+            href={card.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
+          >
+            ◎ VIEW CODE ON GITHUB ↗
+          </a>
+        </div>
+      )}
     </div>
   );
 }

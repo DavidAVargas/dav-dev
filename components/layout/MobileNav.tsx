@@ -150,7 +150,7 @@ export function MobileNav() {
 
         {/* Bottom label */}
         <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em] mt-12 relative">
-          DAVID A. VARGAS · SOFTWARE ENGINEER
+          DAVID A VARGAS · SOFTWARE ENGINEER
         </p>
       </div>
 

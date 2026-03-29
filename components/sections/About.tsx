@@ -110,12 +110,18 @@ export function About() {
               <p className="font-mono text-xs tracking-[0.2em] text-hud-cyan mb-3">
                 // MINDSET.LOG
               </p>
+              <p className="text-hud-muted leading-relaxed mb-3">
+                <span className="text-hud-text font-semibold">
+                  Inspired and driven by the fear of unfulfilled potential.
+                </span>{" "}
+                That&apos;s not a tagline — that&apos;s what gets me up. The idea of having the ability to build something, to grow, to move my future forward — and wasting it — that&apos;s the thing I won&apos;t accept.
+              </p>
               <p className="text-hud-muted leading-relaxed">
                 Some people watch TV. Some play video games. Nothing wrong with that.{" "}
                 <span className="text-hud-text">
-                  Me? I create things and work on becoming the best version of myself.
+                  Me? Every hour I&apos;m not building something, learning something, or pushing myself — I feel it.
                 </span>{" "}
-                That&apos;s just what&apos;s fun for me — building, learning, running, growing.
+                That&apos;s just how I&apos;m wired. It&apos;s not pressure. It&apos;s purpose.
               </p>
             </HudFrame>
           </div>
@@ -124,7 +130,7 @@ export function About() {
           <div className="flex flex-col gap-8">
             {/* Hex photo */}
             <div className="flex justify-center mb-4">
-              <HexPhoto />
+              <HexPhoto src="/headshot.jpg" />
             </div>
 
           {/* Stats grid — count-up on scroll */}

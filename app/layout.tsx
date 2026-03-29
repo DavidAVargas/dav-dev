@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "David A. Vargas — Software Engineer",
+  title: "David A Vargas — Software Engineer",
   description:
     "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
 };

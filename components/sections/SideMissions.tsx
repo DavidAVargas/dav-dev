@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { X } from "lucide-react";
 
+type BookEntry = { title: string; author?: string };
+type BookShelf = { category: string; items: BookEntry[] };
+
 type Mission = {
   id: string;
   title: string;
@@ -15,6 +18,7 @@ type Mission = {
   detail: string;
   tags: string[];
   link?: { label: string; url: string };
+  books?: BookShelf[];
 };
 
 const MISSIONS: Mission[] = [
@@ -34,12 +38,12 @@ const MISSIONS: Mission[] = [
     id: "MSN-002",
     title: "Tax Services",
     category: "FINANCIAL",
-    status: "PTIN ACQUIRED · EA PENDING",
+    status: "PTIN ACQUIRED · AFSP NEXT",
     statusColor: "gold",
-    short: "Licensed to prepare taxes. Currently serving friends and family while studying for the EA designation.",
+    short: "Licensed to prepare taxes. AFSP certification coming June. EA and CPA on the roadmap.",
     detail:
-      "I got my PTIN and started preparing taxes for friends and family. The goal was never to become a full-time tax professional — it was to understand my own financials at a level most business owners don't. Being your own CPA means not needing one. It means understanding every deduction, every structure, every decision. I'm working toward my EA designation now, and when I get there, this becomes a real side revenue stream — tax season is only four months a year anyway.",
-    tags: ["PTIN LICENSED", "EA IN PROGRESS", "FRIENDS & FAMILY", "SIDE VENTURE"],
+      "I got my PTIN and started preparing taxes for friends and family. The goal was never to become a full-time tax professional — it was to understand my own financials at a level most business owners don't. Being your own CPA means not needing one. It means understanding every deduction, every structure, every decision. Next up: AFSP certification in June, then the EA designation, then maybe the CPA. Each level unlocks more. Tax season is only four months a year anyway.",
+    tags: ["PTIN LICENSED", "AFSP · JUNE", "EA ROADMAP", "FRIENDS & FAMILY"],
   },
   {
     id: "MSN-003",
@@ -73,6 +77,127 @@ const MISSIONS: Mission[] = [
     detail:
       "There was a rough year. Credit dropped to 520. A lot of people stay there — I didn't. In two years I rebuilt it to over 720, got approved for the Chase Sapphire Reserve (the travel card I was working toward), and now hold 8 cards fully optimized for everyday spending, travel rewards, and business expenses. I learned the system, fixed the score, and now I use it strategically. I'm not obsessed — I'd call myself medium-level. I know enough to maximize the benefits, travel smarter, and run my business the right way. Good credit is just leverage. I treat it like one.",
     tags: ["520 → 720+", "8 CARDS", "CHASE SAPPHIRE RESERVE", "AMEX GOLD", "TRAVEL REWARDS"],
+  },
+  {
+    id: "MSN-006",
+    title: "The Reading List",
+    category: "KNOWLEDGE",
+    status: "ALWAYS READING",
+    statusColor: "gold",
+    short: "Never liked reading until Rich Dad Poor Dad changed everything. 40+ books in — all business, mindset, and self-improvement. No fiction. No fluff.",
+    detail:
+      "I was never a reader. The only book I actually finished in school was Ender's Game. Everything else just didn't stick. Then I picked up Rich Dad Poor Dad — and something shifted. I realized books weren't boring. I was just reading the wrong ones. Now I can't stop. Every book on this list changed how I think about money, business, mindset, health, or people. I don't read to say I read. I read because there's no faster way to download someone else's decades of experience in a few hours. Knowledge is leverage — and I treat it like one.",
+    tags: ["40+ BOOKS READ", "2 CURRENTLY READING", "18 IN QUEUE", "ALWAYS GROWING"],
+    books: [
+      {
+        category: "BUSINESS & MONEY",
+        items: [
+          { title: "Rich Dad, Poor Dad", author: "Robert Kiyosaki" },
+          { title: "Cashflow Quadrant", author: "Robert Kiyosaki" },
+          { title: "Retire Young, Retire Rich", author: "Robert Kiyosaki" },
+          { title: "Profit First", author: "Mike Michalowicz" },
+          { title: "Million Dollar Weekend", author: "Noah Kagan" },
+          { title: "12 Months to $1 Million", author: "Ryan Daniel Moran" },
+          { title: "The Art of Selling Your Business", author: "John Warrillow" },
+          { title: "The 4-Hour Work Week", author: "Tim Ferriss" },
+          { title: "I Will Teach You to Be Rich", author: "Ramit Sethi" },
+          { title: "The Law of Success in 16 Lessons", author: "Napoleon Hill" },
+          { title: "Think and Grow Rich", author: "Napoleon Hill" },
+          { title: "A Simple Path to Wealth", author: "JL Collins" },
+          { title: "Dropshipping Make Money Online", author: "Marcus Baumann" },
+          { title: "Move Fast and Fix Things", author: "Frances Frei & Anne Morriss" },
+        ],
+      },
+      {
+        category: "MINDSET & SELF-DEVELOPMENT",
+        items: [
+          { title: "Can't Hurt Me", author: "David Goggins" },
+          { title: "Never Finished", author: "David Goggins" },
+          { title: "Hustle Harder, Hustle Smarter", author: "Curtis '50 Cent' Jackson" },
+          { title: "Atomic Habits", author: "James Clear" },
+          { title: "The Subtle Art of Not Giving a F*ck", author: "Mark Manson" },
+          { title: "The Mountain Is You", author: "Brianna Wiest" },
+          { title: "Do Hard Things", author: "Steve Magness" },
+          { title: "The One Thing", author: "Gary Keller" },
+          { title: "48 Laws of Power", author: "Robert Greene" },
+          { title: "Winning", author: "Tim Grover" },
+          { title: "The Secret", author: "Rhonda Byrne" },
+          { title: "The Power", author: "Rhonda Byrne" },
+          { title: "Hero", author: "Rhonda Byrne" },
+          { title: "Redeeming Your Time", author: "Jordan Raynor" },
+          { title: "Discipline for Entrepreneurs", author: "Martin Meadows" },
+          { title: "Stop Lying", author: "Dr. Bennett Pologe" },
+          { title: "How to Find Yourself", author: "Nick Trenton" },
+          { title: "How to Train Your Mind", author: "Chris Bailey" },
+        ],
+      },
+      {
+        category: "SALES & INFLUENCE",
+        items: [
+          { title: "Choose Your Enemies Wisely", author: "Patrick Bet-David & Greg Dinkin" },
+          { title: "The Way of the Wolf", author: "Jordan Belfort" },
+          { title: "How to Win Friends and Influence People", author: "Dale Carnegie" },
+          { title: "1 Million Followers", author: "Brendan Kane" },
+          { title: "Influencer", author: "Brittany Hennessy" },
+          { title: "Crushing It", author: "Gary Vaynerchuk" },
+          { title: "Reverse Engineering of Sales", author: "J. Dehar" },
+        ],
+      },
+      {
+        category: "MILITARY & GRIT",
+        items: [
+          { title: "Lone Survivor", author: "Marcus Luttrell" },
+          { title: "American Sniper", author: "Chris Kyle" },
+          { title: "The Last Punisher", author: "Kevin Lacz" },
+        ],
+      },
+      {
+        category: "HEALTH & PERFORMANCE",
+        items: [
+          { title: "Bigger Leaner Stronger", author: "Michael Matthews" },
+          { title: "The Way of the Superior Man", author: "David Deida" },
+        ],
+      },
+      {
+        category: "OTHER",
+        items: [
+          { title: "The Five Love Languages", author: "Gary Chapman" },
+          { title: "Beyond the Wand", author: "Tom Felton" },
+          { title: "Remote Work Revolution", author: "Tsedal Neeley" },
+          { title: "Ender's Game", author: "Orson Scott Card" },
+        ],
+      },
+      {
+        category: "◉ CURRENTLY READING",
+        items: [
+          { title: "Surrounded by Psychopaths", author: "Thomas Erikson" },
+          { title: "No More Mr. Nice Guy", author: "Robert Glover" },
+        ],
+      },
+      {
+        category: "◇ QUEUE",
+        items: [
+          { title: "Never Eat Alone", author: "Keith Ferrazzi" },
+          { title: "The Operator", author: "Robert O'Neill" },
+          { title: "The Choice", author: "Edith Eger" },
+          { title: "Unafraid", author: "Eddie Penney & Keith Wood" },
+          { title: "Dare to Lead", author: "Brené Brown" },
+          { title: "Unapologetic Ambition", author: "Shellye Archambeau" },
+          { title: "Leading with Heart", author: "John Baird & Edward Sullivan" },
+          { title: "Your Next Five Moves", author: "Patrick Bet-David" },
+          { title: "The Phoenix Economy", author: "Felix Salmon" },
+          { title: "The Power of One More", author: "Ed Mylett" },
+          { title: "What's Your Dream", author: "Simon Squibb" },
+          { title: "The Total Money Makeover", author: "Dave Ramsey" },
+          { title: "Extreme Ownership", author: "Jocko Willink & Leif Babin" },
+          { title: "Power vs. Force", author: "David Hawkins" },
+          { title: "Never Split the Difference", author: "Chris Voss" },
+          { title: "Smarter Faster Better", author: "Charles Duhigg" },
+          { title: "The Triple Package", author: "Amy Chua & Jed Rubenfeld" },
+          { title: "The Personal MBA", author: "Josh Kaufman" },
+        ],
+      },
+    ],
   },
 ];
 
@@ -146,8 +271,8 @@ function MissionModal({
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 flex flex-col gap-6">
+        {/* Content — scrollable */}
+        <div className="p-6 flex flex-col gap-6 overflow-y-auto max-h-[70vh]">
           <div>
             <span
               className={cn(
@@ -174,6 +299,39 @@ function MissionModal({
             ))}
           </div>
 
+          {/* Book list */}
+          {m.books && (
+            <div className="flex flex-col gap-5">
+              <p className={cn(
+                "font-mono text-[10px] tracking-[0.2em]",
+                m.statusColor === "gold" ? "text-hud-gold" : "text-hud-cyan"
+              )}>// READING LOG</p>
+              {m.books.map((shelf) => (
+                <div key={shelf.category}>
+                  <p className="font-mono text-[9px] tracking-[0.2em] text-hud-muted mb-2">
+                    {shelf.category}
+                  </p>
+                  <div className="h-px w-full bg-hud-border mb-3" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4">
+                    {shelf.items.map((book) => (
+                      <div key={book.title} className="flex flex-col">
+                        <span className={cn(
+                          "font-mono text-xs",
+                          m.statusColor === "gold" ? "text-hud-gold/80" : "text-hud-text"
+                        )}>
+                          {book.title}
+                        </span>
+                        {book.author && (
+                          <span className="font-mono text-[9px] text-hud-muted/60">{book.author}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {m.link && (
             <a
               href={m.link.url}
@@ -197,7 +355,7 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
     <div
       onClick={onClick}
       className={cn(
-        "relative border p-5 cursor-pointer flex flex-col gap-3",
+        "h-full relative border p-5 cursor-pointer flex flex-col gap-3",
         "transition-all duration-300 group",
         isGold
           ? "border-hud-gold/20 hover:border-hud-gold/50 bg-hud-surface"
@@ -231,7 +389,7 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
       </h3>
 
       {/* Short desc */}
-      <p className="text-hud-muted text-xs leading-relaxed">{mission.short}</p>
+      <p className="text-hud-muted text-xs leading-relaxed flex-1">{mission.short}</p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5 mt-1">
@@ -262,29 +420,64 @@ export function SideMissions() {
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <FadeIn>
-            <div className="mb-16">
-              <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
-                MODULE 05
-              </p>
-              <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-                <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
-              </h2>
-              <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
-              <div className="mt-6 border-l-2 border-hud-gold pl-4 max-w-xl">
-                <p className="text-hud-muted text-sm leading-relaxed">
-                  The code is one system.{" "}
-                  <span className="text-hud-text">These are the others.</span>{" "}
-                  Business owner, endurance runner, financial strategist — I don&apos;t just build software.
-                  I build everything.
+            <div className="mb-16 flex flex-col lg:flex-row lg:items-center gap-10">
+              {/* Left — text */}
+              <div className="flex-1">
+                <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
+                  MODULE 05
                 </p>
+                <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+                  <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
+                </h2>
+                <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
+                <div className="mt-6 border-l-2 border-hud-gold pl-4 max-w-xl">
+                  <p className="text-hud-muted text-sm leading-relaxed">
+                    The code is one system.{" "}
+                    <span className="text-hud-text">These are the others.</span>{" "}
+                    Business owner, endurance runner, financial strategist — I don&apos;t just build software.
+                    I build everything.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right — cinematic photo */}
+              <div className="relative flex-shrink-0 flex justify-center lg:justify-end">
+                <div className="relative w-[280px] sm:w-[360px]">
+                  {/* Gold corner brackets */}
+                  <span className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-hud-gold z-10" />
+                  <span className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-hud-gold z-10" />
+                  <span className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-hud-gold z-10" />
+                  <span className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-hud-gold z-10" />
+                  {/* Scan line overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none z-10"
+                    style={{
+                      background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.02) 3px, rgba(0,212,255,0.02) 4px)",
+                    }}
+                  />
+                  {/* Gold tint overlay */}
+                  <div className="absolute inset-0 bg-hud-gold/5 z-10" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/dav-stark.png"
+                    alt="David A Vargas"
+                    className="w-full object-cover grayscale-[20%] contrast-[1.05]"
+                  />
+                  {/* ID label */}
+                  <div className="absolute bottom-0 inset-x-0 bg-hud-dark/70 backdrop-blur-sm px-3 py-1.5 z-20">
+                    <p className="font-mono text-[9px] tracking-[0.2em] text-hud-gold text-center">
+                      SUBJECT: DAV-001 · ALWAYS BUILDING
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </FadeIn>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {MISSIONS.map((m, i) => (
-              <FadeIn key={m.id} delay={i * 100}>
+              <FadeIn key={m.id} delay={i * 100} className="h-full">
                 <MissionCard mission={m} onClick={() => setSelected(m)} />
               </FadeIn>
             ))}
