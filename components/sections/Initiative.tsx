@@ -31,11 +31,11 @@ const INITIATIVES: InitiativeCard[] = [
   {
     id: "INI-002",
     industry: "TBD",
-    tags: ["COMING SOON"],
-    problem: "Placeholder — add your next real-world initiative here.",
-    built: "What did you build or propose? Describe it simply and clearly.",
-    outcome: "What happened as a result? Even partial outcomes count.",
-    status: "IN PROGRESS",
+    tags: ["LOADING..."],
+    problem: "Another one is coming. Every place I've worked, I've spotted something worth fixing.",
+    built: "Currently identifying the next gap worth building for.",
+    outcome: "To be filed.",
+    status: "CLASSIFIED",
     statusColor: "muted",
   },
 ];

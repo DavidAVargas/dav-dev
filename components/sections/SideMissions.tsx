@@ -420,21 +420,56 @@ export function SideMissions() {
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <FadeIn>
-            <div className="mb-16">
-              <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
-                MODULE 05
-              </p>
-              <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-                <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
-              </h2>
-              <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
-              <div className="mt-6 border-l-2 border-hud-gold pl-4 max-w-xl">
-                <p className="text-hud-muted text-sm leading-relaxed">
-                  The code is one system.{" "}
-                  <span className="text-hud-text">These are the others.</span>{" "}
-                  Business owner, endurance runner, financial strategist — I don&apos;t just build software.
-                  I build everything.
+            <div className="mb-16 flex flex-col lg:flex-row lg:items-center gap-10">
+              {/* Left — text */}
+              <div className="flex-1">
+                <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
+                  MODULE 05
                 </p>
+                <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+                  <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
+                </h2>
+                <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
+                <div className="mt-6 border-l-2 border-hud-gold pl-4 max-w-xl">
+                  <p className="text-hud-muted text-sm leading-relaxed">
+                    The code is one system.{" "}
+                    <span className="text-hud-text">These are the others.</span>{" "}
+                    Business owner, endurance runner, financial strategist — I don&apos;t just build software.
+                    I build everything.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right — cinematic photo */}
+              <div className="relative flex-shrink-0 flex justify-center lg:justify-end">
+                <div className="relative w-[280px] sm:w-[360px]">
+                  {/* Gold corner brackets */}
+                  <span className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-hud-gold z-10" />
+                  <span className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-hud-gold z-10" />
+                  <span className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-hud-gold z-10" />
+                  <span className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-hud-gold z-10" />
+                  {/* Scan line overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none z-10"
+                    style={{
+                      background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.02) 3px, rgba(0,212,255,0.02) 4px)",
+                    }}
+                  />
+                  {/* Gold tint overlay */}
+                  <div className="absolute inset-0 bg-hud-gold/5 z-10" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/dav-stark.png"
+                    alt="David A Vargas"
+                    className="w-full object-cover grayscale-[20%] contrast-[1.05]"
+                  />
+                  {/* ID label */}
+                  <div className="absolute bottom-0 inset-x-0 bg-hud-dark/70 backdrop-blur-sm px-3 py-1.5 z-20">
+                    <p className="font-mono text-[9px] tracking-[0.2em] text-hud-gold text-center">
+                      SUBJECT: DAV-001 · ALWAYS BUILDING
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </FadeIn>

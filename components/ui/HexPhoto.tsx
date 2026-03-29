@@ -6,7 +6,7 @@ interface HexPhotoProps {
   className?: string;
 }
 
-export function HexPhoto({ src, alt = "David A. Vargas", className }: HexPhotoProps) {
+export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoProps) {
   return (
     <div className={cn("relative flex items-center justify-center", className)}>
       {/* Outer rotating ring */}

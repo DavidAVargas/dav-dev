@@ -130,7 +130,7 @@ export function About() {
           <div className="flex flex-col gap-8">
             {/* Hex photo */}
             <div className="flex justify-center mb-4">
-              <HexPhoto />
+              <HexPhoto src="/headshot.jpg" />
             </div>
 
           {/* Stats grid — count-up on scroll */}

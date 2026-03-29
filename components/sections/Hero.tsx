@@ -81,7 +81,7 @@ function useGlitchText(original: string) {
 export function Hero() {
   const typed = useTypewriter(PHRASES);
   const [scanned, setScanned] = useState(false);
-  const { display: nameDisplay, glitch } = useGlitchText("DAVID A. VARGAS");
+  const { display: nameDisplay, glitch } = useGlitchText("DAVID A VARGAS");
 
   useEffect(() => {
     const t = setTimeout(() => setScanned(true), 1800);
@@ -131,8 +131,8 @@ export function Hero() {
         </HudFrame>
 
         {/* Drive quote */}
-        <p className="font-mono text-xs sm:text-sm tracking-[0.2em] text-hud-muted/70 italic animate-fade-up [animation-delay:0.3s] opacity-0 max-w-lg text-center">
-          &ldquo;Inspired and driven by the fear of unfulfilled potential.&rdquo;
+        <p className="font-mono text-xs tracking-[0.25em] text-hud-muted/60 uppercase animate-fade-up [animation-delay:0.3s] opacity-0 whitespace-nowrap">
+          // DRIVEN BY THE FEAR OF UNFULFILLED POTENTIAL
         </p>
 
         {/* Typing tagline */}
