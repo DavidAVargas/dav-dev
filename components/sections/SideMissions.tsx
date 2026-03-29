@@ -34,12 +34,12 @@ const MISSIONS: Mission[] = [
     id: "MSN-002",
     title: "Tax Services",
     category: "FINANCIAL",
-    status: "PTIN ACQUIRED · EA PENDING",
+    status: "PTIN ACQUIRED · AFSP NEXT",
     statusColor: "gold",
-    short: "Licensed to prepare taxes. Currently serving friends and family while studying for the EA designation.",
+    short: "Licensed to prepare taxes. AFSP certification coming June. EA and CPA on the roadmap.",
     detail:
-      "I got my PTIN and started preparing taxes for friends and family. The goal was never to become a full-time tax professional — it was to understand my own financials at a level most business owners don't. Being your own CPA means not needing one. It means understanding every deduction, every structure, every decision. I'm working toward my EA designation now, and when I get there, this becomes a real side revenue stream — tax season is only four months a year anyway.",
-    tags: ["PTIN LICENSED", "EA IN PROGRESS", "FRIENDS & FAMILY", "SIDE VENTURE"],
+      "I got my PTIN and started preparing taxes for friends and family. The goal was never to become a full-time tax professional — it was to understand my own financials at a level most business owners don't. Being your own CPA means not needing one. It means understanding every deduction, every structure, every decision. Next up: AFSP certification in June, then the EA designation, then maybe the CPA. Each level unlocks more. Tax season is only four months a year anyway.",
+    tags: ["PTIN LICENSED", "AFSP · JUNE", "EA ROADMAP", "FRIENDS & FAMILY"],
   },
   {
     id: "MSN-003",

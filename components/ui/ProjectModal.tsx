@@ -11,6 +11,7 @@ export type ProjectData = {
   fullDescription: string;
   tech: string[];
   status: string;
+  badge?: string;
   demo?: string; // GIF or video URL
   links: { live: string | null; github: string };
 };
@@ -216,14 +217,20 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     // ACCESS LINKS
                   </p>
                   <div className="flex flex-col gap-2">
-                    <a
-                      href={displayed.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono text-xs text-hud-muted hover:text-hud-cyan transition-colors tracking-[0.1em] flex items-center gap-2"
-                    >
-                      <span className="text-hud-cyan">◎</span> GITHUB ↗
-                    </a>
+                    {displayed.links.github ? (
+                      <a
+                        href={displayed.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-xs text-hud-muted hover:text-hud-cyan transition-colors tracking-[0.1em] flex items-center gap-2"
+                      >
+                        <span className="text-hud-cyan">◎</span> GITHUB ↗
+                      </a>
+                    ) : (
+                      <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
+                        <span>◎</span> PRIVATE REPO
+                      </span>
+                    )}
                     {displayed.links.live ? (
                       <a
                         href={displayed.links.live}
