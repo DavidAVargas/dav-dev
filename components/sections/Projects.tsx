@@ -31,7 +31,7 @@ const PROJECTS: ProjectData[] = [
   },
   {
     id: "PRJ-003",
-    title: "Tech Tutors",
+    title: "Tech Tutor",
     description: "Final bootcamp capstone — a tutor marketplace for developers. Best project in the class. Led frontend and UX/UI. Hid a farewell easter egg: every classmate, teacher, and tutor on the expert tab with their LinkedIn.",
     fullDescription:
       "The last project of the bootcamp, built with two collaborators — and the best-looking site in the entire class. I owned the frontend, UX/UI, and API integrations. The site lets developers search for tutors by skill level — beginner, intermediate, expert. My collaborators handled Stripe payments and backend authentication. But the part I'm most proud of had nothing to do with the requirements. For the expert tier, instead of using random stock photos and fake names from the API, I manually added every single person from the class — every classmate, my tutor, my teachers — with their real LinkedIn profiles linked. So on the last day, when we presented, everyone in the room saw themselves on the screen. It was a farewell, a thank you, and a way to keep everyone connected and discoverable to recruiters all in one move. Nobody asked me to do it. That's just how I build.",

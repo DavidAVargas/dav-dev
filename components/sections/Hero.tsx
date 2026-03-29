@@ -130,6 +130,11 @@ export function Hero() {
           </h1>
         </HudFrame>
 
+        {/* Drive quote */}
+        <p className="font-mono text-xs sm:text-sm tracking-[0.2em] text-hud-muted/70 italic animate-fade-up [animation-delay:0.3s] opacity-0 max-w-lg text-center">
+          &ldquo;Inspired and driven by the fear of unfulfilled potential.&rdquo;
+        </p>
+
         {/* Typing tagline */}
         <div className="h-8 flex items-center gap-0.5 animate-fade-up [animation-delay:0.4s] opacity-0">
           <span className="font-mono text-lg sm:text-xl text-hud-cyan text-glow-cyan">
