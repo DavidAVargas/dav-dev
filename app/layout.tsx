@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { inter } from "@/utils/fonts";
 import { SideNav } from "@/components/layout/SideNav";
 import { MobileNav } from "@/components/layout/MobileNav";
@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "David A Vargas — Software Engineer",
   description:
     "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
