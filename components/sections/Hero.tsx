@@ -122,7 +122,7 @@ export function Hero() {
           <h1
             className={cn(
               "font-mono font-bold tracking-[0.15em] text-hud-gold text-glow-gold animate-flicker",
-              "text-4xl sm:text-6xl lg:text-7xl select-none pl-[0.15em]"
+              "text-3xl sm:text-6xl lg:text-7xl select-none pl-[0.15em]"
             )}
             onMouseEnter={glitch}
           >
@@ -131,7 +131,7 @@ export function Hero() {
         </HudFrame>
 
         {/* Drive quote */}
-        <p className="font-mono text-xs tracking-[0.25em] text-hud-muted/60 uppercase animate-fade-up [animation-delay:0.3s] opacity-0 whitespace-nowrap">
+        <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-hud-muted/60 uppercase animate-fade-up [animation-delay:0.3s] opacity-0 max-w-xs sm:max-w-none text-center">
           // DRIVEN BY THE FEAR OF UNFULFILLED POTENTIAL
         </p>
 
