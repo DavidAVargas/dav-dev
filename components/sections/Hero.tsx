@@ -101,6 +101,7 @@ export function Hero() {
         />
       )}
 
+
       {/* Arc reactor background */}
       <ArcReactor />
 
