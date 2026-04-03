@@ -114,7 +114,7 @@ export function Hero() {
 
         {/* HUD status line */}
         <p className="font-mono text-xs tracking-[0.3em] text-hud-muted animate-fade-up [animation-delay:0.1s] opacity-0">
-          SYSTEM ONLINE ·  MARK I ·  LOADING PROFILE
+          SYSTEM ONLINE ·  MARK III ·  LOADING PROFILE
         </p>
 
         {/* Name */}

@@ -2,6 +2,45 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
+
+const MARKS = [
+  {
+    id: "MARK I",
+    label: "Foundation",
+    lines: [
+      "HUD design system & color tokens",
+      "Hero, Projects, Skills, About, Contact sections",
+      "Boot sequence, cursor trail, scroll progress",
+      "Side Nav & Mobile Nav",
+      "Arc Reactor background animation",
+    ],
+  },
+  {
+    id: "MARK II",
+    label: "Real Content",
+    lines: [
+      "QVIL Studios, Tech Tutors, Pixel Coder, Tex N Wash projects",
+      "Real skills with power bars & expandable modals",
+      "Side Missions: Healthcare, Reading List (40+ books)",
+      "Initiative: Hope Auto Check-In",
+      "Real contact info with email anti-spam reveal",
+      "Headshot & Tony Stark easter egg",
+    ],
+  },
+  {
+    id: "MARK III",
+    label: "Polish & Deploy",
+    lines: [
+      "Mobile viewport fix — no more zoom",
+      "Custom arc reactor favicon",
+      "Hero name centering & equal CTA buttons",
+      "SEO metadata & OG image",
+      "Particle network (in progress)",
+      "Deployed to davidavargas.com",
+    ],
+  },
+];
 
 function MobileTopBar({ active }: { active: string }) {
   const [time, setTime] = useState("");
@@ -46,6 +85,7 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("hero");
   const [visible, setVisible] = useState(false);
+  const [markOpen, setMarkOpen] = useState(false);
 
   // Track active section
   useEffect(() => {
@@ -106,7 +146,7 @@ export function MobileNav() {
 
         {/* Top label */}
         <p className="font-mono text-[10px] text-hud-muted tracking-[0.3em] mb-12 relative">
-          NAVIGATION · MARK I
+          NAVIGATION · MARK III
         </p>
 
         {/* Nav items */}
@@ -148,11 +188,71 @@ export function MobileNav() {
           })}
         </nav>
 
-        {/* Bottom label */}
-        <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em] mt-12 relative">
-          DAVID A VARGAS · SOFTWARE ENGINEER
-        </p>
+        {/* Bottom */}
+        <div className="mt-12 relative flex items-center justify-between">
+          <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em]">
+            DAVID A VARGAS · SOFTWARE ENGINEER
+          </p>
+          <button
+            onClick={() => setMarkOpen(true)}
+            className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
+          >
+            <span>◆</span> MARK III
+          </button>
+        </div>
       </div>
+
+      {/* Mark patch notes modal */}
+      {markOpen && (
+        <div
+          className="fixed inset-0 z-[9995] flex items-center justify-center p-4"
+          onClick={() => setMarkOpen(false)}
+        >
+          <div className="absolute inset-0 bg-hud-dark/95 backdrop-blur-sm" />
+          <div
+            className="relative w-full max-w-sm bg-hud-surface border border-hud-gold/30 max-h-[80vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-hud-gold" />
+            <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-hud-gold" />
+            <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-hud-gold" />
+            <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-hud-gold" />
+
+            <div className="flex items-center justify-between px-5 py-4 border-b border-hud-border">
+              <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">SUIT UPGRADE LOG</span>
+              <button onClick={() => setMarkOpen(false)} className="text-hud-muted hover:text-hud-gold transition-colors p-1">
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="p-5 flex flex-col gap-5">
+              {MARKS.map((mark) => (
+                <div key={mark.id}>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={cn(
+                      "font-mono font-bold text-sm tracking-[0.15em]",
+                      mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted/60"
+                    )}>
+                      {mark.id}
+                    </span>
+                    <span className="font-mono text-[10px] text-hud-muted tracking-[0.1em]">— {mark.label}</span>
+                    {mark.id === "MARK III" && (
+                      <span className="font-mono text-[9px] text-hud-gold border border-hud-gold/40 px-1.5 py-0.5 tracking-wide">CURRENT</span>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-1 pl-3 border-l border-hud-border">
+                    {mark.lines.map((line) => (
+                      <p key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
+                        · {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Comm badge button */}
       <button

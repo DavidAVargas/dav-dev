@@ -14,6 +14,29 @@ export const metadata: Metadata = {
   title: "David A Vargas — Software Engineer",
   description:
     "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
+  openGraph: {
+    title: "David A Vargas — Software Engineer",
+    description:
+      "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
+    url: "https://davidavargas.com",
+    siteName: "David A Vargas",
+    images: [
+      {
+        url: "/headshot.jpg",
+        width: 1200,
+        height: 630,
+        alt: "David A Vargas — Software Engineer",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "David A Vargas — Software Engineer",
+    description:
+      "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
+    images: ["/headshot.jpg"],
+  },
 };
 
 export const viewport: Viewport = {
@@ -28,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={inter.variable}>
+      <body className={inter.variable} suppressHydrationWarning>
         <BootSequence />
         <ScrollProgress />
         <CursorTrail />

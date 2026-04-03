@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 const BOOT_LINES = [
-  "INITIALIZING MARK I PROTOCOLS...",
+  "INITIALIZING MARK III PROTOCOLS...",
   "SCANNING ENVIRONMENT...",
   "CALIBRATING HUD INTERFACE...",
   "LOADING PROFILE: DAVID A VARGAS",
@@ -66,7 +66,7 @@ export function BootSequence() {
       <div className="relative flex flex-col gap-3 px-8 max-w-lg w-full">
         {/* Top label */}
         <p className="font-mono text-[10px] text-hud-muted tracking-[0.3em] mb-4">
-          JARVIS · MARK I · BOOT SEQUENCE
+          JARVIS · MARK III · BOOT SEQUENCE
         </p>
 
         {lines.map((line, i) => (
