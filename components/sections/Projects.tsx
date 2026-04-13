@@ -56,6 +56,18 @@ const PROJECTS: ProjectData[] = [
   },
   {
     id: "PRJ-005",
+    title: "Vet Finance",
+    description: "A free financial education platform for U.S. military members and veterans — credit cards, credit scores, and financial literacy built to fight veteran homelessness.",
+    fullDescription:
+      "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. Vet Finance is a free education platform I'm building to close it. The focus is credit: how it works, how to use it strategically, and how to build a strong financial foundation coming out of the military. The layout and platform architecture are live. The education courses are next. Long-term vision goes further — I want to launch a credit card designed specifically for veterans, with three tiers and a rewards structure that gives back to active troops. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
+    tech: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    status: "BETA",
+    badge: "INITIATIVE",
+    demo: undefined,
+    links: { live: "https://vet-finance-omega.vercel.app/", github: "" },
+  },
+  {
+    id: "PRJ-006",
     title: "Tex N Wash",
     description: "Full-stack site for a live, operating pressure washing business in Fort Worth, TX. Real customers. Real revenue. Fully deployed.",
     fullDescription:

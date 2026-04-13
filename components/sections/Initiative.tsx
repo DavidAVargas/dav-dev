@@ -11,6 +11,7 @@ type InitiativeCard = {
   status: string;
   statusColor: "gold" | "cyan" | "muted";
   github?: string;
+  live?: string;
 };
 
 const INITIATIVES: InitiativeCard[] = [
@@ -30,6 +31,20 @@ const INITIATIVES: InitiativeCard[] = [
   },
   {
     id: "INI-002",
+    industry: "MILITARY / VETERANS",
+    tags: ["BETA — LIVE", "NONPROFIT VISION", "REAL PROBLEM IDENTIFIED"],
+    problem:
+      "Military members leave service without financial literacy. No one teaches them how credit works, how to use credit cards strategically, or how to build a financial foundation in civilian life. That gap is a direct pipeline to veteran homelessness — and it's completely preventable.",
+    built:
+      "Vet Finance — a free financial education platform built specifically for U.S. military members and veterans. Credit cards, credit scores, financial strategy, all in one place at no cost. Platform is live in beta. Education courses are in development. Long-term vision: a veteran-specific credit card with three tiers and a rewards structure that gives back to active troops.",
+    outcome:
+      "Platform deployed and live. Education module in development. Pursuing nonprofit structure to keep it free and accessible permanently. Nobody asked me to build this. I saw the gap and I'm closing it.",
+    status: "BETA — IN DEVELOPMENT",
+    statusColor: "gold",
+    live: "https://vet-finance-omega.vercel.app/",
+  },
+  {
+    id: "INI-003",
     industry: "TBD",
     tags: ["LOADING..."],
     problem: "Another one is coming. Every place I've worked, I've spotted something worth fixing.",
@@ -125,17 +140,29 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
         ))}
       </div>
 
-      {/* GitHub link */}
-      {!isPlaceholder && card.github && (
-        <div className="flex justify-end">
-          <a
-            href={card.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
-          >
-            ◎ VIEW CODE ON GITHUB ↗
-          </a>
+      {/* Links */}
+      {!isPlaceholder && (card.github || card.live) && (
+        <div className="flex justify-end gap-6">
+          {card.live && (
+            <a
+              href={card.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
+            >
+              ◆ VIEW LIVE SITE ↗
+            </a>
+          )}
+          {card.github && (
+            <a
+              href={card.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
+            >
+              ◎ VIEW CODE ON GITHUB ↗
+            </a>
+          )}
         </div>
       )}
     </div>
