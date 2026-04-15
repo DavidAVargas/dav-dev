@@ -79,6 +79,40 @@ const MISSIONS: Mission[] = [
     tags: ["520 → 720+", "8 CARDS", "CHASE SAPPHIRE RESERVE", "AMEX GOLD", "TRAVEL REWARDS"],
   },
   {
+    id: "MSN-007",
+    title: "Acting · IMDb · 3 Short Films",
+    category: "PERFORMANCE",
+    status: "ON HIATUS · CREDITS REAL",
+    statusColor: "gold",
+    short: "Took acting classes, got cast, and appeared in three short films. Each with a named character. Credits listed on IMDb.",
+    detail:
+      "I wanted to try something completely outside my lane — so I took acting classes and actually followed through. That turned into three short film credits: Jared Collins in The Reconcile, Kevin in Who's That Knocking?, and Nick Ramon in Two Robbers and A Mad Man. On that last one I got to act alongside Dan Hewitt Owens — an award-winning director, actor, producer, and screenwriter with over 50 years in the film industry. Three different characters, three different productions. I'm not pivoting to Hollywood — I just wanted to see if I could do it, and I did. Haven't had the time to get back into it, but the experience is real and the credits are there. You can look me up.",
+    tags: ["THE RECONCILE", "WHO'S THAT KNOCKING?", "TWO ROBBERS AND A MAD MAN", "3 CREDITS"],
+    link: { label: "VIEW IMDB PROFILE ↗", url: "https://www.imdb.com/name/nm13791743/" },
+  },
+  {
+    id: "MSN-008",
+    title: "Private Pilot License",
+    category: "AVIATION",
+    status: "FLIGHT DISCOVERY INCOMING",
+    statusColor: "cyan",
+    short: "Learning to fly. Flight discovery coming up. Goal: earn a Private Pilot License (PPL) and own the skies.",
+    detail:
+      "I decided I want to learn how to fly a plane. Flight discovery is coming up soon — that's the first real step, where you actually get in a small aircraft and take the controls. After that, the goal is to work toward a Private Pilot License. It's not a quick process. It takes hours, training, written exams, and checkrides. But that's the point. The same reason I ran an ultra marathon with no training is the same energy that gets me interested in this — I like to do hard things on purpose. The sky is just the next hard thing.",
+    tags: ["FLIGHT DISCOVERY SOON", "PPL ROADMAP", "STUDENT PILOT", "IN PROGRESS"],
+  },
+  {
+    id: "MSN-009",
+    title: "Watch Collection · Trophy Philosophy",
+    category: "HOROLOGY",
+    status: "ALWAYS EARNING THE NEXT ONE",
+    statusColor: "gold",
+    short: "~8 watches. Each one earned, not bought. They're trophies — I only get one when I've done something that deserves it.",
+    detail:
+      "A watch isn't just a timepiece. It's a conversation starter, a reflection of character, and for me — a trophy. I only buy one when I've genuinely earned it. My most recent piece is the Bulova Series X Marc Anthony, bought after a year of 65-hour work weeks, every single week. Before that, I picked up the first-ever Bulova Curv Monograph during my first cruise on Icon of the Seas — the largest cruise ship in the world at the time — after 2 to 3 years without a real vacation. That watch earned itself twice. I'm not a hype buyer. I don't chase trends. I go for unique pieces with art and heritage behind them. Favorite brand is Audemars Piguet — the goal isn't just to buy one, it's to walk into an AD, build a real relationship, and earn that purchase the right way. Next up: Cartier Tank, Cartier Santos, then the Omega Seamaster Ultra Deep. That dial is a 1:1 scale of the actual floor of the Mariana Trench — the deepest point on earth. Dark blue. Shaped like a wave. When I deserve it, I'll get it.",
+    tags: ["~8 WATCHES", "TROPHIES NOT TRENDS", "BULOVA · SERIES X", "AP GOAL", "SEAMASTER ULTRA DEEP NEXT"],
+  },
+  {
     id: "MSN-006",
     title: "The Reading List",
     category: "KNOWLEDGE",
