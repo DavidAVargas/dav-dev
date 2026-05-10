@@ -77,6 +77,29 @@ const PROJECTS: ProjectData[] = [
     demo: undefined,
     links: { live: "https://texnwash.com", github: "https://github.com/DavidAVargas/TexnWash" },
   },
+  {
+    id: "PRJ-007",
+    title: "MilsimReady",
+    description: "A Next.js PWA field guide for Milsim events — check-in flow, field tactics, gear guide, and faction breakdowns. Works offline, packs into a condensed PDF, and has an infrared mode for nighttime ops.",
+    fullDescription:
+      "MilsimReady is a field guide built to travel with you — not just before the event, but onto the field. The content covers what actually matters: how check-in and processing works so you're not lost on arrival, basic field tactics that veterans keep repeating to every newcomer, a gear guide broken into what to get, what to bring, and what not to waste money on, and faction explanations so you understand the scenario you're dropping into. The official event documentation can run 200 pages. I condensed the essentials into a downloadable PDF you can keep on your phone. Since signal is unreliable on location, the whole site is a PWA — load it once and it works fully offline. And for nighttime use at camp, there's an infrared display mode so you can check a detail without lighting yourself up.",
+    tech: ["Next.js", "TypeScript", "Tailwind", "PWA", "Vercel"],
+    status: "DEPLOYED",
+    demo: undefined,
+    links: { live: "https://milsimready.com", github: "" },
+  },
+  {
+    id: "PRJ-008",
+    title: "DAV Tax",
+    description: "My IRS-certified tax prep business. No hidden fees, no runaround — built for individuals, side hustlers, and small businesses ready for the 2027 tax season.",
+    fullDescription:
+      "The site is as straightforward as the service. No maze of pages, no vague pricing, no consultation gauntlet before you know what anything costs. You land, you see what's offered, you know what you're getting. Built for individuals, freelancers, and small business owners who want their taxes done by someone who actually knows the work — not someone trying to make it feel complicated to justify the bill. IRS certified. Covering 2026 filings for the 2027 season. Studying for the AFSP credential next, then Enrolled Agent, eventually CPA.",
+    tech: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    status: "DEPLOYED",
+    badge: "INITIATIVE",
+    demo: undefined,
+    links: { live: "https://dav-tax.vercel.app/", github: "" },
+  },
 ];
 
 function ProjectCard({

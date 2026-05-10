@@ -45,6 +45,34 @@ const INITIATIVES: InitiativeCard[] = [
   },
   {
     id: "INI-003",
+    industry: "MILSIM / COMMUNITY",
+    tags: ["DEPLOYED — LIVE", "DOMAIN SECURED 10 YRS", "GOING TO NEXT EVENT"],
+    problem:
+      "The official event documentation for most Milsim operations runs close to 200 pages. Nobody reads it. So every event, the same scene plays out — new players show up unprepared and the veterans spend the day answering the same questions: when do we arrive, how does check-in work, what should I bring, what do the factions mean? There was no simple, centralized resource. Just forums, word of mouth, and a PDF nobody opened.",
+    built:
+      "MilsimReady covers everything a new player needs to walk in ready: check-in and processing flow, basic field tactics that actually matter, a gear guide broken down into what to get, what to bring, and what not to waste money on, and faction explanations so the scenario makes sense before you're in it. I took the overwhelming 200-page manual and condensed the essentials into a downloadable PDF — something you can actually read. The whole site is a PWA so it works offline on the field where there's no signal. Infrared display mode for use at camp in the dark without lighting yourself up.",
+    outcome:
+      "Problem solved. Already sending it to new teammates joining the platoon before the next event. Once one squad has it, the next one will too — it'll spread on its own because it fills a gap every group runs into. No more re-explaining the same things on the field.",
+    status: "DEPLOYED — LIVE",
+    statusColor: "cyan",
+    live: "https://milsimready.com",
+  },
+  {
+    id: "INI-004",
+    industry: "TAX / FINANCE",
+    tags: ["DEPLOYED — LIVE", "IRS CERTIFIED", "2027 TAX SEASON"],
+    problem:
+      "For a long time, I was one of those people who just handed over their documents and hoped for the best. Every time, same story — overcomplicated explanations, surprise fees, and that feeling like you were being charged more simply because you didn't know enough to push back. Once I started my own small business, it got worse. Finding a preparer who wouldn't immediately upcharge me just for having an LLC felt impossible. So I made a decision: I was going to learn it myself.",
+    built:
+      "Got IRS certified. Studied the tax code from W-2s to self-employment to small business filings. What I found surprised me — it's not as complicated as people make it seem. It just requires someone who actually knows what they're doing and isn't trying to make it feel harder to justify a higher bill. That's when I realized I wasn't the only one dealing with this. DAV Tax is the service I wish had existed — real expertise, honest pricing, no runaround.",
+    outcome:
+      "Live and taking clients for the 2027 tax season (2026 filings). Studying for the AFSP credential next month. Path: AFSP → Enrolled Agent → CPA. Not building a tax factory. Building something people can actually trust.",
+    status: "DEPLOYED — 2027 SEASON",
+    statusColor: "cyan",
+    live: "https://dav-tax.vercel.app/",
+  },
+  {
+    id: "INI-005",
     industry: "TBD",
     tags: ["LOADING..."],
     problem: "Another one is coming. Every place I've worked, I've spotted something worth fixing.",
