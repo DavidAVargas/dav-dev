@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useDialog } from "@/lib/use-dialog";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export type ProjectData = {
   id: string;
@@ -13,7 +14,7 @@ export type ProjectData = {
   tech: string[];
   status: string;
   badge?: string;
-  demo?: string; // GIF or video URL
+  demo?: string; // screenshot (or GIF) path under /public
   links: { live: string | null; github: string };
 };
 
@@ -23,20 +24,34 @@ export const A11Y_TAG = "Accessibility (A11Y)";
 interface ProjectModalProps {
   project: ProjectData | null;
   onClose: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
+  position?: { index: number; total: number };
 }
 
-export function ProjectModal({ project, onClose }: ProjectModalProps) {
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export function ProjectModal({ project, onClose, onPrev, onNext, position }: ProjectModalProps) {
   const [phase, setPhase] = useState<"accessing" | "open" | "closing" | "closed">("closed");
   const [displayed, setDisplayed] = useState<ProjectData | null>(null);
+  const phaseRef = useRef(phase);
 
-  // Open flow
   useEffect(() => {
-    if (project) {
-      setDisplayed(project);
-      setPhase("accessing");
-      const t = setTimeout(() => setPhase("open"), 800);
-      return () => clearTimeout(t);
+    phaseRef.current = phase;
+  });
+
+  // Open flow — switching between projects while open skips the "accessing" intro
+  useEffect(() => {
+    if (!project) return;
+    setDisplayed(project);
+    if (phaseRef.current === "open") {
+      dialogRef.current?.scrollTo({ top: 0 });
+      return;
     }
+    setPhase("accessing");
+    const t = setTimeout(() => setPhase("open"), 800);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project]);
 
   // Close with animation
@@ -51,6 +66,17 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   const dialogRef = useDialog(phase !== "closed", handleClose);
   const titleId = useId();
+
+  // Left / Right arrow keys move between projects
+  useEffect(() => {
+    if (phase !== "open") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" && onPrev) { e.preventDefault(); onPrev(); }
+      if (e.key === "ArrowRight" && onNext) { e.preventDefault(); onNext(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [phase, onPrev, onNext]);
 
   // Lock body scroll without layout shift
   useEffect(() => {
@@ -130,15 +156,21 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         {/* Full content */}
         {phase === "open" && (
           <div className="flex flex-col">
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-hud-border">
-              <div className="flex items-center gap-4">
-                <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">
-                  FILE: {displayed.id}
+            {/* Announces the project after prev/next navigation */}
+            <p className="sr-only" aria-live="polite">
+              {position ? `Project ${position.index + 1} of ${position.total}: ` : ""}
+              {displayed.title}
+            </p>
+
+            {/* Top bar — sticky so prev/next stay reachable while scrolling */}
+            <div className="sticky top-0 z-20 bg-hud-surface flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-hud-border">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-x-4 min-w-0">
+                <span className="font-mono text-[10px] text-hud-muted tracking-[0.2em] sm:tracking-[0.3em] whitespace-nowrap">
+                  <span className="hidden sm:inline">FILE: </span>{displayed.id}
                 </span>
                 <span
                   className={cn(
-                    "font-mono text-[9px] tracking-[0.15em] px-2 py-0.5 border",
+                    "font-mono text-[9px] tracking-[0.15em] px-2 py-0.5 border whitespace-nowrap",
                     displayed.status === "DEPLOYED"
                       ? "text-hud-cyan border-hud-cyan/40"
                       : "text-hud-gold border-hud-gold/40"
@@ -147,118 +179,147 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   {displayed.status}
                 </span>
               </div>
-              <button
-                onClick={handleClose}
-                aria-label="Close project details"
-                className="text-hud-muted hover:text-hud-cyan transition-colors p-1"
-              >
-                <X size={16} />
-              </button>
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                {onPrev && onNext && position && (
+                  <>
+                    <button
+                      onClick={onPrev}
+                      aria-label="Previous project"
+                      className="w-8 h-8 flex items-center justify-center border border-hud-border text-hud-muted hover:text-hud-cyan hover:border-hud-cyan/60 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hud-cyan"
+                    >
+                      <ChevronLeft size={16} />
+                    </button>
+                    <span className="font-mono text-[10px] text-hud-muted hidden sm:inline tracking-[0.2em] tabular-nums whitespace-nowrap text-center" aria-hidden="true">
+                      {pad(position.index + 1)} / {pad(position.total)}
+                    </span>
+                    <button
+                      onClick={onNext}
+                      aria-label="Next project"
+                      className="w-8 h-8 flex items-center justify-center border border-hud-border text-hud-muted hover:text-hud-cyan hover:border-hud-cyan/60 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hud-cyan"
+                    >
+                      <ChevronRight size={16} />
+                    </button>
+                    <span className="w-px h-5 bg-hud-border mx-1" aria-hidden="true" />
+                  </>
+                )}
+                <button
+                  onClick={handleClose}
+                  aria-label="Close project details"
+                  className="text-hud-muted hover:text-hud-cyan transition-colors p-1"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
-            {/* Demo area */}
-            <div className="relative w-full aspect-video bg-hud-dark border-b border-hud-border overflow-hidden">
-              {displayed.demo ? (
-                <img
-                  src={displayed.demo}
-                  alt={`${displayed.title} demo`}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-                  {/* Placeholder HUD */}
-                  <div className="relative w-20 h-20 border border-hud-cyan/20 flex items-center justify-center">
-                    <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-hud-cyan/40" />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-hud-cyan/40" />
-                    <span className="font-mono text-2xl text-hud-cyan/30">▶</span>
+            <div key={displayed.id} className="animate-in fade-in-0 duration-300">
+              {/* Demo area */}
+              <div className="relative w-full aspect-video bg-hud-dark border-b border-hud-border overflow-hidden">
+                {displayed.demo ? (
+                  <Image
+                    src={displayed.demo}
+                    alt={`Screenshot of the ${displayed.title} homepage`}
+                    fill
+                    loading="eager"
+                    sizes="(min-width: 1024px) 896px, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+                    {/* Placeholder HUD */}
+                    <div className="relative w-20 h-20 border border-hud-cyan/20 flex items-center justify-center">
+                      <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-hud-cyan/40" />
+                      <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-hud-cyan/40" />
+                      <span className="font-mono text-2xl text-hud-cyan/30">▶</span>
+                    </div>
+                    <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
+                      // PREVIEW PENDING
+                    </p>
+                    <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.15em]">
+                      SCREENSHOT COMING SOON
+                    </p>
                   </div>
-                  <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
-                    // DEMO RECORDING PENDING
-                  </p>
-                  <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.15em]">
-                    GIF OR VIDEO WILL LOAD HERE
-                  </p>
-                </div>
-              )}
+                )}
 
-              {/* Scan line overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.015) 3px, rgba(0,212,255,0.015) 4px)",
-                }}
-              />
-            </div>
-
-            {/* Details */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-hud-border">
-              {/* Left — description */}
-              <div className="md:col-span-2 p-6 flex flex-col gap-4">
-                <h2 id={titleId} className="font-mono font-bold text-xl text-hud-text tracking-wide">
-                  {displayed.title}
-                </h2>
-                <p className="text-hud-muted text-sm leading-relaxed">
-                  {displayed.fullDescription}
-                </p>
+                {/* Scan line overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.015) 3px, rgba(0,212,255,0.015) 4px)",
+                  }}
+                />
               </div>
 
-              {/* Right — tech + links */}
-              <div className="p-6 flex flex-col gap-6">
-                <div>
-                  <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
-                    // TECH STACK
+              {/* Details */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-hud-border">
+                {/* Left — description */}
+                <div className="md:col-span-2 p-6 flex flex-col gap-4">
+                  <h2 id={titleId} className="font-mono font-bold text-xl text-hud-text tracking-wide">
+                    {displayed.title}
+                  </h2>
+                  <p className="text-hud-muted text-sm leading-relaxed">
+                    {displayed.fullDescription}
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {displayed.tech.map((t) => (
-                      <span
-                        key={t}
-                        className={cn(
-                          "font-mono text-[10px] border px-2 py-0.5 tracking-wide",
-                          t === A11Y_TAG
-                            ? "text-hud-green border-hud-green/50"
-                            : "text-hud-cyan border-hud-cyan/30"
-                        )}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                <div>
-                  <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
-                    // ACCESS LINKS
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    {displayed.links.github ? (
-                      <a
-                        href={displayed.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xs text-hud-muted hover:text-hud-cyan transition-colors tracking-[0.1em] flex items-center gap-2"
-                      >
-                        <span className="text-hud-cyan">◎</span> GITHUB ↗
-                      </a>
-                    ) : (
-                      <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
-                        <span>◎</span> PRIVATE REPO
-                      </span>
-                    )}
-                    {displayed.links.live ? (
-                      <a
-                        href={displayed.links.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xs text-hud-muted hover:text-hud-gold transition-colors tracking-[0.1em] flex items-center gap-2"
-                      >
-                        <span className="text-hud-gold">◆</span> LIVE SITE ↗
-                      </a>
-                    ) : (
-                      <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
-                        <span>◇</span> LIVE SITE PENDING
-                      </span>
-                    )}
+                {/* Right — tech + links */}
+                <div className="p-6 flex flex-col gap-6">
+                  <div>
+                    <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
+                      // TECH STACK
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {displayed.tech.map((t) => (
+                        <span
+                          key={t}
+                          className={cn(
+                            "font-mono text-[10px] border px-2 py-0.5 tracking-wide",
+                            t === A11Y_TAG
+                              ? "text-hud-green border-hud-green/50"
+                              : "text-hud-cyan border-hud-cyan/30"
+                          )}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
+                      // ACCESS LINKS
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      {displayed.links.github ? (
+                        <a
+                          href={displayed.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-xs text-hud-muted hover:text-hud-cyan transition-colors tracking-[0.1em] flex items-center gap-2"
+                        >
+                          <span className="text-hud-cyan">◎</span> GITHUB ↗
+                        </a>
+                      ) : (
+                        <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
+                          <span>◎</span> PRIVATE REPO
+                        </span>
+                      )}
+                      {displayed.links.live ? (
+                        <a
+                          href={displayed.links.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-xs text-hud-muted hover:text-hud-gold transition-colors tracking-[0.1em] flex items-center gap-2"
+                        >
+                          <span className="text-hud-gold">◆</span> LIVE SITE ↗
+                        </a>
+                      ) : (
+                        <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
+                          <span>◇</span> LIVE SITE PENDING
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

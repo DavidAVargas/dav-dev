@@ -15,7 +15,7 @@ const PROJECTS: ProjectData[] = [
       "A friend studying fashion needed more than a portfolio — he needed a platform. QVIL Studios is a full-stack web app where he can display his design work, post upcoming events, and share collaborations with other creatives. I built the entire thing: auth with Clerk, file/image uploads with UploadThing, content management with Payload CMS, and deployed on Vercel. The stack is Next.js, TypeScript, Tailwind, and shadcn/ui — the same foundation I use for my own work. The goal was to give him something that looks professional, scales with him as he grows, and he can actually manage himself without touching code.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Payload CMS", "shadcn/ui", "Vercel"],
     status: "DEPLOYED",
-    demo: undefined,
+    demo: "/projects/qvil-studios.jpg",
     links: { live: "https://qvilstudios.com", github: "https://github.com/DavidAVargas/qvil-studios" },
   },
   {
@@ -26,7 +26,7 @@ const PROJECTS: ProjectData[] = [
       "Most developer portfolios look the same — white background, three project cards, a contact form. I wanted something that felt like me. I built a full Iron Man JARVIS HUD aesthetic from scratch using Next.js, TypeScript, and Tailwind CSS v4. Every detail was intentional: the boot sequence on first load, the cursor trail, the arc reactor, the scroll progress bar, the side nav that tracks your position in real time. The sections aren't just placeholders — they tell a real story. This project is as much about design thinking and personal brand as it is about technical skill. It's also being built to be usable by everyone: I'm taking it to WCAG 2.1 AA — full keyboard navigation, focus that's trapped in modals and returned when they close, screen reader support, and color contrast that passes — because accessibility is a requirement, not a nice-to-have.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "Vercel"],
     status: "DEPLOYED",
-    demo: undefined,
+    demo: "/projects/dav-portfolio.jpg",
     links: { live: "#", github: "https://github.com/DavidAVargas/dav-dev" },
   },
   {
@@ -51,7 +51,7 @@ const PROJECTS: ProjectData[] = [
     tech: [A11Y_TAG, "JavaScript", "HTML", "CSS"],
     status: "DEPLOYED",
     badge: "BEST IN CLASS",
-    demo: undefined,
+    demo: "/projects/pixel-coder.jpg",
     links: { live: "https://davidavargas.github.io/Pixel-Coder.github.io/", github: "https://github.com/DavidAVargas/Pixel-Coder.github.io" },
   },
   {
@@ -63,7 +63,7 @@ const PROJECTS: ProjectData[] = [
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
     status: "BETA",
     badge: "INITIATIVE",
-    demo: undefined,
+    demo: "/projects/vet-finance.jpg",
     links: { live: "https://vet-finance-omega.vercel.app/", github: "" },
   },
   {
@@ -74,7 +74,7 @@ const PROJECTS: ProjectData[] = [
       "This isn't a demo — it's a fully operational business platform with real customers and active operations behind it. The site has two login paths: an admin dashboard for managing the business side, and a community login so customers can sign up, join, and stay connected. Built with Next.js, TypeScript, Tailwind, Clerk for auth, UploadThing for media, and Brevo for email marketing and CRM. Deployed on Vercel. Every feature was built to serve a real need — not because it looked good in a tutorial. When stakes are real, the code has to be too.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Brevo", "Vercel"],
     status: "DEPLOYED",
-    demo: undefined,
+    demo: "/projects/tex-n-wash.jpg",
     links: { live: "https://texnwash.com", github: "https://github.com/DavidAVargas/TexnWash" },
   },
   {
@@ -85,7 +85,7 @@ const PROJECTS: ProjectData[] = [
       "MilsimReady is a field guide built to travel with you — not just before the event, but onto the field. The content covers what actually matters: how check-in and processing works so you're not lost on arrival, basic field tactics that veterans keep repeating to every newcomer, a gear guide broken into what to get, what to bring, and what not to waste money on, and faction explanations so you understand the scenario you're dropping into. The official event documentation can run 200 pages. I condensed the essentials into a downloadable PDF you can keep on your phone. Since signal is unreliable on location, the whole site is a PWA — load it once and it works fully offline. And for nighttime use at camp, there's an infrared display mode so you can check a detail without lighting yourself up.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "PWA", "Vercel"],
     status: "DEPLOYED",
-    demo: undefined,
+    demo: "/projects/milsim-ready.jpg",
     links: { live: "https://milsimready.com", github: "" },
   },
   {
@@ -97,7 +97,7 @@ const PROJECTS: ProjectData[] = [
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
     status: "DEPLOYED",
     badge: "INITIATIVE",
-    demo: undefined,
+    demo: "/projects/dav-tax.jpg",
     links: { live: "https://dav-tax.vercel.app/", github: "" },
   },
   {
@@ -109,7 +109,7 @@ const PROJECTS: ProjectData[] = [
     tech: [A11Y_TAG, "Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Vercel"],
     status: "IN PROGRESS",
     badge: "CLIENT",
-    demo: undefined,
+    demo: "/projects/buy-with-miguel.jpg",
     links: { live: "https://buy-with-miguel.vercel.app/en", github: "" },
   },
 ];
@@ -210,6 +210,7 @@ function ProjectCard({
 
 export function Projects() {
   const [selected, setSelected] = useState<ProjectData | null>(null);
+  const selectedIndex = selected ? PROJECTS.findIndex((p) => p.id === selected.id) : 0;
 
   return (
     <>
@@ -242,7 +243,13 @@ export function Projects() {
         </div>
       </section>
 
-      <ProjectModal project={selected} onClose={() => setSelected(null)} />
+      <ProjectModal
+        project={selected}
+        onClose={() => setSelected(null)}
+        onPrev={() => setSelected(PROJECTS[(selectedIndex - 1 + PROJECTS.length) % PROJECTS.length])}
+        onNext={() => setSelected(PROJECTS[(selectedIndex + 1) % PROJECTS.length])}
+        position={{ index: selectedIndex, total: PROJECTS.length }}
+      />
     </>
   );
 }
