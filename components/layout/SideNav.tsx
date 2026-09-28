@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { focusSection } from "@/lib/use-dialog";
 
 const NAV_ITEMS = [
   { id: "hero",       label: "HOME" },
@@ -41,9 +42,6 @@ export function SideNav() {
     return () => window.removeEventListener("scroll", getActive);
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <nav className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 flex-col gap-7">
@@ -52,7 +50,7 @@ export function SideNav() {
         return (
           <button
             key={id}
-            onClick={() => scrollTo(id)}
+            onClick={() => focusSection(id)}
             className="group flex items-center gap-4 justify-end"
             aria-label={label}
           >

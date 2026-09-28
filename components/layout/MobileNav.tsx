@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { useDialog, focusSection } from "@/lib/use-dialog";
 
 const MARKS = [
   {
@@ -86,6 +87,10 @@ export function MobileNav() {
   const [active, setActive] = useState("hero");
   const [visible, setVisible] = useState(false);
   const [markOpen, setMarkOpen] = useState(false);
+  const menuRef = useDialog(open, () => setOpen(false));
+  const markRef = useDialog(markOpen, () => setMarkOpen(false));
+  const menuId = useId();
+  const markTitleId = useId();
 
   // Track active section
   useEffect(() => {
@@ -121,85 +126,133 @@ export function MobileNav() {
 
   const scrollTo = (id: string) => {
     setOpen(false);
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+    setTimeout(() => focusSection(id), 300);
   };
 
   return (
     <div className="md:hidden">
       <MobileTopBar active={active} />
-      {/* Full-screen overlay */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[9989] flex flex-col justify-center px-8",
-          "bg-hud-dark/95 backdrop-blur-md",
-          "transition-all duration-300",
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        )}
-      >
-        {/* Background grid */}
-        <div className="absolute inset-0 hud-grid-bg opacity-20" />
+      {/* Menu overlay + toggle share one focus-trap container so the toggle can close the menu */}
+      <div ref={menuRef} tabIndex={-1} className="outline-none">
+        {/* Full-screen overlay */}
+        <div
+          id={menuId}
+          inert={!open}
+          className={cn(
+            "fixed inset-0 z-[9989] flex flex-col justify-center px-8",
+            "bg-hud-dark/95 backdrop-blur-md",
+            "transition-all duration-300",
+            open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          )}
+        >
+          {/* Background grid */}
+          <div className="absolute inset-0 hud-grid-bg opacity-20" />
 
-        {/* Radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-hud-cyan/5 blur-3xl pointer-events-none" />
+          {/* Radial glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-hud-cyan/5 blur-3xl pointer-events-none" />
 
-        {/* Top label */}
-        <p className="font-mono text-[10px] text-hud-muted tracking-[0.3em] mb-12 relative">
-          NAVIGATION · MARK III
-        </p>
-
-        {/* Nav items */}
-        <nav className="relative flex flex-col gap-2">
-          {NAV_ITEMS.map(({ id, label, module }, i) => {
-            const isActive = active === id;
-            return (
-              <button
-                key={id}
-                onClick={() => scrollTo(id)}
-                className={cn(
-                  "group flex items-center gap-4 py-3 text-left",
-                  "transition-all duration-300",
-                  "border-b border-hud-border/40",
-                  visible
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-4"
-                )}
-                style={{
-                  transitionDelay: visible ? `${i * 60}ms` : "0ms",
-                }}
-              >
-                <span className="font-mono text-[10px] text-hud-muted/50 tracking-[0.2em] w-6">
-                  {module}
-                </span>
-                <span
-                  className={cn(
-                    "font-mono font-bold text-3xl tracking-[0.1em] transition-colors duration-200",
-                    isActive ? "text-hud-cyan text-glow-cyan" : "text-hud-text/60 group-hover:text-hud-text"
-                  )}
-                >
-                  {label}
-                </span>
-                {isActive && (
-                  <span className="ml-auto font-mono text-xs text-hud-cyan">◆</span>
-                )}
-              </button>
-            );
-          })}
-        </nav>
-
-        {/* Bottom */}
-        <div className="mt-12 relative flex items-center justify-between">
-          <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em]">
-            DAVID A VARGAS · SOFTWARE ENGINEER
+          {/* Top label */}
+          <p className="font-mono text-[10px] text-hud-muted tracking-[0.3em] mb-12 relative">
+            NAVIGATION · MARK III
           </p>
-          <button
-            onClick={() => setMarkOpen(true)}
-            className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
-          >
-            <span>◆</span> MARK III
-          </button>
+
+          {/* Nav items */}
+          <nav aria-label="Mobile" className="relative flex flex-col gap-2">
+            {NAV_ITEMS.map(({ id, label, module }, i) => {
+              const isActive = active === id;
+              return (
+                <button
+                  key={id}
+                  onClick={() => scrollTo(id)}
+                  aria-current={isActive ? "location" : undefined}
+                  data-autofocus={i === 0 ? true : undefined}
+                  className={cn(
+                    "group flex items-center gap-4 py-3 text-left",
+                    "transition-all duration-300",
+                    "border-b border-hud-border/40",
+                    visible
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-4"
+                  )}
+                  style={{
+                    transitionDelay: visible ? `${i * 60}ms` : "0ms",
+                  }}
+                >
+                  <span className="font-mono text-[10px] text-hud-muted/50 tracking-[0.2em] w-6">
+                    {module}
+                  </span>
+                  <span
+                    className={cn(
+                      "font-mono font-bold text-3xl tracking-[0.1em] transition-colors duration-200",
+                      isActive ? "text-hud-cyan text-glow-cyan" : "text-hud-text/60 group-hover:text-hud-text"
+                    )}
+                  >
+                    {label}
+                  </span>
+                  {isActive && (
+                    <span className="ml-auto font-mono text-xs text-hud-cyan">◆</span>
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Bottom */}
+          <div className="mt-12 relative flex items-center justify-between">
+            <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em]">
+              DAVID A VARGAS · SOFTWARE ENGINEER
+            </p>
+            <button
+              onClick={() => setMarkOpen(true)}
+              aria-haspopup="dialog"
+              aria-label="MARK III — view suit upgrade log"
+              className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
+            >
+              <span>◆</span> MARK III
+            </button>
+          </div>
         </div>
+
+        {/* Comm badge button */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className={cn(
+            "fixed bottom-8 right-6 z-[9990] w-12 h-12",
+            "flex items-center justify-center",
+            "border border-hud-cyan/40 bg-hud-dark",
+            "transition-all duration-300",
+            open ? "border-hud-cyan glow-cyan rotate-90" : "hover:border-hud-cyan hover:glow-cyan"
+          )}
+          aria-label="Navigation menu"
+          aria-expanded={open}
+          aria-controls={menuId}
+        >
+          {/* Corner accents */}
+          <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-hud-cyan" />
+          <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-hud-cyan" />
+
+          {/* Icon — morphs between menu and close */}
+          <div className="flex flex-col gap-1 items-center justify-center">
+            <span
+              className={cn(
+                "block h-px bg-hud-cyan transition-all duration-300",
+                open ? "w-4 rotate-45 translate-y-[5px]" : "w-4"
+              )}
+            />
+            <span
+              className={cn(
+                "block h-px bg-hud-cyan transition-all duration-300",
+                open ? "opacity-0 w-0" : "w-3 opacity-100"
+              )}
+            />
+            <span
+              className={cn(
+                "block h-px bg-hud-cyan transition-all duration-300",
+                open ? "w-4 -rotate-45 -translate-y-[5px]" : "w-4"
+              )}
+            />
+          </div>
+        </button>
       </div>
 
       {/* Mark patch notes modal */}
@@ -210,7 +263,12 @@ export function MobileNav() {
         >
           <div className="absolute inset-0 bg-hud-dark/95 backdrop-blur-sm" />
           <div
-            className="relative w-full max-w-sm bg-hud-surface border border-hud-gold/30 max-h-[80vh] overflow-y-auto"
+            ref={markRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={markTitleId}
+            tabIndex={-1}
+            className="relative w-full max-w-sm bg-hud-surface border border-hud-gold/30 max-h-[80vh] overflow-y-auto outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-hud-gold" />
@@ -219,8 +277,8 @@ export function MobileNav() {
             <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-hud-gold" />
 
             <div className="flex items-center justify-between px-5 py-4 border-b border-hud-border">
-              <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">SUIT UPGRADE LOG</span>
-              <button onClick={() => setMarkOpen(false)} className="text-hud-muted hover:text-hud-gold transition-colors p-1">
+              <h2 id={markTitleId} className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">SUIT UPGRADE LOG</h2>
+              <button onClick={() => setMarkOpen(false)} aria-label="Close upgrade log" className="text-hud-muted hover:text-hud-gold transition-colors p-1">
                 <X size={16} />
               </button>
             </div>
@@ -254,44 +312,6 @@ export function MobileNav() {
         </div>
       )}
 
-      {/* Comm badge button */}
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className={cn(
-          "fixed bottom-8 right-6 z-[9990] w-12 h-12",
-          "flex items-center justify-center",
-          "border border-hud-cyan/40 bg-hud-dark",
-          "transition-all duration-300",
-          open ? "border-hud-cyan glow-cyan rotate-90" : "hover:border-hud-cyan hover:glow-cyan"
-        )}
-        aria-label="Toggle navigation"
-      >
-        {/* Corner accents */}
-        <span className="absolute top-0 left-0 w-2 h-2 border-t border-l border-hud-cyan" />
-        <span className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-hud-cyan" />
-
-        {/* Icon — morphs between menu and close */}
-        <div className="flex flex-col gap-1 items-center justify-center">
-          <span
-            className={cn(
-              "block h-px bg-hud-cyan transition-all duration-300",
-              open ? "w-4 rotate-45 translate-y-[5px]" : "w-4"
-            )}
-          />
-          <span
-            className={cn(
-              "block h-px bg-hud-cyan transition-all duration-300",
-              open ? "opacity-0 w-0" : "w-3 opacity-100"
-            )}
-          />
-          <span
-            className={cn(
-              "block h-px bg-hud-cyan transition-all duration-300",
-              open ? "w-4 -rotate-45 -translate-y-[5px]" : "w-4"
-            )}
-          />
-        </div>
-      </button>
     </div>
   );
 }

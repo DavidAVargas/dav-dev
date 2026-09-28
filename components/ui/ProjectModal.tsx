@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useDialog } from "@/lib/use-dialog";
 import { X } from "lucide-react";
 
 export type ProjectData = {
@@ -45,13 +46,8 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     }, 350);
   };
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [phase]);
+  const dialogRef = useDialog(phase !== "closed", handleClose);
+  const titleId = useId();
 
   // Lock body scroll without layout shift
   useEffect(() => {
@@ -84,8 +80,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
       {/* Modal */}
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-busy={phase === "accessing"}
+        tabIndex={-1}
         className={cn(
-          "relative w-full max-w-4xl max-h-[90vh] overflow-y-auto",
+          "relative w-full max-w-4xl max-h-[90vh] overflow-y-auto outline-none",
           "bg-hud-surface border border-hud-cyan/30",
           "transition-all duration-350",
           phase === "closing"
@@ -107,6 +109,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <p className="font-mono text-xs text-hud-muted tracking-[0.3em]">
               ACCESSING FILE...
             </p>
+            <h2 id={titleId} className="sr-only">
+              {displayed.title}
+            </h2>
             <div className="w-48 h-px bg-hud-border overflow-hidden">
               <div
                 className="h-full bg-hud-cyan"
@@ -141,6 +146,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
               <button
                 onClick={handleClose}
+                aria-label="Close project details"
                 className="text-hud-muted hover:text-hud-cyan transition-colors p-1"
               >
                 <X size={16} />
@@ -186,9 +192,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-hud-border">
               {/* Left — description */}
               <div className="md:col-span-2 p-6 flex flex-col gap-4">
-                <h3 className="font-mono font-bold text-xl text-hud-text tracking-wide">
+                <h2 id={titleId} className="font-mono font-bold text-xl text-hud-text tracking-wide">
                   {displayed.title}
-                </h3>
+                </h2>
                 <p className="text-hud-muted text-sm leading-relaxed">
                   {displayed.fullDescription}
                 </p>

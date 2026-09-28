@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { cn } from "@/lib/utils";
+import { useDialog } from "@/lib/use-dialog";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { X } from "lucide-react";
 
@@ -260,6 +261,9 @@ function MissionModal({
     }, 300);
   };
 
+  const dialogRef = useDialog(mission !== null || displayed !== null, handleClose);
+  const titleId = useId();
+
   if (!mission && !displayed) return null;
   const m = displayed ?? mission!;
 
@@ -274,11 +278,16 @@ function MissionModal({
       />
       <div
         className={cn(
-          "relative w-full max-w-2xl bg-hud-surface border transition-all duration-300",
+          "relative w-full max-w-2xl bg-hud-surface border outline-none transition-all duration-300",
           m.statusColor === "gold" ? "border-hud-gold/30" : "border-hud-cyan/30",
           visible && mission ? "opacity-100 scale-100" : "opacity-0 scale-95"
         )}
         onClick={(e) => e.stopPropagation()}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
       >
         {/* Corner brackets */}
         {(["top-0 left-0 border-t-2 border-l-2", "top-0 right-0 border-t-2 border-r-2",
@@ -300,7 +309,7 @@ function MissionModal({
             <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">{m.id}</span>
             <span className="font-mono text-[10px] text-hud-muted tracking-[0.2em]">{m.category}</span>
           </div>
-          <button onClick={handleClose} className="text-hud-muted hover:text-hud-cyan transition-colors p-1">
+          <button onClick={handleClose} aria-label="Close mission details" className="text-hud-muted hover:text-hud-cyan transition-colors p-1">
             <X size={16} />
           </button>
         </div>
@@ -317,7 +326,7 @@ function MissionModal({
               <span className={cn("w-1.5 h-1.5 rounded-full", m.statusColor === "gold" ? "bg-hud-gold" : "bg-hud-cyan")} />
               {m.status}
             </span>
-            <h3 className="font-mono font-bold text-xl text-hud-text tracking-wide">{m.title}</h3>
+            <h2 id={titleId} className="font-mono font-bold text-xl text-hud-text tracking-wide">{m.title}</h2>
           </div>
 
           <p className="text-hud-muted text-sm leading-relaxed">{m.detail}</p>
@@ -387,13 +396,13 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
 
   return (
     <div
-      onClick={onClick}
       className={cn(
         "h-full relative border p-5 cursor-pointer flex flex-col gap-3",
         "transition-all duration-300 group",
+        "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4",
         isGold
-          ? "border-hud-gold/20 hover:border-hud-gold/50 bg-hud-surface"
-          : "border-hud-border hover:border-hud-cyan/40 bg-hud-surface hover:glow-cyan"
+          ? "border-hud-gold/20 hover:border-hud-gold/50 bg-hud-surface has-[:focus-visible]:outline-hud-gold"
+          : "border-hud-border hover:border-hud-cyan/40 bg-hud-surface hover:glow-cyan has-[:focus-visible]:outline-hud-cyan"
       )}
     >
       {/* Corner accents */}
@@ -419,7 +428,14 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
           ? "text-hud-text group-hover:text-hud-gold"
           : "text-hud-text group-hover:text-hud-cyan"
       )}>
-        {mission.title}
+        <button
+          type="button"
+          onClick={onClick}
+          aria-haspopup="dialog"
+          className="text-left outline-none after:absolute after:inset-0 after:content-['']"
+        >
+          {mission.title}
+        </button>
       </h3>
 
       {/* Short desc */}

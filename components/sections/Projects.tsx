@@ -117,9 +117,9 @@ function ProjectCard({
         "h-full bg-hud-surface p-6 flex flex-col gap-4 cursor-pointer",
         "border border-hud-border overflow-hidden",
         "transition-all duration-300 group",
-        "hover:border-hud-cyan/40 hover:glow-cyan"
+        "hover:border-hud-cyan/40 hover:glow-cyan",
+        "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-hud-cyan"
       )}
-      onClick={onClick}
     >
       {/* Scan line on hover */}
       <span className="card-scan-line absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-hud-cyan to-transparent pointer-events-none top-0 opacity-0" />
@@ -150,7 +150,15 @@ function ProjectCard({
 
       {/* Title */}
       <h3 className="font-mono font-bold text-lg text-hud-text group-hover:text-hud-cyan transition-colors duration-200 tracking-wide">
-        {project.title}
+        {/* Stretched button: whole card is the click target, title is the accessible name */}
+        <button
+          type="button"
+          onClick={onClick}
+          aria-haspopup="dialog"
+          className="text-left outline-none after:absolute after:inset-0 after:content-['']"
+        >
+          {project.title}
+        </button>
       </h3>
 
       {/* Description */}

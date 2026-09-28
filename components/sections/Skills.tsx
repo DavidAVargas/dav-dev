@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useDialog } from "@/lib/use-dialog";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { X } from "lucide-react";
 
@@ -201,6 +202,9 @@ function SkillModal({
     }, 300);
   };
 
+  const dialogRef = useDialog(category !== null || displayed !== null, handleClose);
+  const titleId = useId();
+
   if (!category && !displayed) return null;
   const c = displayed ?? category!;
   const isGold = c.color === "gold";
@@ -216,11 +220,16 @@ function SkillModal({
       />
       <div
         className={cn(
-          "relative w-full max-w-2xl bg-hud-surface border transition-all duration-300",
+          "relative w-full max-w-2xl bg-hud-surface border outline-none transition-all duration-300",
           isGold ? "border-hud-gold/30" : "border-hud-cyan/30",
           visible && category ? "opacity-100 scale-100" : "opacity-0 scale-95"
         )}
         onClick={(e) => e.stopPropagation()}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
       >
         {/* Corner brackets */}
         {(["top-0 left-0 border-t-2 border-l-2", "top-0 right-0 border-t-2 border-r-2",
@@ -241,7 +250,7 @@ function SkillModal({
           <div className="flex items-center gap-3">
             <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">{c.subtitle}</span>
           </div>
-          <button onClick={handleClose} className="text-hud-muted hover:text-hud-cyan transition-colors p-1">
+          <button onClick={handleClose} aria-label="Close skill details" className="text-hud-muted hover:text-hud-cyan transition-colors p-1">
             <X size={16} />
           </button>
         </div>
@@ -249,12 +258,12 @@ function SkillModal({
         {/* Content */}
         <div className="p-6 flex flex-col gap-6">
           <div>
-            <h3 className={cn(
+            <h2 id={titleId} className={cn(
               "font-mono font-bold text-xl tracking-wide",
               isGold ? "text-hud-gold" : "text-hud-cyan"
             )}>
               {c.title}
-            </h3>
+            </h2>
             <p className="text-hud-muted text-sm leading-relaxed mt-3">{c.description}</p>
           </div>
 
@@ -317,12 +326,12 @@ function CategoryBlock({
   return (
     <div
       ref={ref}
-      onClick={onClick}
       className={cn(
         "relative p-6 border flex flex-col gap-5 cursor-pointer transition-all duration-300 group",
+        "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4",
         isGold
-          ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60"
-          : "border-hud-border bg-hud-surface hover:border-hud-cyan/40"
+          ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60 has-[:focus-visible]:outline-hud-gold"
+          : "border-hud-border bg-hud-surface hover:border-hud-cyan/40 has-[:focus-visible]:outline-hud-cyan"
       )}
     >
       {/* Corner accents */}
@@ -338,7 +347,14 @@ function CategoryBlock({
           "font-mono font-bold text-sm tracking-[0.2em] transition-opacity duration-200",
           isGold ? "text-hud-gold" : "text-hud-cyan"
         )}>
-          {category.title}
+          <button
+            type="button"
+            onClick={onClick}
+            aria-haspopup="dialog"
+            className="text-left outline-none after:absolute after:inset-0 after:z-10 after:content-['']"
+          >
+            {category.title}
+          </button>
         </h3>
         {isGold && (
           <p className="font-mono text-[9px] text-hud-gold/50 tracking-[0.1em] mt-1">

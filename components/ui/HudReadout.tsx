@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { useDialog } from "@/lib/use-dialog";
 
 const MARKS = [
   {
@@ -58,6 +59,8 @@ export function HudReadout() {
   const [active, setActive] = useState("hero");
   const [flash, setFlash] = useState(false);
   const [open, setOpen] = useState(false);
+  const dialogRef = useDialog(open, () => setOpen(false));
+  const titleId = useId();
 
   useEffect(() => {
     let lastActive = "";
@@ -104,6 +107,8 @@ export function HudReadout() {
         </div>
         <button
           onClick={() => setOpen(true)}
+          aria-haspopup="dialog"
+          aria-label="MARK III — view suit upgrade log"
           className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
         >
           <span>◆</span> MARK III <span className="text-hud-gold/60">↗</span>
@@ -118,7 +123,12 @@ export function HudReadout() {
         >
           <div className="absolute inset-0 bg-hud-dark/90 backdrop-blur-sm" />
           <div
-            className="relative w-full max-w-lg bg-hud-surface border border-hud-gold/30"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            tabIndex={-1}
+            className="relative w-full max-w-lg bg-hud-surface border border-hud-gold/30 outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Corner brackets */}
@@ -129,8 +139,8 @@ export function HudReadout() {
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-hud-border">
-              <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">SUIT UPGRADE LOG</span>
-              <button onClick={() => setOpen(false)} className="text-hud-muted hover:text-hud-gold transition-colors p-1">
+              <h2 id={titleId} className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">SUIT UPGRADE LOG</h2>
+              <button onClick={() => setOpen(false)} aria-label="Close upgrade log" className="text-hud-muted hover:text-hud-gold transition-colors p-1">
                 <X size={16} />
               </button>
             </div>

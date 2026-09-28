@@ -191,3 +191,10 @@ input[type="search"]::-webkit-search-cancel-button {
     }
   }
 }
+
+/* Sections receive programmatic focus from nav (tabindex="-1"); don't ring the whole section */
+@layer base {
+  section[tabindex="-1"]:focus {
+    outline: none;
+  }
+}
