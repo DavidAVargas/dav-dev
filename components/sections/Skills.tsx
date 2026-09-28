@@ -13,11 +13,23 @@ type Skill = {
   icon: string;
 };
 
+type Tone = "cyan" | "gold" | "green";
+
+// Full class strings so Tailwind can see them
+const TONES: Record<Tone, {
+  text: string; textSoft: string; bg: string; border: string; borderSoft: string;
+  barGlow: string; outline: string;
+}> = {
+  cyan:  { text: "text-hud-cyan",  textSoft: "text-hud-muted",    bg: "bg-hud-cyan",  border: "border-hud-cyan",  borderSoft: "border-hud-cyan/30",  barGlow: "0 0 8px rgba(0,212,255,0.6)",   outline: "has-[:focus-visible]:outline-hud-cyan" },
+  gold:  { text: "text-hud-gold",  textSoft: "text-hud-gold/70",  bg: "bg-hud-gold",  border: "border-hud-gold",  borderSoft: "border-hud-gold/30",  barGlow: "0 0 8px rgba(201,162,39,0.6)",  outline: "has-[:focus-visible]:outline-hud-gold" },
+  green: { text: "text-hud-green", textSoft: "text-hud-green/70", bg: "bg-hud-green", border: "border-hud-green", borderSoft: "border-hud-green/30", barGlow: "0 0 8px rgba(57,229,140,0.6)",  outline: "has-[:focus-visible]:outline-hud-green" },
+};
+
 type Category = {
   id: string;
   title: string;
   subtitle: string;
-  color: "cyan" | "gold";
+  color: Tone;
   description: string;
   usedIn: string[];
   skills: Skill[];
@@ -30,13 +42,13 @@ const CATEGORIES: Category[] = [
     id: "a11y",
     title: "ACCESSIBILITY (A11Y)",
     subtitle: "BUILT FOR EVERYONE — WCAG 2.1 AA",
-    color: "cyan",
+    color: "green",
     featured: true,
     callout:
       "// 1 in 4 U.S. adults lives with a disability. Thousands of ADA website lawsuits are filed every year. Most teams treat accessibility as an afterthought — I build it in from the start.",
     description:
       "An interface isn't finished until everyone can use it — with a keyboard, a screen reader, low vision, or a shaky hand. I build to WCAG 2.1 AA: real semantic HTML, focus that goes where it should and comes back when it should, ARIA only where native HTML falls short, and color contrast that actually passes. It protects the business legally, widens the audience, and makes the product better for every user.",
-    usedIn: ["DAV Portfolio"],
+    usedIn: ["All Projects"],
     skills: [
       { name: "WCAG 2.1 AA",               level: 60, label: "PROFICIENT", icon: "◎" },
       { name: "Semantic HTML",             level: 72, label: "PROFICIENT", icon: "</>" },
@@ -120,7 +132,7 @@ function PowerBar({
   animate,
 }: {
   level: number;
-  color: "cyan" | "gold";
+  color: Tone;
   animate: boolean;
 }) {
   return (
@@ -135,14 +147,11 @@ function PowerBar({
       <div
         className={cn(
           "absolute inset-y-0 left-0 transition-all duration-1000 ease-out",
-          color === "gold" ? "bg-hud-gold" : "bg-hud-cyan"
+          TONES[color].bg
         )}
         style={{
           width: animate ? `${level}%` : "0%",
-          boxShadow:
-            color === "gold"
-              ? "0 0 8px rgba(201,162,39,0.6)"
-              : "0 0 8px rgba(0,212,255,0.6)",
+          boxShadow: TONES[color].barGlow,
           transitionDelay: "0.1s",
         }}
       />
@@ -156,7 +165,7 @@ function SkillRow({
   animate,
 }: {
   skill: Skill;
-  color: "cyan" | "gold";
+  color: Tone;
   animate: boolean;
 }) {
   return (
@@ -166,7 +175,7 @@ function SkillRow({
           <span
             className={cn(
               "font-mono text-lg w-7 text-center leading-none",
-              color === "gold" ? "text-hud-gold" : "text-hud-cyan"
+              TONES[color].text
             )}
           >
             {skill.icon}
@@ -179,7 +188,7 @@ function SkillRow({
           <span
             className={cn(
               "font-mono text-[9px] tracking-[0.15em]",
-              color === "gold" ? "text-hud-gold/70" : "text-hud-muted"
+              TONES[color].textSoft
             )}
           >
             {skill.label}
@@ -187,7 +196,7 @@ function SkillRow({
           <span
             className={cn(
               "font-mono text-xs font-bold",
-              color === "gold" ? "text-hud-gold" : "text-hud-cyan"
+              TONES[color].text
             )}
           >
             {animate ? `${skill.level}%` : "---"}
@@ -229,7 +238,7 @@ function SkillModal({
 
   if (!category && !displayed) return null;
   const c = displayed ?? category!;
-  const isGold = c.color === "gold";
+  const tone = TONES[c.color];
 
   return (
     <div
@@ -243,7 +252,7 @@ function SkillModal({
       <div
         className={cn(
           "relative w-full max-w-2xl bg-hud-surface border outline-none transition-all duration-300",
-          isGold ? "border-hud-gold/30" : "border-hud-cyan/30",
+          tone.borderSoft,
           visible && category ? "opacity-100 scale-100" : "opacity-0 scale-95"
         )}
         onClick={(e) => e.stopPropagation()}
@@ -262,7 +271,7 @@ function SkillModal({
             className={cn(
               "absolute w-4 h-4",
               pos,
-              isGold ? "border-hud-gold" : "border-hud-cyan"
+              tone.border
             )}
           />
         ))}
@@ -282,7 +291,7 @@ function SkillModal({
           <div>
             <h2 id={titleId} className={cn(
               "font-mono font-bold text-xl tracking-wide",
-              isGold ? "text-hud-gold" : "text-hud-cyan"
+              tone.text
             )}>
               {c.title}
             </h2>
@@ -296,7 +305,7 @@ function SkillModal({
               {c.usedIn.map((p) => (
                 <span key={p} className={cn(
                   "font-mono text-[10px] px-2 py-0.5 border tracking-wide",
-                  isGold ? "text-hud-gold border-hud-gold/30" : "text-hud-cyan border-hud-cyan/30"
+                  tone.text, tone.borderSoft
                 )}>{p}</span>
               ))}
             </div>
@@ -344,6 +353,7 @@ function CategoryBlock({
   }, []);
 
   const isGold = category.color === "gold";
+  const tone = TONES[category.color];
 
   return (
     <div
@@ -351,22 +361,23 @@ function CategoryBlock({
       className={cn(
         "relative p-6 border flex flex-col gap-5 cursor-pointer transition-all duration-300 group",
         "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4",
+        tone.outline,
         category.featured
-          ? "border-hud-cyan/60 bg-hud-surface glow-cyan hover:border-hud-cyan has-[:focus-visible]:outline-hud-cyan"
+          ? "border-hud-green/60 bg-hud-surface glow-green hover:border-hud-green"
           : isGold
-            ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60 has-[:focus-visible]:outline-hud-gold"
-            : "border-hud-border bg-hud-surface hover:border-hud-cyan/40 has-[:focus-visible]:outline-hud-cyan"
+            ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60"
+            : "border-hud-border bg-hud-surface hover:border-hud-cyan/40"
       )}
     >
       {/* Corner accents */}
-      <span className={cn("absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2", isGold ? "border-hud-gold" : "border-hud-cyan")} />
-      <span className={cn("absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2", isGold ? "border-hud-gold" : "border-hud-cyan")} />
+      <span className={cn("absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2", tone.border)} />
+      <span className={cn("absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2", tone.border)} />
 
       {/* Featured: full corner brackets + priority badge */}
       {category.featured && (
         <>
-          <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-hud-cyan" />
-          <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-hud-cyan" />
+          <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-hud-green" />
+          <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-hud-green" />
           <span className="absolute -top-3 left-6 bg-hud-dark px-2 font-mono text-[10px] tracking-[0.2em] text-hud-gold border border-hud-gold/60">
             ★ PRIORITY SYSTEM
           </span>
@@ -380,8 +391,8 @@ function CategoryBlock({
         </p>
         <h3 className={cn(
           "font-mono font-bold tracking-[0.2em] transition-opacity duration-200",
-          category.featured ? "text-lg sm:text-xl text-glow-cyan" : "text-sm",
-          isGold ? "text-hud-gold" : "text-hud-cyan"
+          category.featured ? "text-lg sm:text-xl text-glow-green" : "text-sm",
+          tone.text
         )}>
           <button
             type="button"
@@ -398,7 +409,7 @@ function CategoryBlock({
           </p>
         )}
         {category.callout && (
-          <p className="text-sm text-hud-text leading-relaxed mt-3 max-w-3xl border-l-2 border-hud-gold pl-3">
+          <p className="text-sm text-hud-text leading-relaxed mt-3 max-w-3xl border-l-2 border-hud-green pl-3">
             {category.callout}
           </p>
         )}

@@ -96,6 +96,14 @@
   box-shadow: 0 0 8px rgba(201, 162, 39, 0.5), 0 0 24px rgba(201, 162, 39, 0.2);
 }
 
+@utility glow-green {
+  box-shadow: 0 0 8px rgba(57, 229, 140, 0.5), 0 0 24px rgba(57, 229, 140, 0.2);
+}
+
+@utility text-glow-green {
+  text-shadow: 0 0 12px rgba(57, 229, 140, 0.6);
+}
+
 @utility text-glow-cyan {
   text-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
 }

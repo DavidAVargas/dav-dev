@@ -24,6 +24,7 @@
   /* HUD brand colors */
   --hud-cyan: #00d4ff;
   --hud-gold: #c9a227;
+  --hud-green: #39e58c; /* accessibility accent */
   --hud-dark: #0e0e18;
   --hud-surface: #12121f;
   --hud-text: #e8e8f0;
@@ -84,6 +85,7 @@
   /* HUD custom tokens */
   --color-hud-cyan: var(--hud-cyan);
   --color-hud-gold: var(--hud-gold);
+  --color-hud-green: var(--hud-green);
   --color-hud-dark: var(--hud-dark);
   --color-hud-surface: var(--hud-surface);
   --color-hud-text: var(--hud-text);

@@ -17,6 +17,9 @@ export type ProjectData = {
   links: { live: string | null; github: string };
 };
 
+/** Tech tag highlighted in the accessibility accent color */
+export const A11Y_TAG = "Accessibility (A11Y)";
+
 interface ProjectModalProps {
   project: ProjectData | null;
   onClose: () => void;
@@ -210,7 +213,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     {displayed.tech.map((t) => (
                       <span
                         key={t}
-                        className="font-mono text-[10px] text-hud-cyan border border-hud-cyan/30 px-2 py-0.5 tracking-wide"
+                        className={cn(
+                          "font-mono text-[10px] border px-2 py-0.5 tracking-wide",
+                          t === A11Y_TAG
+                            ? "text-hud-green border-hud-green/50"
+                            : "text-hud-cyan border-hud-cyan/30"
+                        )}
                       >
                         {t}
                       </span>

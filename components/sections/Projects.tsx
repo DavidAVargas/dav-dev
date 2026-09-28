@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
-import { ProjectModal, type ProjectData } from "@/components/ui/ProjectModal";
+import { ProjectModal, A11Y_TAG, type ProjectData } from "@/components/ui/ProjectModal";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ const PROJECTS: ProjectData[] = [
     description: "Full-stack fashion portfolio and event hub for a college fashion student. Built to showcase work, promote events, and connect with collaborators.",
     fullDescription:
       "A friend studying fashion needed more than a portfolio — he needed a platform. QVIL Studios is a full-stack web app where he can display his design work, post upcoming events, and share collaborations with other creatives. I built the entire thing: auth with Clerk, file/image uploads with UploadThing, content management with Payload CMS, and deployed on Vercel. The stack is Next.js, TypeScript, Tailwind, and shadcn/ui — the same foundation I use for my own work. The goal was to give him something that looks professional, scales with him as he grows, and he can actually manage himself without touching code.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Payload CMS", "shadcn/ui", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Payload CMS", "shadcn/ui", "Vercel"],
     status: "DEPLOYED",
     demo: undefined,
     links: { live: "https://qvilstudios.com", github: "https://github.com/DavidAVargas/qvil-studios" },
@@ -24,7 +24,7 @@ const PROJECTS: ProjectData[] = [
     description: "This site. A JARVIS-inspired HUD portfolio built to stand out — not just show code, but show how I think and who I am.",
     fullDescription:
       "Most developer portfolios look the same — white background, three project cards, a contact form. I wanted something that felt like me. I built a full Iron Man JARVIS HUD aesthetic from scratch using Next.js, TypeScript, and Tailwind CSS v4. Every detail was intentional: the boot sequence on first load, the cursor trail, the arc reactor, the scroll progress bar, the side nav that tracks your position in real time. The sections aren't just placeholders — they tell a real story. This project is as much about design thinking and personal brand as it is about technical skill. It's also being built to be usable by everyone: I'm taking it to WCAG 2.1 AA — full keyboard navigation, focus that's trapped in modals and returned when they close, screen reader support, and color contrast that passes — because accessibility is a requirement, not a nice-to-have.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "WCAG 2.1 AA", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "Vercel"],
     status: "DEPLOYED",
     demo: undefined,
     links: { live: "#", github: "https://github.com/DavidAVargas/dav-dev" },
@@ -35,7 +35,7 @@ const PROJECTS: ProjectData[] = [
     description: "Final bootcamp capstone — a tutor marketplace for developers. Best project in the class. Led frontend and UX/UI. Hid a farewell easter egg: every classmate, teacher, and tutor on the expert tab with their LinkedIn.",
     fullDescription:
       "The last project of the bootcamp, built with two collaborators — and the best-looking site in the entire class. I owned the frontend, UX/UI, and API integrations. The site lets developers search for tutors by skill level — beginner, intermediate, expert. My collaborators handled Stripe payments and backend authentication. But the part I'm most proud of had nothing to do with the requirements. For the expert tier, instead of using random stock photos and fake names from the API, I manually added every single person from the class — every classmate, my tutor, my teachers — with their real LinkedIn profiles linked. So on the last day, when we presented, everyone in the room saw themselves on the screen. It was a farewell, a thank you, and a way to keep everyone connected and discoverable to recruiters all in one move. Nobody asked me to do it. That's just how I build.",
-    tech: ["JavaScript", "HTML", "CSS", "Stripe", "REST APIs"],
+    tech: [A11Y_TAG, "JavaScript", "HTML", "CSS", "Stripe", "REST APIs"],
     status: "DEPLOYED",
     badge: "BEST IN CLASS",
     demo: undefined,
@@ -48,7 +48,7 @@ const PROJECTS: ProjectData[] = [
     description: "First solo bootcamp project — a browser game where you answer coding questions to dress your character for a software engineering interview. Built everything: code, art, design.",
     fullDescription:
       "Most bootcamp solo projects are a simple webpage. I built a game. Pixel Coder is a browser-based interactive game where players answer coding interview questions to progressively dress their character — starting in pajamas, earning each piece of professional attire with every correct answer, until they're suited up and ready for the interview. I created everything: the code, the pixel art, the character design, the question bank, the logic. Vanilla JavaScript, HTML, and CSS — no frameworks, no shortcuts. It was one of the top projects in my class. This is also where I figured out what I actually love — not just building things, but making them look and feel right. The UI, the UX, the experience a user has in the first three seconds. Because if it doesn't look good, nobody's going to use it. And if it's confusing, same result. I've kept it exactly as I shipped it — a time capsule of where it all started. The code isn't perfect. That's the point.",
-    tech: ["JavaScript", "HTML", "CSS"],
+    tech: [A11Y_TAG, "JavaScript", "HTML", "CSS"],
     status: "DEPLOYED",
     badge: "BEST IN CLASS",
     demo: undefined,
@@ -60,7 +60,7 @@ const PROJECTS: ProjectData[] = [
     description: "A free financial education platform for U.S. military members and veterans — credit cards, credit scores, and financial literacy built to fight veteran homelessness.",
     fullDescription:
       "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. Vet Finance is a free education platform I'm building to close it. The focus is credit: how it works, how to use it strategically, and how to build a strong financial foundation coming out of the military. The layout and platform architecture are live. The education courses are next. Long-term vision goes further — I want to launch a credit card designed specifically for veterans, with three tiers and a rewards structure that gives back to active troops. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
     status: "BETA",
     badge: "INITIATIVE",
     demo: undefined,
@@ -72,7 +72,7 @@ const PROJECTS: ProjectData[] = [
     description: "Full-stack site for a live, operating pressure washing business in Fort Worth, TX. Real customers. Real revenue. Fully deployed.",
     fullDescription:
       "This isn't a demo — it's a fully operational business platform with real customers and active operations behind it. The site has two login paths: an admin dashboard for managing the business side, and a community login so customers can sign up, join, and stay connected. Built with Next.js, TypeScript, Tailwind, Clerk for auth, UploadThing for media, and Brevo for email marketing and CRM. Deployed on Vercel. Every feature was built to serve a real need — not because it looked good in a tutorial. When stakes are real, the code has to be too.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Brevo", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Clerk", "UploadThing", "Brevo", "Vercel"],
     status: "DEPLOYED",
     demo: undefined,
     links: { live: "https://texnwash.com", github: "https://github.com/DavidAVargas/TexnWash" },
@@ -83,7 +83,7 @@ const PROJECTS: ProjectData[] = [
     description: "A Next.js PWA field guide for Milsim events — check-in flow, field tactics, gear guide, and faction breakdowns. Works offline, packs into a condensed PDF, and has an infrared mode for nighttime ops.",
     fullDescription:
       "MilsimReady is a field guide built to travel with you — not just before the event, but onto the field. The content covers what actually matters: how check-in and processing works so you're not lost on arrival, basic field tactics that veterans keep repeating to every newcomer, a gear guide broken into what to get, what to bring, and what not to waste money on, and faction explanations so you understand the scenario you're dropping into. The official event documentation can run 200 pages. I condensed the essentials into a downloadable PDF you can keep on your phone. Since signal is unreliable on location, the whole site is a PWA — load it once and it works fully offline. And for nighttime use at camp, there's an infrared display mode so you can check a detail without lighting yourself up.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "PWA", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "PWA", "Vercel"],
     status: "DEPLOYED",
     demo: undefined,
     links: { live: "https://milsimready.com", github: "" },
@@ -94,7 +94,7 @@ const PROJECTS: ProjectData[] = [
     description: "My IRS-certified tax prep business. No hidden fees, no runaround — built for individuals, side hustlers, and small businesses ready for the 2027 tax season.",
     fullDescription:
       "The site is as straightforward as the service. No maze of pages, no vague pricing, no consultation gauntlet before you know what anything costs. You land, you see what's offered, you know what you're getting. Built for individuals, freelancers, and small business owners who want their taxes done by someone who actually knows the work — not someone trying to make it feel complicated to justify the bill. IRS certified. Covering 2026 filings for the 2027 season. Studying for the AFSP credential next, then Enrolled Agent, eventually CPA.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
     status: "DEPLOYED",
     badge: "INITIATIVE",
     demo: undefined,
@@ -106,7 +106,7 @@ const PROJECTS: ProjectData[] = [
     description: "Bilingual real estate site for a Central New Jersey REALTOR® — built to boost his exposure, drive local traffic, and turn visitors into buyers, sellers, and renters.",
     fullDescription:
       "Miguel is a bilingual REALTOR® with Halo Realty serving Perth Amboy, South Amboy, and the surrounding Central Jersey towns. He needed more than a listing profile — he needed a home base that brings people to him. I built a full English and Spanish site so every visitor gets the experience in their own language, with services broken out for buying, selling, rentals, and commercial, a recent sales showcase, and a service-area section covering twelve towns. Under the hood it's built for local search: structured data that tells Google exactly who he is and where he works, proper language tagging for both versions, and clear calls to action on every page — call, email, or find out what your home is worth. This is an active client build. Miguel and I are shaping it together as he tells me what he needs, so the live site keeps evolving.",
-    tech: ["Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Vercel"],
     status: "IN PROGRESS",
     badge: "CLIENT",
     demo: undefined,
@@ -183,7 +183,12 @@ function ProjectCard({
         {project.tech.map((t) => (
           <span
             key={t}
-            className="font-mono text-[11px] text-hud-cyan border border-hud-cyan/30 px-2 py-0.5 tracking-wide"
+            className={cn(
+              "font-mono text-[11px] border px-2 py-0.5 tracking-wide",
+              t === A11Y_TAG
+                ? "text-hud-green border-hud-green/50"
+                : "text-hud-cyan border-hud-cyan/30"
+            )}
           >
             {t}
           </span>
