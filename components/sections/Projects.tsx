@@ -23,8 +23,8 @@ const PROJECTS: ProjectData[] = [
     title: "DAV Portfolio",
     description: "This site. A JARVIS-inspired HUD portfolio built to stand out — not just show code, but show how I think and who I am.",
     fullDescription:
-      "Most developer portfolios look the same — white background, three project cards, a contact form. I wanted something that felt like me. I built a full Iron Man JARVIS HUD aesthetic from scratch using Next.js, TypeScript, and Tailwind CSS v4. Every detail was intentional: the boot sequence on first load, the cursor trail, the arc reactor, the scroll progress bar, the side nav that tracks your position in real time. The sections aren't just placeholders — they tell a real story. This project is as much about design thinking and personal brand as it is about technical skill.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "Vercel"],
+      "Most developer portfolios look the same — white background, three project cards, a contact form. I wanted something that felt like me. I built a full Iron Man JARVIS HUD aesthetic from scratch using Next.js, TypeScript, and Tailwind CSS v4. Every detail was intentional: the boot sequence on first load, the cursor trail, the arc reactor, the scroll progress bar, the side nav that tracks your position in real time. The sections aren't just placeholders — they tell a real story. This project is as much about design thinking and personal brand as it is about technical skill. It's also being built to be usable by everyone: I'm taking it to WCAG 2.1 AA — full keyboard navigation, focus that's trapped in modals and returned when they close, screen reader support, and color contrast that passes — because accessibility is a requirement, not a nice-to-have.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "WCAG 2.1 AA", "Vercel"],
     status: "DEPLOYED",
     demo: undefined,
     links: { live: "#", github: "https://github.com/DavidAVargas/dav-dev" },

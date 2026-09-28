@@ -21,9 +21,31 @@ type Category = {
   description: string;
   usedIn: string[];
   skills: Skill[];
+  featured?: boolean;
+  callout?: string;
 };
 
 const CATEGORIES: Category[] = [
+  {
+    id: "a11y",
+    title: "ACCESSIBILITY (A11Y)",
+    subtitle: "BUILT FOR EVERYONE — WCAG 2.1 AA",
+    color: "cyan",
+    featured: true,
+    callout:
+      "// 1 in 4 U.S. adults lives with a disability. Thousands of ADA website lawsuits are filed every year. Most teams treat accessibility as an afterthought — I build it in from the start.",
+    description:
+      "An interface isn't finished until everyone can use it — with a keyboard, a screen reader, low vision, or a shaky hand. I build to WCAG 2.1 AA: real semantic HTML, focus that goes where it should and comes back when it should, ARIA only where native HTML falls short, and color contrast that actually passes. It protects the business legally, widens the audience, and makes the product better for every user.",
+    usedIn: ["DAV Portfolio"],
+    skills: [
+      { name: "WCAG 2.1 AA",               level: 60, label: "PROFICIENT", icon: "◎" },
+      { name: "Semantic HTML",             level: 72, label: "PROFICIENT", icon: "</>" },
+      { name: "Keyboard & Focus Mgmt",     level: 65, label: "PROFICIENT", icon: "⇥" },
+      { name: "ARIA & Screen Readers",     level: 55, label: "DEVELOPING", icon: "◉" },
+      { name: "Color Contrast",            level: 62, label: "PROFICIENT", icon: "◐" },
+      { name: "Accessibility Auditing",    level: 58, label: "DEVELOPING", icon: "⌕" },
+    ],
+  },
   {
     id: "frontend",
     title: "FRONTEND & UI/UX",
@@ -329,14 +351,27 @@ function CategoryBlock({
       className={cn(
         "relative p-6 border flex flex-col gap-5 cursor-pointer transition-all duration-300 group",
         "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4",
-        isGold
-          ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60 has-[:focus-visible]:outline-hud-gold"
-          : "border-hud-border bg-hud-surface hover:border-hud-cyan/40 has-[:focus-visible]:outline-hud-cyan"
+        category.featured
+          ? "border-hud-cyan/60 bg-hud-surface glow-cyan hover:border-hud-cyan has-[:focus-visible]:outline-hud-cyan"
+          : isGold
+            ? "border-hud-gold/30 bg-hud-surface hover:border-hud-gold/60 has-[:focus-visible]:outline-hud-gold"
+            : "border-hud-border bg-hud-surface hover:border-hud-cyan/40 has-[:focus-visible]:outline-hud-cyan"
       )}
     >
       {/* Corner accents */}
       <span className={cn("absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2", isGold ? "border-hud-gold" : "border-hud-cyan")} />
       <span className={cn("absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2", isGold ? "border-hud-gold" : "border-hud-cyan")} />
+
+      {/* Featured: full corner brackets + priority badge */}
+      {category.featured && (
+        <>
+          <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-hud-cyan" />
+          <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-hud-cyan" />
+          <span className="absolute -top-3 left-6 bg-hud-dark px-2 font-mono text-[10px] tracking-[0.2em] text-hud-gold border border-hud-gold/60">
+            ★ PRIORITY SYSTEM
+          </span>
+        </>
+      )}
 
       {/* Category header */}
       <div>
@@ -344,7 +379,8 @@ function CategoryBlock({
           {category.subtitle}
         </p>
         <h3 className={cn(
-          "font-mono font-bold text-sm tracking-[0.2em] transition-opacity duration-200",
+          "font-mono font-bold tracking-[0.2em] transition-opacity duration-200",
+          category.featured ? "text-lg sm:text-xl text-glow-cyan" : "text-sm",
           isGold ? "text-hud-gold" : "text-hud-cyan"
         )}>
           <button
@@ -361,10 +397,18 @@ function CategoryBlock({
             // AI-assisted development is not a shortcut — it&apos;s a force multiplier
           </p>
         )}
+        {category.callout && (
+          <p className="text-sm text-hud-text leading-relaxed mt-3 max-w-3xl border-l-2 border-hud-gold pl-3">
+            {category.callout}
+          </p>
+        )}
       </div>
 
       {/* Skills */}
-      <div className="flex flex-col gap-4">
+      <div className={cn(
+        "flex flex-col gap-4",
+        category.featured && "md:grid md:grid-cols-2 md:gap-x-10"
+      )}>
         {category.skills.map((skill) => (
           <SkillRow key={skill.name} skill={skill} color={category.color} animate={animate} />
         ))}
@@ -432,7 +476,7 @@ export function Skills() {
           {/* Categories grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {CATEGORIES.map((cat, i) => (
-              <FadeIn key={cat.id} delay={i * 120}>
+              <FadeIn key={cat.id} delay={i * 120} className={cat.featured ? "md:col-span-2" : undefined}>
                 <CategoryBlock category={cat} onClick={() => setSelected(cat)} />
               </FadeIn>
             ))}
