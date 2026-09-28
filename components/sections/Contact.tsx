@@ -97,7 +97,7 @@ export function Contact() {
         {/* Footer line */}
         <div className="mt-24 pt-8 border-t border-hud-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
-            DAVID A VARGAS · MARK II · {new Date().getFullYear()}
+            DAVID A VARGAS · MARK III · {new Date().getFullYear()}
           </p>
           <p className="font-mono text-xs text-hud-muted tracking-[0.15em]">
             BUILT WITH NEXT.JS · TAILWIND · VERCEL

@@ -8,7 +8,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 const STATS = [
   { label: "YEARS IN HEALTHCARE", value: 5,    suffix: "+",  display: "5+"    },
   { label: "BOOTCAMP GRAD",        value: 2024, suffix: "",   display: "2024"  },
-  { label: "MARATHONS RUN",        value: 1,    suffix: "+",  display: "1+"    },
+  { label: "MARATHONS RUN",        value: 3,    suffix: "+",  display: "3+"    },
   { label: "PROJECTS BUILT",       value: 10,   suffix: "+",  display: "10+"   },
 ];
 
