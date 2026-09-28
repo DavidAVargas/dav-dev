@@ -34,6 +34,7 @@ type Category = {
   usedIn: string[];
   skills: Skill[];
   featured?: boolean;
+  wide?: boolean; // full-width row, skills laid out in three columns
   callout?: string;
 };
 
@@ -107,21 +108,42 @@ const CATEGORIES: Category[] = [
       { name: "Clerk",       level: 60, label: "PROFICIENT", icon: "◇" },
       { name: "UploadThing", level: 60, label: "PROFICIENT", icon: "⇧" },
       { name: "Payload CMS", level: 55, label: "PROFICIENT", icon: "▣" },
+      { name: "Sanity CMS",  level: 50, label: "DEVELOPING", icon: "◧" },
+      { name: "Neon",        level: 55, label: "PROFICIENT", icon: "⊕" },
       { name: "Postman",     level: 55, label: "FAMILIAR",   icon: "⊳" },
     ],
   },
   {
+    id: "motion",
+    title: "MOTION & MOBILE",
+    subtitle: "EXPERIENCE LAYER",
+    color: "cyan",
+    description:
+      "Motion is what makes an interface feel alive instead of static. I use GSAP for timeline-driven animation and Motion for React component transitions — always purposeful, never in the way, and respectful of reduced-motion settings. Capacitor lets me take a React web app and ship it as a native iOS or Android app, and Mobbin is where I study real-world mobile patterns and user flows before I design one.",
+    usedIn: [],
+    skills: [
+      { name: "GSAP",       level: 50, label: "DEVELOPING", icon: "≫" },
+      { name: "Motion",     level: 55, label: "DEVELOPING", icon: "↝" },
+      { name: "Capacitor",  level: 45, label: "FAMILIAR",   icon: "⧉" },
+      { name: "Mobbin",     level: 60, label: "PROFICIENT", icon: "▦" },
+    ],
+  },
+  {
     id: "ai",
-    title: "MARK II PROTOCOLS",
+    title: "J.A.R.V.I.S. PROTOCOLS",
     subtitle: "AI-AUGMENTED DEVELOPMENT",
     color: "gold",
+    wide: true,
     description:
-      "AI-assisted development is not a shortcut — it's a force multiplier. I use Claude Code and AI tools to move faster, think bigger, and ship better. The engineer still drives. The AI removes the speed limits.",
+      "AI-assisted development is not a shortcut — it's a force multiplier. Claude Code is my main workstation — I wire in MCP servers so it can reach docs, the browser, and my tools, and I engineer the context (project rules, memory, skills) so it actually understands the codebase it's working in. Gemini rounds out the toolkit. The result: I move faster, think bigger, and ship better. The engineer still drives. The AI removes the speed limits.",
     usedIn: ["All Projects"],
     skills: [
-      { name: "Claude Code",        level: 92, label: "ENHANCED",   icon: "◆" },
-      { name: "AI-Assisted Dev",    level: 88, label: "ENHANCED",   icon: "∞" },
-      { name: "Prompt Engineering", level: 80, label: "PROFICIENT", icon: "⌘" },
+      { name: "Claude Code",         level: 92, label: "ENHANCED",   icon: "◆" },
+      { name: "MCP Servers",         level: 75, label: "PROFICIENT", icon: "⧓" },
+      { name: "Context Engineering", level: 80, label: "PROFICIENT", icon: "✦" },
+      { name: "Gemini",              level: 70, label: "PROFICIENT", icon: "✧" },
+      { name: "AI-Assisted Dev",     level: 88, label: "ENHANCED",   icon: "∞" },
+      { name: "Prompt Engineering",  level: 80, label: "PROFICIENT", icon: "⌘" },
     ],
   },
 ];
@@ -299,17 +321,19 @@ function SkillModal({
           </div>
 
           {/* Used in */}
-          <div>
-            <p className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2">// DEPLOYED IN</p>
-            <div className="flex flex-wrap gap-2">
-              {c.usedIn.map((p) => (
-                <span key={p} className={cn(
-                  "font-mono text-[10px] px-2 py-0.5 border tracking-wide",
-                  tone.text, tone.borderSoft
-                )}>{p}</span>
-              ))}
+          {c.usedIn.length > 0 && (
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2">// DEPLOYED IN</p>
+              <div className="flex flex-wrap gap-2">
+                {c.usedIn.map((p) => (
+                  <span key={p} className={cn(
+                    "font-mono text-[10px] px-2 py-0.5 border tracking-wide",
+                    tone.text, tone.borderSoft
+                  )}>{p}</span>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Skills */}
           <div>
@@ -359,7 +383,7 @@ function CategoryBlock({
     <div
       ref={ref}
       className={cn(
-        "relative p-6 border flex flex-col gap-5 cursor-pointer transition-all duration-300 group",
+        "relative h-full p-6 border flex flex-col gap-5 cursor-pointer transition-all duration-300 group",
         "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4",
         tone.outline,
         category.featured
@@ -418,7 +442,8 @@ function CategoryBlock({
       {/* Skills */}
       <div className={cn(
         "flex flex-col gap-4",
-        category.featured && "md:grid md:grid-cols-2 md:gap-x-10"
+        category.featured && "md:grid md:grid-cols-2 md:gap-x-10",
+        category.wide && "md:grid md:grid-cols-3 md:gap-x-8"
       )}>
         {category.skills.map((skill) => (
           <SkillRow key={skill.name} skill={skill} color={category.color} animate={animate} />
@@ -426,7 +451,7 @@ function CategoryBlock({
       </div>
 
       {/* Click hint */}
-      <div className="flex justify-end mt-1">
+      <div className="flex justify-end mt-auto">
         <span className={cn(
           "font-mono text-[9px] tracking-[0.1em] transition-colors",
           isGold ? "text-hud-gold/30 group-hover:text-hud-gold/70" : "text-hud-muted/40 group-hover:text-hud-muted"
@@ -487,14 +512,14 @@ export function Skills() {
           {/* Categories grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {CATEGORIES.map((cat, i) => (
-              <FadeIn key={cat.id} delay={i * 120} className={cat.featured ? "md:col-span-2" : undefined}>
+              <FadeIn key={cat.id} delay={i * 120} className={cn("h-full", (cat.featured || cat.wide) && "md:col-span-2")}>
                 <CategoryBlock category={cat} onClick={() => setSelected(cat)} />
               </FadeIn>
             ))}
           </div>
 
           <p className="font-mono text-[10px] text-hud-muted/50 tracking-[0.15em] mt-8 text-center">
-            // MARK II PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.
+            // J.A.R.V.I.S. PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.
           </p>
         </div>
       </section>
