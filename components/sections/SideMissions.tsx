@@ -466,7 +466,7 @@ export function SideMissions() {
 
   return (
     <>
-      <section id="services" className="min-h-screen py-24 px-6 bg-hud-surface">
+      <section id="services" className="min-h-screen py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <FadeIn>

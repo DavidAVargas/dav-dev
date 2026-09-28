@@ -199,7 +199,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
 
 export function Initiative() {
   return (
-    <section id="initiative" className="min-h-screen py-24 px-6 bg-hud-surface">
+    <section id="initiative" className="min-h-screen py-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">

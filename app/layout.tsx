@@ -4,6 +4,7 @@ import { SideNav } from "@/components/layout/SideNav";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { HudReadout } from "@/components/ui/HudReadout";
 import { BootSequence } from "@/components/ui/BootSequence";
+import { HudBackground } from "@/components/ui/HudBackground";
 import { CursorTrail } from "@/components/ui/CursorTrail";
 import { SystemClock } from "@/components/ui/SystemClock";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -53,6 +54,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.variable} suppressHydrationWarning>
         <BootSequence />
+        <HudBackground />
         <ScrollProgress />
         <CursorTrail />
         <SystemClock />

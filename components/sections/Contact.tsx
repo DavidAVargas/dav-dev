@@ -16,7 +16,7 @@ export function Contact() {
   const email = EMAIL_PARTS.join("");
 
   return (
-    <section id="contact" className="min-h-screen py-24 px-6 bg-hud-surface flex items-center">
+    <section id="contact" className="min-h-screen py-24 px-6 flex items-center">
       <div className="max-w-4xl mx-auto w-full">
         {/* Section header */}
         <div className="mb-16">

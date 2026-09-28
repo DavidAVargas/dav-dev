@@ -475,7 +475,7 @@ export function Skills() {
 
   return (
     <>
-      <section id="skills" className="min-h-screen py-24 px-6 hud-grid-bg">
+      <section id="skills" className="min-h-screen py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">
