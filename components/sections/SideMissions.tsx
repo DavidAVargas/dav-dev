@@ -33,7 +33,7 @@ const MISSIONS: Mission[] = [
     detail:
       "Running a business before writing my first line of code taught me more about clients, operations, and money than any bootcamp could. Tex N Wash Services LLC is a pressure washing company I built from the ground up in Fort Worth, TX — complete with its own LLC, dedicated bank account, business credit card, and a live website. It runs. It makes money. And doing my own taxes for it is what pushed me to get my PTIN and start down the EA path.",
     tags: ["LLC", "FORT WORTH TX", "PRESSURE WASHING", "ESTABLISHED"],
-    link: { label: "TEXNWASH.COM ↗", url: "https://texnwash.com" },
+    link: { label: "TEXNWASH.COM", url: "https://texnwash.com" },
   },
   {
     id: "MSN-002",
@@ -89,7 +89,7 @@ const MISSIONS: Mission[] = [
     detail:
       "I wanted to try something completely outside my lane — so I took acting classes and actually followed through. That turned into three short film credits: Jared Collins in The Reconcile, Kevin in Who's That Knocking?, and Nick Ramon in Two Robbers and A Mad Man. On that last one I got to act alongside Dan Hewitt Owens — an award-winning director, actor, producer, and screenwriter with over 50 years in the film industry. Three different characters, three different productions. I'm not pivoting to Hollywood — I just wanted to see if I could do it, and I did. Haven't had the time to get back into it, but the experience is real and the credits are there. You can look me up.",
     tags: ["THE RECONCILE", "WHO'S THAT KNOCKING?", "TWO ROBBERS AND A MAD MAN", "3 CREDITS"],
-    link: { label: "VIEW IMDB PROFILE ↗", url: "https://www.imdb.com/name/nm13791743/" },
+    link: { label: "VIEW IMDB PROFILE", url: "https://www.imdb.com/name/nm13791743/" },
   },
   {
     id: "MSN-008",
@@ -348,7 +348,7 @@ function MissionModal({
               <h3 className={cn(
                 "font-mono text-[10px] tracking-[0.2em]",
                 m.statusColor === "gold" ? "text-hud-gold" : "text-hud-cyan"
-              )}>// READING LOG</h3>
+              )}><span aria-hidden="true">// </span>READING LOG</h3>
               {m.books.map((shelf) => (
                 <div key={shelf.category}>
                   <h4 className="font-mono text-[9px] tracking-[0.2em] text-hud-muted mb-2">
@@ -383,6 +383,8 @@ function MissionModal({
               className="font-mono text-xs text-hud-cyan hover:opacity-80 transition-opacity tracking-[0.1em]"
             >
               {m.link.label}
+              <span aria-hidden="true"> ↗</span>
+              <span className="sr-only"> (opens in new tab)</span>
             </a>
           )}
         </div>
@@ -452,7 +454,7 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
       </ul>
 
       {/* Click hint */}
-      <div className="flex justify-end mt-1">
+      <div aria-hidden="true" className="flex justify-end mt-1">
         <span className="font-mono text-[9px] text-hud-muted/40 group-hover:text-hud-muted tracking-[0.1em] transition-colors">
           CLICK TO EXPAND ↗
         </span>
@@ -477,7 +479,7 @@ export function SideMissions() {
                   MODULE 05
                 </p>
                 <h2 id="side-missions-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-                  <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
+                  <span aria-hidden="true" className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
                 </h2>
                 <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
                 <div className="mt-6 border-l-2 border-hud-gold pl-4 max-w-xl">
@@ -510,11 +512,11 @@ export function SideMissions() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/dav-stark.png"
-                    alt="David A Vargas"
+                    alt="David A Vargas in a pinstripe suit and tinted sunglasses, arms outstretched in the desert as explosions rise behind him — a nod to Tony Stark's Jericho demo in Iron Man"
                     className="w-full object-cover grayscale-[20%] contrast-[1.05]"
                   />
                   {/* ID label */}
-                  <div className="absolute bottom-0 inset-x-0 bg-hud-dark/70 backdrop-blur-sm px-3 py-1.5 z-20">
+                  <div aria-hidden="true" className="absolute bottom-0 inset-x-0 bg-hud-dark/70 backdrop-blur-sm px-3 py-1.5 z-20">
                     <p className="font-mono text-[9px] tracking-[0.2em] text-hud-gold text-center">
                       SUBJECT: DAV-001 · ALWAYS BUILDING
                     </p>

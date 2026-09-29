@@ -230,10 +230,10 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                     <div className="relative w-20 h-20 border border-hud-cyan/20 flex items-center justify-center">
                       <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-hud-cyan/40" />
                       <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-hud-cyan/40" />
-                      <span className="font-mono text-2xl text-hud-cyan/30">▶</span>
+                      <span aria-hidden="true" className="font-mono text-2xl text-hud-cyan/30">▶</span>
                     </div>
                     <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
-                      // PREVIEW PENDING
+                      <span aria-hidden="true">// </span>PREVIEW PENDING
                     </p>
                     <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.15em]">
                       SCREENSHOT COMING SOON
@@ -267,7 +267,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                 <div className="p-6 flex flex-col gap-6">
                   <div>
                     <h3 className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
-                      // TECH STACK
+                      <span aria-hidden="true">// </span>TECH STACK
                     </h3>
                     <ul role="list" className="flex flex-wrap gap-2">
                       {displayed.tech.map((t) => (
@@ -288,7 +288,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
 
                   <div>
                     <h3 className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
-                      // ACCESS LINKS
+                      <span aria-hidden="true">// </span>ACCESS LINKS
                     </h3>
                     <div className="flex flex-col gap-2">
                       {displayed.links.github ? (
@@ -298,11 +298,11 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                           rel="noopener noreferrer"
                           className="font-mono text-xs text-hud-muted hover:text-hud-cyan transition-colors tracking-[0.1em] flex items-center gap-2"
                         >
-                          <span className="text-hud-cyan">◎</span> GITHUB ↗
+                          <span aria-hidden="true" className="text-hud-cyan">◎</span> GITHUB<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
                         </a>
                       ) : (
                         <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
-                          <span>◎</span> PRIVATE REPO
+                          <span aria-hidden="true">◎</span> PRIVATE REPO
                         </span>
                       )}
                       {displayed.links.live ? (
@@ -312,11 +312,11 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                           rel="noopener noreferrer"
                           className="font-mono text-xs text-hud-muted hover:text-hud-gold transition-colors tracking-[0.1em] flex items-center gap-2"
                         >
-                          <span className="text-hud-gold">◆</span> LIVE SITE ↗
+                          <span aria-hidden="true" className="text-hud-gold">◆</span> LIVE SITE<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
                         </a>
                       ) : (
                         <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
-                          <span>◇</span> LIVE SITE PENDING
+                          <span aria-hidden="true">◇</span> LIVE SITE PENDING
                         </span>
                       )}
                     </div>

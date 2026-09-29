@@ -129,21 +129,25 @@ export function Hero() {
             )}
             onMouseEnter={glitch}
           >
-            {nameDisplay}
+            <span aria-hidden="true">{nameDisplay}</span>
+            <span className="sr-only">David A Vargas</span>
           </h1>
         </HudFrame>
 
         {/* Drive quote */}
         <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-hud-muted/60 uppercase animate-fade-up [animation-delay:0.3s] opacity-0 max-w-xs sm:max-w-none text-center">
-          // DRIVEN BY THE FEAR OF UNFULFILLED POTENTIAL
+          <span aria-hidden="true">// </span>DRIVEN BY THE FEAR OF UNFULFILLED POTENTIAL
         </p>
 
         {/* Typing tagline */}
         <div className="h-8 flex items-center gap-0.5 animate-fade-up [animation-delay:0.4s] opacity-0">
-          <span className="font-mono text-lg sm:text-xl text-hud-cyan text-glow-cyan">
+          {/* Screen readers get the full list once; the typing animation is visual only */}
+          <p className="sr-only">{PHRASES.join(" ")}</p>
+          <span aria-hidden="true" className="font-mono text-lg sm:text-xl text-hud-cyan text-glow-cyan">
             {typed}
           </span>
           <span
+            aria-hidden="true"
             className="inline-block w-0.5 h-5 bg-hud-cyan"
             style={{ animation: "cursor-blink 1s step-end infinite" }}
           />
@@ -176,7 +180,7 @@ export function Hero() {
         </div>
 
         {/* Scroll hint */}
-        <div className="mt-8 flex flex-col items-center gap-2 animate-fade-up [animation-delay:1s] opacity-0">
+        <div aria-hidden="true" className="mt-8 flex flex-col items-center gap-2 animate-fade-up [animation-delay:1s] opacity-0">
           <span className="font-mono text-[10px] tracking-[0.3em] text-hud-muted">SCROLL TO EXPLORE</span>
           <div className="w-px h-8 bg-gradient-to-b from-hud-cyan to-transparent" />
         </div>

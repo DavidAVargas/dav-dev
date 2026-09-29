@@ -53,7 +53,7 @@ export function SideNav() {
           <button
             onClick={() => focusSection(id)}
             className="group flex items-center gap-4 justify-end"
-            aria-label={label}
+            aria-current={isActive ? "location" : undefined}
           >
             {/* Label — slides in on hover */}
             <span
@@ -70,6 +70,7 @@ export function SideNav() {
 
             {/* Dot */}
             <span
+              aria-hidden="true"
               className={cn(
                 "block rounded-full transition-all duration-300 flex-shrink-0",
                 isActive

@@ -84,6 +84,7 @@ export function CursorTrail() {
     <>
       <div
         ref={outerRef}
+        aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[9998]"
         style={{
           width: 36,
@@ -103,6 +104,7 @@ export function CursorTrail() {
 
       <div
         ref={innerRef}
+        aria-hidden="true"
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
           width: 6,

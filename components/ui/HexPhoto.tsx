@@ -11,6 +11,7 @@ export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoPro
     <div className={cn("relative flex items-center justify-center", className)}>
       {/* Outer rotating ring */}
       <div
+        aria-hidden="true"
         className="absolute w-[280px] h-[280px] rounded-full border border-hud-cyan/30"
         style={{ animation: "arc-spin 20s linear infinite" }}
       >
@@ -30,6 +31,7 @@ export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoPro
 
       {/* Middle ring — reverse */}
       <div
+        aria-hidden="true"
         className="absolute w-[248px] h-[248px] rounded-full border border-hud-gold/20"
         style={{ animation: "arc-spin-reverse 14s linear infinite" }}
       />
@@ -67,7 +69,7 @@ export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoPro
       </div>
 
       {/* Status labels — desktop only */}
-      <div className="hidden md:flex absolute -right-4 top-8 flex-col gap-2 translate-x-full">
+      <div aria-hidden="true" className="hidden md:flex absolute -right-4 top-8 flex-col gap-2 translate-x-full">
         <div className="flex items-center gap-2">
           <div className="w-6 h-px bg-hud-cyan/40" />
           <span className="font-mono text-[9px] text-hud-cyan/60 tracking-[0.15em] whitespace-nowrap">

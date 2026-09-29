@@ -11,6 +11,7 @@ const RINGS = [
 export function ArcReactor({ className }: { className?: string }) {
   return (
     <div
+      aria-hidden="true"
       className={cn(
         "absolute inset-0 flex items-center justify-center pointer-events-none",
         className

@@ -178,7 +178,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
               rel="noopener noreferrer"
               className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
             >
-              ◆ VIEW LIVE SITE ↗
+              <span aria-hidden="true">◆ </span>VIEW LIVE SITE<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
             </a>
           )}
           {card.github && (
@@ -188,7 +188,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
               rel="noopener noreferrer"
               className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
             >
-              ◎ VIEW CODE ON GITHUB ↗
+              <span aria-hidden="true">◎ </span>VIEW CODE ON GITHUB<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
             </a>
           )}
         </div>
@@ -207,7 +207,7 @@ export function Initiative() {
             BEYOND THE JOB DESCRIPTION
           </p>
           <h2 id="initiative-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-            <span className="text-hud-gold text-glow-gold">/</span> INITIATIVE
+            <span aria-hidden="true" className="text-hud-gold text-glow-gold">/</span> INITIATIVE
           </h2>
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
 

@@ -144,7 +144,7 @@ function ProjectCard({
           </span>
           {project.badge && (
             <span className="font-mono text-[9px] tracking-[0.15em] px-2 py-0.5 border text-hud-gold border-hud-gold/50">
-              ★ {project.badge}
+              <span aria-hidden="true">★ </span>{project.badge}
             </span>
           )}
         </div>
@@ -196,7 +196,7 @@ function ProjectCard({
       </ul>
 
       {/* Click hint */}
-      <div className="pt-2 border-t border-hud-border flex items-center justify-between">
+      <div aria-hidden="true" className="pt-2 border-t border-hud-border flex items-center justify-between">
         <span className="font-mono text-[10px] text-hud-muted/50 tracking-[0.1em]">
           CLICK TO ACCESS FILE
         </span>
@@ -223,7 +223,7 @@ export function Projects() {
                 MODULE 02
               </p>
               <h2 id="projects-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-                <span className="text-hud-cyan text-glow-cyan">/</span> PROJECTS
+                <span aria-hidden="true" className="text-hud-cyan text-glow-cyan">/</span> PROJECTS
               </h2>
               <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
             </div>

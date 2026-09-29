@@ -21,7 +21,7 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed left-0 top-0 w-px h-full z-50 pointer-events-none">
+    <div aria-hidden="true" className="fixed left-0 top-0 w-px h-full z-50 pointer-events-none">
       {/* Track */}
       <div className="absolute inset-0 bg-hud-cyan/10" />
       {/* Fill */}

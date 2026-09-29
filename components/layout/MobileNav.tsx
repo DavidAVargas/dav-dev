@@ -59,7 +59,7 @@ function MobileTopBar({ active }: { active: string }) {
   };
 
   return (
-    <div className="md:hidden fixed top-0 inset-x-0 z-40 bg-hud-dark/80 backdrop-blur-sm border-b border-hud-border pointer-events-none">
+    <div aria-hidden="true" className="md:hidden fixed top-0 inset-x-0 z-40 bg-hud-dark/80 backdrop-blur-sm border-b border-hud-border pointer-events-none">
       {/* Main row */}
       <div className="flex items-center justify-between px-4 py-2">
         <span className="font-mono text-xs text-hud-gold tracking-[0.2em]">DAV</span>
@@ -179,7 +179,7 @@ export function MobileNav() {
                     transitionDelay: visible ? `${i * 60}ms` : "0ms",
                   }}
                 >
-                  <span className="font-mono text-[10px] text-hud-muted/50 tracking-[0.2em] w-6">
+                  <span aria-hidden="true" className="font-mono text-[10px] text-hud-muted/50 tracking-[0.2em] w-6">
                     {module}
                   </span>
                   <span
@@ -191,7 +191,7 @@ export function MobileNav() {
                     {label}
                   </span>
                   {isActive && (
-                    <span className="ml-auto font-mono text-xs text-hud-cyan">◆</span>
+                    <span aria-hidden="true" className="ml-auto font-mono text-xs text-hud-cyan">◆</span>
                   )}
                 </button>
                 </li>
@@ -304,7 +304,7 @@ export function MobileNav() {
                   <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
                       <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
-                        · {line}
+                        <span aria-hidden="true">· </span>{line}
                       </li>
                     ))}
                   </ul>

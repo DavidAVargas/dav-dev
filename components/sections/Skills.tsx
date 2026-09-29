@@ -46,7 +46,7 @@ const CATEGORIES: Category[] = [
     color: "green",
     featured: true,
     callout:
-      "// 1 in 4 U.S. adults lives with a disability. Thousands of ADA website lawsuits are filed every year. Most teams treat accessibility as an afterthought — I build it in from the start.",
+      "1 in 4 U.S. adults lives with a disability. Thousands of ADA website lawsuits are filed every year. Most teams treat accessibility as an afterthought — I build it in from the start.",
     description:
       "An interface isn't finished until everyone can use it — with a keyboard, a screen reader, low vision, or a shaky hand. I build to WCAG 2.1 AA: real semantic HTML, focus that goes where it should and comes back when it should, ARIA only where native HTML falls short, and color contrast that actually passes. It protects the business legally, widens the audience, and makes the product better for every user.",
     usedIn: ["All Projects"],
@@ -158,7 +158,7 @@ function PowerBar({
   animate: boolean;
 }) {
   return (
-    <div className="relative h-1.5 w-full bg-hud-border rounded-none overflow-hidden">
+    <div aria-hidden="true" className="relative h-1.5 w-full bg-hud-border rounded-none overflow-hidden">
       <div
         className="absolute inset-0 opacity-20"
         style={{
@@ -195,6 +195,7 @@ function SkillRow({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span
+            aria-hidden="true"
             className={cn(
               "font-mono text-lg w-7 text-center leading-none",
               TONES[color].text
@@ -221,7 +222,8 @@ function SkillRow({
               TONES[color].text
             )}
           >
-            {animate ? `${skill.level}%` : "---"}
+            <span aria-hidden="true">{animate ? `${skill.level}%` : "---"}</span>
+            <span className="sr-only">, {skill.level}%</span>
           </span>
         </div>
       </div>
@@ -323,7 +325,7 @@ function SkillModal({
           {/* Used in */}
           {c.usedIn.length > 0 && (
             <div>
-              <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2">// DEPLOYED IN</h3>
+              <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2"><span aria-hidden="true">// </span>DEPLOYED IN</h3>
               <ul role="list" className="flex flex-wrap gap-2">
                 {c.usedIn.map((p) => (
                   <li key={p} className={cn(
@@ -337,7 +339,7 @@ function SkillModal({
 
           {/* Skills */}
           <div>
-            <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-4">// POWER LEVELS</h3>
+            <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-4"><span aria-hidden="true">// </span>POWER LEVELS</h3>
             <ul role="list" className="flex flex-col gap-4">
               {c.skills.map((skill) => (
                 <li key={skill.name}>
@@ -405,7 +407,7 @@ function CategoryBlock({
           <span className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-hud-green" />
           <span className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-hud-green" />
           <span className="absolute -top-3 left-6 bg-hud-dark px-2 font-mono text-[10px] tracking-[0.2em] text-hud-gold border border-hud-gold/60">
-            ★ PRIORITY SYSTEM
+            <span aria-hidden="true">★ </span>PRIORITY SYSTEM
           </span>
         </>
       )}
@@ -431,12 +433,12 @@ function CategoryBlock({
         </h3>
         {isGold && (
           <p className="font-mono text-[9px] text-hud-gold/50 tracking-[0.1em] mt-1">
-            // AI-assisted development is not a shortcut — it&apos;s a force multiplier
+            <span aria-hidden="true">// </span>AI-assisted development is not a shortcut — it&apos;s a force multiplier
           </p>
         )}
         {category.callout && (
           <p className="text-sm text-hud-text leading-relaxed mt-3 max-w-3xl border-l-2 border-hud-green pl-3">
-            {category.callout}
+            <span aria-hidden="true">// </span>{category.callout}
           </p>
         )}
       </div>
@@ -455,7 +457,7 @@ function CategoryBlock({
       </ul>
 
       {/* Click hint */}
-      <div className="flex justify-end mt-auto">
+      <div aria-hidden="true" className="flex justify-end mt-auto">
         <span className={cn(
           "font-mono text-[9px] tracking-[0.1em] transition-colors",
           isGold ? "text-hud-gold/30 group-hover:text-hud-gold/70" : "text-hud-muted/40 group-hover:text-hud-muted"
@@ -487,7 +489,7 @@ export function Skills() {
               MODULE 03
             </p>
             <h2 id="skills-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-              <span className="text-hud-cyan text-glow-cyan">/</span> CAPABILITIES
+              <span aria-hidden="true" className="text-hud-cyan text-glow-cyan">/</span> CAPABILITIES
             </h2>
             <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
 
@@ -525,7 +527,7 @@ export function Skills() {
           </ul>
 
           <p className="font-mono text-[10px] text-hud-muted/50 tracking-[0.15em] mt-8 text-center">
-            // J.A.R.V.I.S. PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.
+            <span aria-hidden="true">// </span>J.A.R.V.I.S. PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.
           </p>
         </div>
       </section>

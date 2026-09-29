@@ -98,6 +98,7 @@ export function HudReadout() {
     <>
       <div className="hidden md:flex fixed top-6 left-6 z-40 select-none flex-col gap-1">
         <div
+          aria-hidden="true"
           className={cn(
             "font-mono text-[10px] tracking-[0.25em] transition-opacity duration-200 pointer-events-none",
             flash ? "text-hud-cyan" : "text-hud-muted/60"
@@ -164,7 +165,7 @@ export function HudReadout() {
                   <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
                       <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
-                        · {line}
+                        <span aria-hidden="true">· </span>{line}
                       </li>
                     ))}
                   </ul>

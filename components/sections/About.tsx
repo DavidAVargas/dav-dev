@@ -12,7 +12,7 @@ const STATS = [
   { label: "PROJECTS BUILT",       value: 10,   suffix: "+",  display: "10+"   },
 ];
 
-function CountUpStat({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+function CountUpStat({ value, suffix, label, display }: { value: number; suffix: string; label: string; display: string }) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -51,7 +51,8 @@ function CountUpStat({ value, suffix, label }: { value: number; suffix: string; 
   return (
     <HudFrame className="p-5 border border-hud-border bg-hud-dark text-center" ref={ref as React.Ref<HTMLDivElement>}>
       <p className="font-mono font-bold text-2xl text-hud-cyan text-glow-cyan">
-        {count}{suffix}
+        <span aria-hidden="true">{count}{suffix}</span>
+        <span className="sr-only">{display}</span>
       </p>
       <p className="font-mono text-[10px] tracking-[0.15em] text-hud-muted mt-1">
         {label}
@@ -70,7 +71,7 @@ export function About() {
             MODULE 04
           </p>
           <h2 id="about-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
-            <span className="text-hud-gold text-glow-gold">/</span> ABOUT
+            <span aria-hidden="true" className="text-hud-gold text-glow-gold">/</span> ABOUT
           </h2>
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
         </div>
@@ -82,7 +83,7 @@ export function About() {
             {/* Tony Stark moment */}
             <HudFrame cornerColor="gold" className="p-6 border border-hud-gold/20">
               <h3 className="font-mono text-xs tracking-[0.2em] text-hud-gold mb-4">
-                // ORIGIN STORY
+                <span aria-hidden="true">// </span>ORIGIN STORY
               </h3>
               <blockquote className="text-hud-text text-lg leading-relaxed italic">
                 &ldquo;Tony Stark had errors too. He just kept building.&rdquo;
@@ -108,7 +109,7 @@ export function About() {
             {/* The creator mindset */}
             <HudFrame className="p-5 border border-hud-cyan/20">
               <h3 className="font-mono text-xs tracking-[0.2em] text-hud-cyan mb-3">
-                // MINDSET.LOG
+                <span aria-hidden="true">// </span>MINDSET.LOG
               </h3>
               <p className="text-hud-muted leading-relaxed mb-3">
                 <span className="text-hud-text font-semibold">
@@ -141,6 +142,7 @@ export function About() {
                   value={s.value}
                   suffix={s.suffix}
                   label={s.label}
+                  display={s.display}
                 />
               ))}
             </div>
@@ -148,7 +150,7 @@ export function About() {
             {/* Journey timeline */}
             <div className="flex flex-col gap-4">
               <h3 className="font-mono text-xs tracking-[0.2em] text-hud-muted">
-                // CAREER TIMELINE
+                <span aria-hidden="true">// </span>CAREER TIMELINE
               </h3>
               <ol role="list" className="flex flex-col gap-4">
               {[
