@@ -323,26 +323,28 @@ function SkillModal({
           {/* Used in */}
           {c.usedIn.length > 0 && (
             <div>
-              <p className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2">// DEPLOYED IN</p>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-2">// DEPLOYED IN</h3>
+              <ul role="list" className="flex flex-wrap gap-2">
                 {c.usedIn.map((p) => (
-                  <span key={p} className={cn(
+                  <li key={p} className={cn(
                     "font-mono text-[10px] px-2 py-0.5 border tracking-wide",
                     tone.text, tone.borderSoft
-                  )}>{p}</span>
+                  )}>{p}</li>
                 ))}
-              </div>
+              </ul>
             </div>
           )}
 
           {/* Skills */}
           <div>
-            <p className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-4">// POWER LEVELS</p>
-            <div className="flex flex-col gap-4">
+            <h3 className="font-mono text-[10px] tracking-[0.2em] text-hud-muted mb-4">// POWER LEVELS</h3>
+            <ul role="list" className="flex flex-col gap-4">
               {c.skills.map((skill) => (
-                <SkillRow key={skill.name} skill={skill} color={c.color} animate={true} />
+                <li key={skill.name}>
+                  <SkillRow skill={skill} color={c.color} animate={true} />
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
@@ -440,15 +442,17 @@ function CategoryBlock({
       </div>
 
       {/* Skills */}
-      <div className={cn(
+      <ul role="list" className={cn(
         "flex flex-col gap-4",
         category.featured && "md:grid md:grid-cols-2 md:gap-x-10",
         category.wide && "md:grid md:grid-cols-3 md:gap-x-8"
       )}>
         {category.skills.map((skill) => (
-          <SkillRow key={skill.name} skill={skill} color={category.color} animate={animate} />
+          <li key={skill.name}>
+            <SkillRow skill={skill} color={category.color} animate={animate} />
+          </li>
         ))}
-      </div>
+      </ul>
 
       {/* Click hint */}
       <div className="flex justify-end mt-auto">
@@ -475,14 +479,14 @@ export function Skills() {
 
   return (
     <>
-      <section id="skills" className="min-h-screen py-24 px-6">
+      <section id="skills" aria-labelledby="skills-heading" className="min-h-screen py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="mb-16">
             <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
               MODULE 03
             </p>
-            <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+            <h2 id="skills-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
               <span className="text-hud-cyan text-glow-cyan">/</span> CAPABILITIES
             </h2>
             <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
@@ -510,13 +514,15 @@ export function Skills() {
           </div>
 
           {/* Categories grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {CATEGORIES.map((cat, i) => (
-              <FadeIn key={cat.id} delay={i * 120} className={cn("h-full", (cat.featured || cat.wide) && "md:col-span-2")}>
-                <CategoryBlock category={cat} onClick={() => setSelected(cat)} />
-              </FadeIn>
+              <li key={cat.id} className={cn((cat.featured || cat.wide) && "md:col-span-2")}>
+                <FadeIn delay={i * 120} className="h-full">
+                  <CategoryBlock category={cat} onClick={() => setSelected(cat)} />
+                </FadeIn>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <p className="font-mono text-[10px] text-hud-muted/50 tracking-[0.15em] mt-8 text-center">
             // J.A.R.V.I.S. PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.

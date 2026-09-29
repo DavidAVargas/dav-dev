@@ -179,9 +179,9 @@ function ProjectCard({
       </p>
 
       {/* Tech tags */}
-      <div className="flex flex-wrap gap-2">
+      <ul role="list" aria-label="Tech stack" className="flex flex-wrap gap-2">
         {project.tech.map((t) => (
-          <span
+          <li
             key={t}
             className={cn(
               "font-mono text-[11px] border px-2 py-0.5 tracking-wide",
@@ -191,9 +191,9 @@ function ProjectCard({
             )}
           >
             {t}
-          </span>
+          </li>
         ))}
-      </div>
+      </ul>
 
       {/* Click hint */}
       <div className="pt-2 border-t border-hud-border flex items-center justify-between">
@@ -214,7 +214,7 @@ export function Projects() {
 
   return (
     <>
-      <section id="projects" className="min-h-screen py-24 px-6">
+      <section id="projects" aria-labelledby="projects-heading" className="min-h-screen py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <FadeIn>
@@ -222,7 +222,7 @@ export function Projects() {
               <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
                 MODULE 02
               </p>
-              <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+              <h2 id="projects-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
                 <span className="text-hud-cyan text-glow-cyan">/</span> PROJECTS
               </h2>
               <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-cyan to-transparent" />
@@ -230,16 +230,18 @@ export function Projects() {
           </FadeIn>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {PROJECTS.map((p, i) => (
-              <FadeIn key={p.id} delay={i * 100} className="h-full">
-                <ProjectCard
-                  project={p}
-                  onClick={() => setSelected(p)}
-                />
-              </FadeIn>
+              <li key={p.id}>
+                <FadeIn delay={i * 100} className="h-full">
+                  <ProjectCard
+                    project={p}
+                    onClick={() => setSelected(p)}
+                  />
+                </FadeIn>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

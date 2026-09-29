@@ -108,12 +108,12 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <span className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">
+          <h3 className="font-mono text-[10px] text-hud-muted tracking-[0.3em]">
             {card.id} · {card.industry}
-          </span>
-          <div className="flex flex-wrap gap-2">
+          </h3>
+          <ul role="list" aria-label="Tags" className="flex flex-wrap gap-2">
             {card.tags.map((tag) => (
-              <span
+              <li
                 key={tag}
                 className={cn(
                   "font-mono text-[9px] tracking-[0.15em] px-2 py-0.5 border",
@@ -123,9 +123,9 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
                 )}
               >
                 {tag}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <span
           className={cn(
@@ -159,9 +159,9 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
           { label: "THE OUTCOME", body: card.outcome, color: "text-hud-text" },
         ].map(({ label, body, color }) => (
           <div key={label} className="flex flex-col gap-2">
-            <p className={cn("font-mono text-[10px] tracking-[0.2em]", color)}>
+            <h4 className={cn("font-mono text-[10px] tracking-[0.2em]", color)}>
               // {label}
-            </p>
+            </h4>
             <div className="h-px w-full bg-hud-border" />
             <p className="text-hud-muted text-sm leading-relaxed">{body}</p>
           </div>
@@ -199,14 +199,14 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
 
 export function Initiative() {
   return (
-    <section id="initiative" className="min-h-screen py-24 px-6">
+    <section id="initiative" aria-labelledby="initiative-heading" className="min-h-screen py-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
             BEYOND THE JOB DESCRIPTION
           </p>
-          <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+          <h2 id="initiative-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
             <span className="text-hud-gold text-glow-gold">/</span> INITIATIVE
           </h2>
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
@@ -242,13 +242,15 @@ export function Initiative() {
         </div>
 
         {/* Initiative cards */}
-        <div className="flex flex-col gap-8">
+        <ul role="list" className="flex flex-col gap-8">
           {INITIATIVES.map((card, i) => (
-            <FadeIn key={card.id} delay={i * 150}>
-              <InitiativeItem card={card} />
-            </FadeIn>
+            <li key={card.id}>
+              <FadeIn delay={i * 150}>
+                <InitiativeItem card={card} />
+              </FadeIn>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -331,33 +331,33 @@ function MissionModal({
 
           <p className="text-hud-muted text-sm leading-relaxed">{m.detail}</p>
 
-          <div className="flex flex-wrap gap-2">
+          <ul role="list" aria-label="Tags" className="flex flex-wrap gap-2">
             {m.tags.map((t) => (
-              <span key={t} className={cn(
+              <li key={t} className={cn(
                 "font-mono text-[10px] px-2 py-0.5 border tracking-wide",
                 m.statusColor === "gold"
                   ? "text-hud-gold border-hud-gold/30"
                   : "text-hud-cyan border-hud-cyan/30"
-              )}>{t}</span>
+              )}>{t}</li>
             ))}
-          </div>
+          </ul>
 
           {/* Book list */}
           {m.books && (
             <div className="flex flex-col gap-5">
-              <p className={cn(
+              <h3 className={cn(
                 "font-mono text-[10px] tracking-[0.2em]",
                 m.statusColor === "gold" ? "text-hud-gold" : "text-hud-cyan"
-              )}>// READING LOG</p>
+              )}>// READING LOG</h3>
               {m.books.map((shelf) => (
                 <div key={shelf.category}>
-                  <p className="font-mono text-[9px] tracking-[0.2em] text-hud-muted mb-2">
+                  <h4 className="font-mono text-[9px] tracking-[0.2em] text-hud-muted mb-2">
                     {shelf.category}
-                  </p>
+                  </h4>
                   <div className="h-px w-full bg-hud-border mb-3" />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4">
+                  <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4">
                     {shelf.items.map((book) => (
-                      <div key={book.title} className="flex flex-col">
+                      <li key={book.title} className="flex flex-col">
                         <span className={cn(
                           "font-mono text-xs",
                           m.statusColor === "gold" ? "text-hud-gold/80" : "text-hud-text"
@@ -367,9 +367,9 @@ function MissionModal({
                         {book.author && (
                           <span className="font-mono text-[9px] text-hud-muted/60">{book.author}</span>
                         )}
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               ))}
             </div>
@@ -442,14 +442,14 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
       <p className="text-hud-muted text-xs leading-relaxed flex-1">{mission.short}</p>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-1.5 mt-1">
+      <ul role="list" aria-label="Tags" className="flex flex-wrap gap-1.5 mt-1">
         {mission.tags.slice(0, 3).map((t) => (
-          <span key={t} className={cn(
+          <li key={t} className={cn(
             "font-mono text-[9px] px-1.5 py-0.5 border tracking-wide",
             isGold ? "text-hud-gold/70 border-hud-gold/20" : "text-hud-cyan/70 border-hud-cyan/20"
-          )}>{t}</span>
+          )}>{t}</li>
         ))}
-      </div>
+      </ul>
 
       {/* Click hint */}
       <div className="flex justify-end mt-1">
@@ -466,7 +466,7 @@ export function SideMissions() {
 
   return (
     <>
-      <section id="services" className="min-h-screen py-24 px-6">
+      <section id="side-missions" aria-labelledby="side-missions-heading" className="min-h-screen py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <FadeIn>
@@ -476,7 +476,7 @@ export function SideMissions() {
                 <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
                   MODULE 05
                 </p>
-                <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+                <h2 id="side-missions-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
                   <span className="text-hud-gold text-glow-gold">/</span> SIDE MISSIONS
                 </h2>
                 <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
@@ -525,13 +525,15 @@ export function SideMissions() {
           </FadeIn>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {MISSIONS.map((m, i) => (
-              <FadeIn key={m.id} delay={i * 100} className="h-full">
-                <MissionCard mission={m} onClick={() => setSelected(m)} />
-              </FadeIn>
+              <li key={m.id}>
+                <FadeIn delay={i * 100} className="h-full">
+                  <MissionCard mission={m} onClick={() => setSelected(m)} />
+                </FadeIn>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 

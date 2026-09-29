@@ -16,7 +16,7 @@ const MOODS: Record<string, [Glow, Glow]> = {
   initiative: [{ color: GOLD(0.08),  left: "15%", top: "35%" }, { color: GOLD(0.05),  left: "85%", top: "80%" }],
   skills:     [{ color: GREEN(0.07), left: "80%", top: "25%" }, { color: CYAN(0.06),  left: "20%", top: "75%" }],
   about:      [{ color: GOLD(0.08),  left: "75%", top: "40%" }, { color: CYAN(0.05),  left: "20%", top: "85%" }],
-  services:   [{ color: GOLD(0.07),  left: "25%", top: "30%" }, { color: CYAN(0.05),  left: "80%", top: "75%" }],
+  "side-missions": [{ color: GOLD(0.07),  left: "25%", top: "30%" }, { color: CYAN(0.05),  left: "80%", top: "75%" }],
   contact:    [{ color: CYAN(0.09),  left: "50%", top: "55%" }, { color: GOLD(0.05),  left: "20%", top: "20%" }],
 };
 
@@ -174,7 +174,7 @@ const MOTIFS: Record<string, { el: React.ReactNode; className: string; spin?: nu
   initiative: { el: null,         className: "w-[85vw] h-[40vh] left-[7.5vw] top-[30%]" },
   skills:     { el: <DotField />, className: "w-[90vw] h-[90vh] left-[5vw] top-[5vh]" },
   about:      { el: <Hexes />,    className: "w-[85vmin] h-[85vmin] -right-[15vmin] top-[10%]" },
-  services:   { el: <Contours />, className: "w-full h-[60vh] left-0 bottom-0" },
+  "side-missions": { el: <Contours />, className: "w-full h-[60vh] left-0 bottom-0" },
   contact:    { el: <Signal />,   className: "w-[110vmin] h-[55vmin] left-1/2 -translate-x-1/2 bottom-0" },
 };
 

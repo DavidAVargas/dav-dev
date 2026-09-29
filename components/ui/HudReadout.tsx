@@ -49,7 +49,7 @@ const SECTION_LABELS: Record<string, string> = {
   initiative: "INITIATIVE",
   skills:     "CAPABILITIES",
   about:      "ABOUT",
-  services:   "SIDE MISSIONS",
+  "side-missions": "SIDE MISSIONS",
   contact:    "CONTACT",
 };
 
@@ -149,7 +149,7 @@ export function HudReadout() {
             <div className="p-6 flex flex-col gap-6">
               {MARKS.map((mark) => (
                 <div key={mark.id}>
-                  <div className="flex items-center gap-3 mb-2">
+                  <h3 className="flex items-center gap-3 mb-2">
                     <span className={cn(
                       "font-mono font-bold text-sm tracking-[0.15em]",
                       mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted/60"
@@ -160,14 +160,14 @@ export function HudReadout() {
                     {mark.id === "MARK III" && (
                       <span className="font-mono text-[9px] text-hud-gold border border-hud-gold/40 px-1.5 py-0.5 tracking-wide">CURRENT</span>
                     )}
-                  </div>
-                  <div className="flex flex-col gap-1 pl-3 border-l border-hud-border">
+                  </h3>
+                  <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
-                      <p key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
+                      <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
                         · {line}
-                      </p>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               ))}
             </div>

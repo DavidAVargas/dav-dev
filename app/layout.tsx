@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { inter } from "@/utils/fonts";
 import { SideNav } from "@/components/layout/SideNav";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { Footer } from "@/components/layout/Footer";
 import { HudReadout } from "@/components/ui/HudReadout";
 import { BootSequence } from "@/components/ui/BootSequence";
 import { HudBackground } from "@/components/ui/HudBackground";
@@ -53,15 +54,24 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={inter.variable} suppressHydrationWarning>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-1/2 focus:-translate-x-1/2 focus:z-[10000] bg-hud-dark border border-hud-cyan text-hud-cyan font-mono text-xs tracking-[0.2em] px-4 py-2"
+        >
+          SKIP TO CONTENT
+        </a>
         <BootSequence />
         <HudBackground />
         <ScrollProgress />
         <CursorTrail />
-        <SystemClock />
-        <HudReadout />
-        <SideNav />
-        <MobileNav />
-        <main>{children}</main>
+        <header>
+          <SystemClock />
+          <HudReadout />
+          <SideNav />
+          <MobileNav />
+        </header>
+        <main id="main" tabIndex={-1}>{children}</main>
+        <Footer />
         <Toaster position="top-right" theme="dark" />
       </body>
     </html>

@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { id: "initiative", label: "INITIATIVE" },
   { id: "skills",     label: "SKILLS" },
   { id: "about",      label: "ABOUT" },
-  { id: "services",   label: "SIDE MISSIONS" },
+  { id: "side-missions", label: "SIDE MISSIONS" },
   { id: "contact",    label: "CONTACT" },
 ];
 
@@ -44,12 +44,13 @@ export function SideNav() {
 
 
   return (
-    <nav className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 flex-col gap-7">
+    <nav aria-label="Sections" className="hidden md:block fixed right-8 top-1/2 -translate-y-1/2 z-50">
+      <ul role="list" className="flex flex-col gap-7">
       {NAV_ITEMS.map(({ id, label }) => {
         const isActive = active === id;
         return (
+          <li key={id} className="flex justify-end">
           <button
-            key={id}
             onClick={() => focusSection(id)}
             className="group flex items-center gap-4 justify-end"
             aria-label={label}
@@ -77,8 +78,10 @@ export function SideNav() {
               )}
             />
           </button>
+          </li>
         );
       })}
+      </ul>
     </nav>
   );
 }

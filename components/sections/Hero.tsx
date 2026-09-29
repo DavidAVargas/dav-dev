@@ -91,6 +91,7 @@ export function Hero() {
   return (
     <section
       id="hero"
+      aria-labelledby="hero-heading"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Scan line — one-time sweep on load */}
@@ -121,6 +122,7 @@ export function Hero() {
         {/* Name */}
         <HudFrame cornerColor="gold" className="px-8 py-4 cursor-none">
           <h1
+            id="hero-heading"
             className={cn(
               "font-mono font-bold tracking-[0.15em] text-hud-gold text-glow-gold animate-flicker",
               "text-3xl sm:text-6xl lg:text-7xl select-none pl-[0.15em]"

@@ -16,14 +16,14 @@ export function Contact() {
   const email = EMAIL_PARTS.join("");
 
   return (
-    <section id="contact" className="min-h-screen py-24 px-6 flex items-center">
+    <section id="contact" aria-labelledby="contact-heading" className="min-h-screen py-24 px-6 flex items-center">
       <div className="max-w-4xl mx-auto w-full">
         {/* Section header */}
         <div className="mb-16">
           <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
             MODULE 06
           </p>
-          <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+          <h2 id="contact-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
             <span className="text-hud-gold text-glow-gold">/</span> CONTACT
           </h2>
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
@@ -42,9 +42,9 @@ export function Contact() {
 
             {/* Email reveal */}
             <HudFrame className="p-5 border border-hud-cyan/20">
-              <p className="font-mono text-xs text-hud-muted mb-3 tracking-[0.2em]">
+              <h3 className="font-mono text-xs text-hud-muted mb-3 tracking-[0.2em]">
                 // DIRECT CHANNEL
-              </p>
+              </h3>
               {revealed ? (
                 <a
                   href={`mailto:${email}`}
@@ -67,12 +67,13 @@ export function Contact() {
 
           {/* Right — social links */}
           <div className="flex flex-col gap-4">
-            <p className="font-mono text-xs tracking-[0.2em] text-hud-muted mb-2">
+            <h3 className="font-mono text-xs tracking-[0.2em] text-hud-muted mb-2">
               // SOCIAL CHANNELS
-            </p>
+            </h3>
+            <ul role="list" className="flex flex-col gap-4">
             {SOCIAL_LINKS.map((link) => (
+              <li key={link.label}>
               <a
-                key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -90,18 +91,10 @@ export function Contact() {
                   ↗
                 </span>
               </a>
+              </li>
             ))}
+            </ul>
           </div>
-        </div>
-
-        {/* Footer line */}
-        <div className="mt-24 pt-8 border-t border-hud-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
-            DAVID A VARGAS · MARK III · {new Date().getFullYear()}
-          </p>
-          <p className="font-mono text-xs text-hud-muted tracking-[0.15em]">
-            BUILT WITH NEXT.JS · TAILWIND · VERCEL
-          </p>
         </div>
       </div>
     </section>

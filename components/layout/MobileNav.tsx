@@ -55,7 +55,7 @@ function MobileTopBar({ active }: { active: string }) {
 
   const LABELS: Record<string, string> = {
     hero: "HOME", projects: "PROJECTS", initiative: "INITIATIVE",
-    skills: "SKILLS", about: "ABOUT", services: "SIDE MISSIONS", contact: "CONTACT",
+    skills: "SKILLS", about: "ABOUT", "side-missions": "SIDE MISSIONS", contact: "CONTACT",
   };
 
   return (
@@ -78,7 +78,7 @@ const NAV_ITEMS = [
   { id: "initiative", label: "INITIATIVE", module: "02" },
   { id: "skills",     label: "SKILLS",     module: "03" },
   { id: "about",      label: "ABOUT",      module: "04" },
-  { id: "services",   label: "SIDE MISSIONS", module: "05" },
+  { id: "side-missions", label: "SIDE MISSIONS", module: "05" },
   { id: "contact",    label: "CONTACT",    module: "06" },
 ];
 
@@ -157,17 +157,18 @@ export function MobileNav() {
           </p>
 
           {/* Nav items */}
-          <nav aria-label="Mobile" className="relative flex flex-col gap-2">
+          <nav aria-label="Sections" className="relative">
+            <ul role="list" className="flex flex-col gap-2">
             {NAV_ITEMS.map(({ id, label, module }, i) => {
               const isActive = active === id;
               return (
+                <li key={id}>
                 <button
-                  key={id}
                   onClick={() => scrollTo(id)}
                   aria-current={isActive ? "location" : undefined}
                   data-autofocus={i === 0 ? true : undefined}
                   className={cn(
-                    "group flex items-center gap-4 py-3 text-left",
+                    "group w-full flex items-center gap-4 py-3 text-left",
                     "transition-all duration-300",
                     "border-b border-hud-border/40",
                     visible
@@ -193,8 +194,10 @@ export function MobileNav() {
                     <span className="ml-auto font-mono text-xs text-hud-cyan">◆</span>
                   )}
                 </button>
+                </li>
               );
             })}
+            </ul>
           </nav>
 
           {/* Bottom */}
@@ -286,7 +289,7 @@ export function MobileNav() {
             <div className="p-5 flex flex-col gap-5">
               {MARKS.map((mark) => (
                 <div key={mark.id}>
-                  <div className="flex items-center gap-3 mb-2">
+                  <h3 className="flex items-center gap-3 mb-2">
                     <span className={cn(
                       "font-mono font-bold text-sm tracking-[0.15em]",
                       mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted/60"
@@ -297,14 +300,14 @@ export function MobileNav() {
                     {mark.id === "MARK III" && (
                       <span className="font-mono text-[9px] text-hud-gold border border-hud-gold/40 px-1.5 py-0.5 tracking-wide">CURRENT</span>
                     )}
-                  </div>
-                  <div className="flex flex-col gap-1 pl-3 border-l border-hud-border">
+                  </h3>
+                  <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
-                      <p key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
+                      <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
                         · {line}
-                      </p>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               ))}
             </div>

@@ -266,12 +266,12 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                 {/* Right — tech + links */}
                 <div className="p-6 flex flex-col gap-6">
                   <div>
-                    <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
+                    <h3 className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
                       // TECH STACK
-                    </p>
-                    <div className="flex flex-wrap gap-2">
+                    </h3>
+                    <ul role="list" className="flex flex-wrap gap-2">
                       {displayed.tech.map((t) => (
-                        <span
+                        <li
                           key={t}
                           className={cn(
                             "font-mono text-[10px] border px-2 py-0.5 tracking-wide",
@@ -281,15 +281,15 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                           )}
                         >
                           {t}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
 
                   <div>
-                    <p className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
+                    <h3 className="font-mono text-[10px] text-hud-cyan tracking-[0.2em] mb-3">
                       // ACCESS LINKS
-                    </p>
+                    </h3>
                     <div className="flex flex-col gap-2">
                       {displayed.links.github ? (
                         <a

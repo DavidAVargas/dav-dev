@@ -62,14 +62,14 @@ function CountUpStat({ value, suffix, label }: { value: number; suffix: string; 
 
 export function About() {
   return (
-    <section id="about" className="min-h-screen py-24 px-6">
+    <section id="about" aria-labelledby="about-heading" className="min-h-screen py-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <p className="font-mono text-xs tracking-[0.3em] text-hud-muted mb-3">
             MODULE 04
           </p>
-          <h2 className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
+          <h2 id="about-heading" className="font-mono font-bold text-3xl sm:text-4xl text-hud-text tracking-wide">
             <span className="text-hud-gold text-glow-gold">/</span> ABOUT
           </h2>
           <div className="mt-4 h-px w-24 bg-gradient-to-r from-hud-gold to-transparent" />
@@ -81,9 +81,9 @@ export function About() {
           <div className="flex flex-col gap-8">
             {/* Tony Stark moment */}
             <HudFrame cornerColor="gold" className="p-6 border border-hud-gold/20">
-              <p className="font-mono text-xs tracking-[0.2em] text-hud-gold mb-4">
+              <h3 className="font-mono text-xs tracking-[0.2em] text-hud-gold mb-4">
                 // ORIGIN STORY
-              </p>
+              </h3>
               <blockquote className="text-hud-text text-lg leading-relaxed italic">
                 &ldquo;Tony Stark had errors too. He just kept building.&rdquo;
               </blockquote>
@@ -107,9 +107,9 @@ export function About() {
 
             {/* The creator mindset */}
             <HudFrame className="p-5 border border-hud-cyan/20">
-              <p className="font-mono text-xs tracking-[0.2em] text-hud-cyan mb-3">
+              <h3 className="font-mono text-xs tracking-[0.2em] text-hud-cyan mb-3">
                 // MINDSET.LOG
-              </p>
+              </h3>
               <p className="text-hud-muted leading-relaxed mb-3">
                 <span className="text-hud-text font-semibold">
                   Inspired and driven by the fear of unfulfilled potential.
@@ -147,9 +147,10 @@ export function About() {
 
             {/* Journey timeline */}
             <div className="flex flex-col gap-4">
-              <p className="font-mono text-xs tracking-[0.2em] text-hud-muted">
+              <h3 className="font-mono text-xs tracking-[0.2em] text-hud-muted">
                 // CAREER TIMELINE
-              </p>
+              </h3>
+              <ol role="list" className="flex flex-col gap-4">
               {[
                 {
                   date: "PRESENT",
@@ -170,7 +171,7 @@ export function About() {
                   color: "muted",
                 },
               ].map((item) => (
-                <div key={item.date} className="flex gap-4 items-start">
+                <li key={item.date} className="flex gap-4 items-start">
                   <div className="flex flex-col items-center">
                     <div
                       className={
@@ -190,8 +191,9 @@ export function About() {
                     <p className="font-mono text-sm text-hud-text mt-0.5">{item.role}</p>
                     <p className="text-xs text-hud-muted mt-0.5">{item.note}</p>
                   </div>
-                </div>
+                </li>
               ))}
+              </ol>
             </div>
           </div>
         </div>
