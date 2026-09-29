@@ -112,5 +112,8 @@ export function focusSection(id: string) {
   if (!el) return;
   if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
   el.focus({ preventScroll: true });
-  el.scrollIntoView({ behavior: "smooth" });
+  const still =
+    document.documentElement.dataset.motion === "off" ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ behavior: still ? "auto" : "smooth" });
 }

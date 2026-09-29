@@ -4,6 +4,7 @@ import { useState, useEffect, useId } from "react";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useDialog, focusSection } from "@/lib/use-dialog";
+import { MotionToggle } from "@/components/ui/MotionToggle";
 
 const MARKS = [
   {
@@ -139,7 +140,7 @@ export function MobileNav() {
           id={menuId}
           inert={!open}
           className={cn(
-            "fixed inset-0 z-[9989] flex flex-col justify-center px-8",
+            "fixed inset-0 z-[9989] flex flex-col justify-center-safe overflow-y-auto px-8 pt-16 pb-28",
             "bg-hud-dark/95 backdrop-blur-md",
             "transition-all duration-300",
             open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -179,7 +180,7 @@ export function MobileNav() {
                     transitionDelay: visible ? `${i * 60}ms` : "0ms",
                   }}
                 >
-                  <span aria-hidden="true" className="font-mono text-[10px] text-hud-muted/50 tracking-[0.2em] w-6">
+                  <span aria-hidden="true" className="font-mono text-[10px] text-hud-muted tracking-[0.2em] w-6">
                     {module}
                   </span>
                   <span
@@ -201,18 +202,21 @@ export function MobileNav() {
           </nav>
 
           {/* Bottom */}
-          <div className="mt-12 relative flex items-center justify-between">
-            <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.2em]">
+          <div className="mt-12 relative flex flex-wrap items-center justify-between gap-x-3 gap-y-4">
+            <p className="font-mono text-[10px] text-hud-muted tracking-[0.2em]">
               DAVID A VARGAS · SOFTWARE ENGINEER
             </p>
-            <button
-              onClick={() => setMarkOpen(true)}
-              aria-haspopup="dialog"
-              aria-label="MARK III — view suit upgrade log"
-              className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
-            >
-              <span>◆</span> MARK III
-            </button>
+            <div className="flex items-center gap-2">
+              <MotionToggle />
+              <button
+                onClick={() => setMarkOpen(true)}
+                aria-haspopup="dialog"
+                aria-label="MARK III — view suit upgrade log"
+                className="whitespace-nowrap font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
+              >
+                <span>◆</span> MARK III
+              </button>
+            </div>
           </div>
         </div>
 
@@ -292,7 +296,7 @@ export function MobileNav() {
                   <h3 className="flex items-center gap-3 mb-2">
                     <span className={cn(
                       "font-mono font-bold text-sm tracking-[0.15em]",
-                      mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted/60"
+                      mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted"
                     )}>
                       {mark.id}
                     </span>
@@ -303,7 +307,7 @@ export function MobileNav() {
                   </h3>
                   <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
-                      <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
+                      <li key={line} className="font-mono text-[10px] text-hud-muted tracking-[0.05em]">
                         <span aria-hidden="true">· </span>{line}
                       </li>
                     ))}

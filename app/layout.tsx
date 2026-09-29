@@ -10,6 +10,7 @@ import { CursorTrail } from "@/components/ui/CursorTrail";
 import { SystemClock } from "@/components/ui/SystemClock";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Toaster } from "@/components/ui/sonner";
+import { motionPrefScript } from "@/lib/motion-pref";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -53,6 +54,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: motionPrefScript }} />
+      </head>
       <body className={inter.variable} suppressHydrationWarning>
         <a
           href="#main"

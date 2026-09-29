@@ -10,6 +10,11 @@
   * {
     @apply outline-ring/50;
   }
+  /* One visible focus ring for every keyboard-focusable element (10:1 against the dark HUD) */
+  :focus-visible {
+    outline: 2px solid var(--hud-cyan);
+    outline-offset: 3px;
+  }
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -205,5 +210,34 @@ input[type="search"]::-webkit-search-cancel-button {
   main[tabindex="-1"]:focus,
   section[tabindex="-1"]:focus {
     outline: none;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────
+   Honors the OS setting and the site's MOTION toggle (html[data-motion="off"]).
+   Animations jump to their end state so nothing is left hidden mid-fade.
+   !important inside a layer outranks the (non-important) animation utilities. */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+  html[data-motion="off"] {
+    scroll-behavior: auto !important;
+  }
+  html[data-motion="off"] *,
+  html[data-motion="off"] *::before,
+  html[data-motion="off"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

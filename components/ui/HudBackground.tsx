@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotionPref } from "@/lib/motion-pref";
 
 type Glow = { color: string; left: string; top: string };
 
@@ -180,7 +181,7 @@ const MOTIFS: Record<string, { el: React.ReactNode; className: string; spin?: nu
 
 export function HudBackground() {
   const [active, setActive] = useState("hero");
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionPref();
   const { scrollY } = useScroll();
   // Grid drifts slower than the page (parallax); wraps every grid cell so it never runs out
   const gridY = useTransform(scrollY, (v) => (reduce ? 0 : -((v * 0.15) % GRID)));

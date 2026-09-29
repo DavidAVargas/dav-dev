@@ -4,6 +4,7 @@ import { useState, useEffect, useId } from "react";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { useDialog } from "@/lib/use-dialog";
+import { MotionToggle } from "@/components/ui/MotionToggle";
 
 const MARKS = [
   {
@@ -101,7 +102,7 @@ export function HudReadout() {
           aria-hidden="true"
           className={cn(
             "font-mono text-[10px] tracking-[0.25em] transition-opacity duration-200 pointer-events-none",
-            flash ? "text-hud-cyan" : "text-hud-muted/60"
+            flash ? "text-hud-cyan" : "text-hud-muted"
           )}
         >
           // MODULE: {SECTION_LABELS[active]}
@@ -112,8 +113,9 @@ export function HudReadout() {
           aria-label="MARK III — view suit upgrade log"
           className="font-mono text-[10px] tracking-[0.15em] text-hud-gold border border-hud-gold/40 hover:border-hud-gold hover:bg-hud-gold/10 transition-all duration-200 px-3 py-1 flex items-center gap-1.5"
         >
-          <span>◆</span> MARK III <span className="text-hud-gold/60">↗</span>
+          <span>◆</span> MARK III <span className="text-hud-gold-dim">↗</span>
         </button>
+        <MotionToggle className="self-start" />
       </div>
 
       {/* Patch notes modal */}
@@ -153,7 +155,7 @@ export function HudReadout() {
                   <h3 className="flex items-center gap-3 mb-2">
                     <span className={cn(
                       "font-mono font-bold text-sm tracking-[0.15em]",
-                      mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted/60"
+                      mark.id === "MARK III" ? "text-hud-gold" : "text-hud-muted"
                     )}>
                       {mark.id}
                     </span>
@@ -164,7 +166,7 @@ export function HudReadout() {
                   </h3>
                   <ul role="list" className="flex flex-col gap-1 pl-3 border-l border-hud-border">
                     {mark.lines.map((line) => (
-                      <li key={line} className="font-mono text-[10px] text-hud-muted/70 tracking-[0.05em]">
+                      <li key={line} className="font-mono text-[10px] text-hud-muted tracking-[0.05em]">
                         <span aria-hidden="true">· </span>{line}
                       </li>
                     ))}

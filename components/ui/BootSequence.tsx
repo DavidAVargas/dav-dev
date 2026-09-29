@@ -21,11 +21,27 @@ export function BootSequence() {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    // Only show once per session
-    if (sessionStorage.getItem(SESSION_KEY)) {
+    // Only show once per session, and never when the user asked for less motion
+    const reduced =
+      document.documentElement.dataset.motion === "off" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (sessionStorage.getItem(SESSION_KEY) || reduced) {
+      sessionStorage.setItem(SESSION_KEY, "1");
       setDone(true);
       return;
     }
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const later = (fn: () => void, ms: number) => timers.push(setTimeout(fn, ms));
+
+    // Any key, click, or tap skips straight to the site
+    const skip = () => {
+      timers.forEach(clearTimeout);
+      sessionStorage.setItem(SESSION_KEY, "1");
+      setDone(true);
+    };
+    window.addEventListener("keydown", skip, { once: true });
+    window.addEventListener("pointerdown", skip, { once: true });
 
     let lineIdx = 0;
 
@@ -33,11 +49,11 @@ export function BootSequence() {
       if (lineIdx < BOOT_LINES.length) {
         setLines((prev) => [...prev, BOOT_LINES[lineIdx]]);
         lineIdx++;
-        setTimeout(addLine, LINE_DELAY);
+        later(addLine, LINE_DELAY);
       } else {
-        setTimeout(() => {
+        later(() => {
           setFading(true);
-          setTimeout(() => {
+          later(() => {
             setDone(true);
             sessionStorage.setItem(SESSION_KEY, "1");
           }, 600);
@@ -45,14 +61,19 @@ export function BootSequence() {
       }
     };
 
-    const start = setTimeout(addLine, 200);
-    return () => clearTimeout(start);
+    later(addLine, 200);
+    return () => {
+      timers.forEach(clearTimeout);
+      window.removeEventListener("keydown", skip);
+      window.removeEventListener("pointerdown", skip);
+    };
   }, []);
 
   if (done) return null;
 
   return (
     <div
+      aria-hidden="true"
       className="fixed inset-0 z-[9999] bg-hud-dark flex items-center justify-center"
       style={{
         transition: "opacity 0.6s ease-out",

@@ -197,7 +197,7 @@ function ProjectCard({
 
       {/* Click hint */}
       <div aria-hidden="true" className="pt-2 border-t border-hud-border flex items-center justify-between">
-        <span className="font-mono text-[10px] text-hud-muted/50 tracking-[0.1em]">
+        <span className="font-mono text-[10px] text-hud-muted tracking-[0.1em]">
           CLICK TO ACCESS FILE
         </span>
         <span className="font-mono text-xs text-hud-cyan opacity-0 group-hover:opacity-100 transition-opacity">

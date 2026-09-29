@@ -30,10 +30,10 @@ export function SystemClock() {
       <p className="font-mono text-sm text-hud-cyan tracking-widest">
         {time}
       </p>
-      <p className="font-mono text-[10px] text-hud-muted/70 tracking-[0.15em] mt-0.5">
+      <p className="font-mono text-[10px] text-hud-muted tracking-[0.15em] mt-0.5">
         {date}
       </p>
-      <p className="font-mono text-[9px] text-hud-muted/40 tracking-[0.1em] mt-0.5">
+      <p className="font-mono text-[9px] text-hud-muted tracking-[0.1em] mt-0.5">
         {COORDS}
       </p>
     </div>

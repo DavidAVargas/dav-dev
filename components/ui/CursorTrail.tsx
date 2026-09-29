@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotionPref } from "@/lib/motion-pref";
 
 export function CursorTrail() {
   const [isTouch, setIsTouch] = useState(true);
@@ -10,13 +11,16 @@ export function CursorTrail() {
   const outer = useRef({ x: -999, y: -999 });
   const inner = useRef({ x: -999, y: -999 });
   const hasMoved = useRef(false);
+  const reduced = useReducedMotionPref();
+  const off = isTouch || reduced; // trailing cursor is motion; fall back to the normal cursor
 
   useEffect(() => {
     setIsTouch(!window.matchMedia("(pointer: fine)").matches);
   }, []);
 
   useEffect(() => {
-    if (isTouch) return;
+    if (off) return;
+    hasMoved.current = false;
 
     document.body.style.cursor = "none";
 
@@ -76,9 +80,9 @@ export function CursorTrail() {
       document.removeEventListener("mouseenter", onEnter);
       cancelAnimationFrame(frame);
     };
-  }, [isTouch]);
+  }, [off]);
 
-  if (isTouch) return null;
+  if (off) return null;
 
   return (
     <>

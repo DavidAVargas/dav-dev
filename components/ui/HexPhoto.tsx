@@ -54,7 +54,7 @@ export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoPro
           /* Placeholder when no photo yet */
           <div className="w-full h-full bg-hud-surface flex flex-col items-center justify-center gap-2 border border-hud-cyan/20">
             <span className="font-mono text-4xl text-hud-cyan/30">DAV</span>
-            <span className="font-mono text-[9px] text-hud-muted/50 tracking-[0.2em]">PHOTO PENDING</span>
+            <span className="font-mono text-[9px] text-hud-muted tracking-[0.2em]">PHOTO PENDING</span>
           </div>
         )}
 
@@ -72,19 +72,19 @@ export function HexPhoto({ src, alt = "David A Vargas", className }: HexPhotoPro
       <div aria-hidden="true" className="hidden md:flex absolute -right-4 top-8 flex-col gap-2 translate-x-full">
         <div className="flex items-center gap-2">
           <div className="w-6 h-px bg-hud-cyan/40" />
-          <span className="font-mono text-[9px] text-hud-cyan/60 tracking-[0.15em] whitespace-nowrap">
+          <span className="font-mono text-[9px] text-hud-cyan tracking-[0.15em] whitespace-nowrap">
             STATUS: ONLINE
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-6 h-px bg-hud-gold/40" />
-          <span className="font-mono text-[9px] text-hud-gold/60 tracking-[0.15em] whitespace-nowrap">
+          <span className="font-mono text-[9px] text-hud-gold-dim tracking-[0.15em] whitespace-nowrap">
             CLEARANCE: ENGINEER
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-6 h-px bg-hud-muted/30" />
-          <span className="font-mono text-[9px] text-hud-muted/50 tracking-[0.15em] whitespace-nowrap">
+          <span className="font-mono text-[9px] text-hud-muted tracking-[0.15em] whitespace-nowrap">
             ID: DAV-001
           </span>
         </div>

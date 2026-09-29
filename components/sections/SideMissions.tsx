@@ -360,12 +360,12 @@ function MissionModal({
                       <li key={book.title} className="flex flex-col">
                         <span className={cn(
                           "font-mono text-xs",
-                          m.statusColor === "gold" ? "text-hud-gold/80" : "text-hud-text"
+                          m.statusColor === "gold" ? "text-hud-gold-dim" : "text-hud-text"
                         )}>
                           {book.title}
                         </span>
                         {book.author && (
-                          <span className="font-mono text-[9px] text-hud-muted/60">{book.author}</span>
+                          <span className="font-mono text-[9px] text-hud-muted">{book.author}</span>
                         )}
                       </li>
                     ))}
@@ -448,14 +448,14 @@ function MissionCard({ mission, onClick }: { mission: Mission; onClick: () => vo
         {mission.tags.slice(0, 3).map((t) => (
           <li key={t} className={cn(
             "font-mono text-[9px] px-1.5 py-0.5 border tracking-wide",
-            isGold ? "text-hud-gold/70 border-hud-gold/20" : "text-hud-cyan/70 border-hud-cyan/20"
+            isGold ? "text-hud-gold-dim border-hud-gold/20" : "text-hud-cyan border-hud-cyan/20"
           )}>{t}</li>
         ))}
       </ul>
 
       {/* Click hint */}
       <div aria-hidden="true" className="flex justify-end mt-1">
-        <span className="font-mono text-[9px] text-hud-muted/40 group-hover:text-hud-muted tracking-[0.1em] transition-colors">
+        <span className="font-mono text-[9px] text-hud-muted tracking-[0.1em] transition-colors">
           CLICK TO EXPAND ↗
         </span>
       </div>

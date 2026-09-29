@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
 import { HexPhoto } from "@/components/ui/HexPhoto";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { useReducedMotionPref } from "@/lib/motion-pref";
 
 const STATS = [
   { label: "YEARS IN HEALTHCARE", value: 5,    suffix: "+",  display: "5+"    },
@@ -16,6 +17,7 @@ function CountUpStat({ value, suffix, label, display }: { value: number; suffix:
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotionPref();
 
   useEffect(() => {
     const el = ref.current;
@@ -36,6 +38,10 @@ function CountUpStat({ value, suffix, label, display }: { value: number; suffix:
 
   useEffect(() => {
     if (!started) return;
+    if (reduced) {
+      setCount(value);
+      return;
+    }
     const duration = 1200;
     const start = performance.now();
 
@@ -46,7 +52,7 @@ function CountUpStat({ value, suffix, label, display }: { value: number; suffix:
       if (progress < 1) requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
-  }, [started, value]);
+  }, [started, value, reduced]);
 
   return (
     <HudFrame className="p-5 border border-hud-border bg-hud-dark text-center" ref={ref as React.Ref<HTMLDivElement>}>

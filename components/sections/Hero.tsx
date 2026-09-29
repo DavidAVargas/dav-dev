@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { HudFrame } from "@/components/ui/HudFrame";
 import { ArcReactor } from "@/components/ui/ArcReactor";
 import { cn } from "@/lib/utils";
+import { useReducedMotionPref } from "@/lib/motion-pref";
 
 const PHRASES = [
   "Software Engineer.",
@@ -12,13 +13,18 @@ const PHRASES = [
   "Always Creating.",
 ];
 
-function useTypewriter(phrases: string[]) {
+function useTypewriter(phrases: string[], still: boolean) {
   const [text, setText] = useState("");
   const [phraseIdx, setPhraseIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
+    // Reduced motion: show the first phrase, no typing loop
+    if (still) {
+      setText(phrases[0]);
+      return;
+    }
     const current = phrases[phraseIdx];
 
     const tick = () => {
@@ -42,18 +48,19 @@ function useTypewriter(phrases: string[]) {
 
     timeoutRef.current = setTimeout(tick, 100);
     return () => clearTimeout(timeoutRef.current);
-  }, [text, deleting, phraseIdx, phrases]);
+  }, [text, deleting, phraseIdx, phrases, still]);
 
   return text;
 }
 
 const GLITCH_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&";
 
-function useGlitchText(original: string) {
+function useGlitchText(original: string, still: boolean) {
   const [display, setDisplay] = useState(original);
   const frameRef = useRef<ReturnType<typeof setInterval>>(undefined);
 
   const glitch = () => {
+    if (still) return;
     let iterations = 0;
     clearInterval(frameRef.current);
     frameRef.current = setInterval(() => {
@@ -79,9 +86,10 @@ function useGlitchText(original: string) {
 }
 
 export function Hero() {
-  const typed = useTypewriter(PHRASES);
+  const reduced = useReducedMotionPref();
+  const typed = useTypewriter(PHRASES, reduced);
   const [scanned, setScanned] = useState(false);
-  const { display: nameDisplay, glitch } = useGlitchText("DAVID A VARGAS");
+  const { display: nameDisplay, glitch } = useGlitchText("DAVID A VARGAS", reduced);
 
   useEffect(() => {
     const t = setTimeout(() => setScanned(true), 1800);
@@ -135,7 +143,7 @@ export function Hero() {
         </HudFrame>
 
         {/* Drive quote */}
-        <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-hud-muted/60 uppercase animate-fade-up [animation-delay:0.3s] opacity-0 max-w-xs sm:max-w-none text-center">
+        <p className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-hud-muted uppercase animate-fade-up [animation-delay:0.3s] opacity-0 max-w-xs sm:max-w-none text-center">
           <span aria-hidden="true">// </span>DRIVEN BY THE FEAR OF UNFULFILLED POTENTIAL
         </p>
 

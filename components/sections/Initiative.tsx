@@ -91,7 +91,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
       className={cn(
         "relative border p-8 flex flex-col gap-6 transition-all duration-300",
         isPlaceholder
-          ? "border-hud-border opacity-50"
+          ? "border-hud-border"
           : "border-hud-gold/30 hover:border-hud-gold/60 group"
       )}
     >
@@ -118,7 +118,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
                 className={cn(
                   "font-mono text-[9px] tracking-[0.15em] px-2 py-0.5 border",
                   isPlaceholder
-                    ? "border-hud-muted/30 text-hud-muted/50"
+                    ? "border-hud-muted/30 text-hud-muted"
                     : "border-hud-gold/40 text-hud-gold"
                 )}
               >
@@ -176,7 +176,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
               href={card.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
+              className="font-mono text-[10px] text-hud-gold-dim hover:text-hud-gold transition-colors tracking-[0.15em]"
             >
               <span aria-hidden="true">◆ </span>VIEW LIVE SITE<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
             </a>
@@ -186,7 +186,7 @@ function InitiativeItem({ card }: { card: InitiativeCard }) {
               href={card.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[10px] text-hud-gold/60 hover:text-hud-gold transition-colors tracking-[0.15em]"
+              className="font-mono text-[10px] text-hud-gold-dim hover:text-hud-gold transition-colors tracking-[0.15em]"
             >
               <span aria-hidden="true">◎ </span>VIEW CODE ON GITHUB<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
             </a>

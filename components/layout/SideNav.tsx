@@ -59,10 +59,10 @@ export function SideNav() {
             <span
               className={cn(
                 "font-mono text-xs tracking-[0.2em] transition-all duration-200",
-                "opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0",
+                "opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0",
                 isActive
                   ? "text-hud-cyan"
-                  : "text-hud-muted group-hover:text-hud-cyan"
+                  : "text-hud-muted group-hover:text-hud-cyan group-focus-visible:text-hud-cyan"
               )}
             >
               {label}
@@ -75,7 +75,7 @@ export function SideNav() {
                 "block rounded-full transition-all duration-300 flex-shrink-0",
                 isActive
                   ? "w-4 h-4 bg-hud-cyan animate-glow-cyan"
-                  : "w-2.5 h-2.5 bg-hud-muted/60 group-hover:bg-hud-cyan group-hover:w-3.5 group-hover:h-3.5"
+                  : "w-2.5 h-2.5 bg-hud-muted group-hover:bg-hud-cyan group-hover:w-3.5 group-hover:h-3.5"
               )}
             />
           </button>

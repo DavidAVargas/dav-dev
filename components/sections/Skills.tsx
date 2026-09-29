@@ -21,7 +21,7 @@ const TONES: Record<Tone, {
   barGlow: string; outline: string;
 }> = {
   cyan:  { text: "text-hud-cyan",  textSoft: "text-hud-muted",    bg: "bg-hud-cyan",  border: "border-hud-cyan",  borderSoft: "border-hud-cyan/30",  barGlow: "0 0 8px rgba(0,212,255,0.6)",   outline: "has-[:focus-visible]:outline-hud-cyan" },
-  gold:  { text: "text-hud-gold",  textSoft: "text-hud-gold/70",  bg: "bg-hud-gold",  border: "border-hud-gold",  borderSoft: "border-hud-gold/30",  barGlow: "0 0 8px rgba(201,162,39,0.6)",  outline: "has-[:focus-visible]:outline-hud-gold" },
+  gold:  { text: "text-hud-gold",  textSoft: "text-hud-gold-dim",  bg: "bg-hud-gold",  border: "border-hud-gold",  borderSoft: "border-hud-gold/30",  barGlow: "0 0 8px rgba(201,162,39,0.6)",  outline: "has-[:focus-visible]:outline-hud-gold" },
   green: { text: "text-hud-green", textSoft: "text-hud-green/70", bg: "bg-hud-green", border: "border-hud-green", borderSoft: "border-hud-green/30", barGlow: "0 0 8px rgba(57,229,140,0.6)",  outline: "has-[:focus-visible]:outline-hud-green" },
 };
 
@@ -432,7 +432,7 @@ function CategoryBlock({
           </button>
         </h3>
         {isGold && (
-          <p className="font-mono text-[9px] text-hud-gold/50 tracking-[0.1em] mt-1">
+          <p className="font-mono text-[9px] text-hud-gold-dim tracking-[0.1em] mt-1">
             <span aria-hidden="true">// </span>AI-assisted development is not a shortcut — it&apos;s a force multiplier
           </p>
         )}
@@ -460,7 +460,7 @@ function CategoryBlock({
       <div aria-hidden="true" className="flex justify-end mt-auto">
         <span className={cn(
           "font-mono text-[9px] tracking-[0.1em] transition-colors",
-          isGold ? "text-hud-gold/30 group-hover:text-hud-gold/70" : "text-hud-muted/40 group-hover:text-hud-muted"
+          isGold ? "text-hud-gold-dim group-hover:text-hud-gold" : "text-hud-muted"
         )}>
           CLICK TO EXPAND ↗
         </span>
@@ -510,7 +510,7 @@ export function Skills() {
               </div>
             </div>
 
-            <p className="mt-4 font-mono text-[10px] text-hud-muted/50 tracking-[0.15em]">
+            <p className="mt-4 font-mono text-[10px] text-hud-muted tracking-[0.15em]">
               // power levels are self-assessed — visual representation, not a standardized score. always growing.
             </p>
           </div>
@@ -526,7 +526,7 @@ export function Skills() {
             ))}
           </ul>
 
-          <p className="font-mono text-[10px] text-hud-muted/50 tracking-[0.15em] mt-8 text-center">
+          <p className="font-mono text-[10px] text-hud-muted tracking-[0.15em] mt-8 text-center">
             <span aria-hidden="true">// </span>J.A.R.V.I.S. PROTOCOLS: AI doesn&apos;t replace the engineer — it amplifies one. I use it to move faster, think bigger, and build better.
           </p>
         </div>

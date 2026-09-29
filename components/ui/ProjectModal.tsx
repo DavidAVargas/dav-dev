@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useDialog } from "@/lib/use-dialog";
+import { useReducedMotionPref } from "@/lib/motion-pref";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export type ProjectData = {
@@ -35,6 +36,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
   const [phase, setPhase] = useState<"accessing" | "open" | "closing" | "closed">("closed");
   const [displayed, setDisplayed] = useState<ProjectData | null>(null);
   const phaseRef = useRef(phase);
+  const reduced = useReducedMotionPref();
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -44,8 +46,9 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
   useEffect(() => {
     if (!project) return;
     setDisplayed(project);
-    if (phaseRef.current === "open") {
-      dialogRef.current?.scrollTo({ top: 0 });
+    if (phaseRef.current === "open" || reduced) {
+      if (phaseRef.current === "open") dialogRef.current?.scrollTo({ top: 0 });
+      else setPhase("open"); // reduced motion: skip the "accessing" intro
       return;
     }
     setPhase("accessing");
@@ -235,7 +238,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                     <p className="font-mono text-xs text-hud-muted tracking-[0.2em]">
                       <span aria-hidden="true">// </span>PREVIEW PENDING
                     </p>
-                    <p className="font-mono text-[10px] text-hud-muted/40 tracking-[0.15em]">
+                    <p className="font-mono text-[10px] text-hud-muted tracking-[0.15em]">
                       SCREENSHOT COMING SOON
                     </p>
                   </div>
@@ -301,7 +304,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                           <span aria-hidden="true" className="text-hud-cyan">◎</span> GITHUB<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
                         </a>
                       ) : (
-                        <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
+                        <span className="font-mono text-xs text-hud-muted tracking-[0.1em] flex items-center gap-2">
                           <span aria-hidden="true">◎</span> PRIVATE REPO
                         </span>
                       )}
@@ -315,7 +318,7 @@ export function ProjectModal({ project, onClose, onPrev, onNext, position }: Pro
                           <span aria-hidden="true" className="text-hud-gold">◆</span> LIVE SITE<span aria-hidden="true"> ↗</span><span className="sr-only"> (opens in new tab)</span>
                         </a>
                       ) : (
-                        <span className="font-mono text-xs text-hud-muted/40 tracking-[0.1em] flex items-center gap-2">
+                        <span className="font-mono text-xs text-hud-muted tracking-[0.1em] flex items-center gap-2">
                           <span aria-hidden="true">◇</span> LIVE SITE PENDING
                         </span>
                       )}

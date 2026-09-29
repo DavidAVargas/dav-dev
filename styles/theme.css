@@ -25,6 +25,7 @@
   --hud-cyan: #00d4ff;
   --hud-gold: #c9a227;
   --hud-green: #39e58c; /* accessibility accent */
+  --hud-gold-dim: #ad8c25; /* softer gold that still passes 4.5:1 on every background */
   --hud-dark: #0e0e18;
   --hud-surface: #12121f;
   --hud-text: #e8e8f0;
@@ -86,6 +87,7 @@
   --color-hud-cyan: var(--hud-cyan);
   --color-hud-gold: var(--hud-gold);
   --color-hud-green: var(--hud-green);
+  --color-hud-gold-dim: var(--hud-gold-dim);
   --color-hud-dark: var(--hud-dark);
   --color-hud-surface: var(--hud-surface);
   --color-hud-text: var(--hud-text);
