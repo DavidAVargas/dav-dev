@@ -7,7 +7,8 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { X } from "lucide-react";
 
 type BookEntry = { title: string; author?: string };
-type BookShelf = { category: string; items: BookEntry[] };
+type BookShelf = { category: string; items: BookEntry[]; highlight?: boolean };
+type LogEntry = { date: string; note: string };
 
 type Mission = {
   id: string;
@@ -20,6 +21,7 @@ type Mission = {
   tags: string[];
   link?: { label: string; url: string };
   books?: BookShelf[];
+  updates?: LogEntry[]; // newest first
 };
 
 const MISSIONS: Mission[] = [
@@ -119,10 +121,14 @@ const MISSIONS: Mission[] = [
     category: "KNOWLEDGE",
     status: "ALWAYS READING",
     statusColor: "gold",
-    short: "Never liked reading until Rich Dad Poor Dad changed everything. 40+ books in — all business, mindset, and self-improvement. No fiction. No fluff.",
+    short: "Never liked reading until Rich Dad Poor Dad changed everything. 50+ books in — all business, mindset, and self-improvement. No fiction. No fluff.",
     detail:
       "I was never a reader. The only book I actually finished in school was Ender's Game. Everything else just didn't stick. Then I picked up Rich Dad Poor Dad — and something shifted. I realized books weren't boring. I was just reading the wrong ones. Now I can't stop. Every book on this list changed how I think about money, business, mindset, health, or people. I don't read to say I read. I read because there's no faster way to download someone else's decades of experience in a few hours. Knowledge is leverage — and I treat it like one.",
-    tags: ["40+ BOOKS READ", "2 CURRENTLY READING", "18 IN QUEUE", "ALWAYS GROWING"],
+    tags: ["54 BOOKS READ", "2 CURRENTLY READING", "15 IN QUEUE", "ALWAYS GROWING"],
+    updates: [
+      { date: "OCT 23, 2026", note: "+6 finished · now reading Once an Eagle & Smarter Faster Better" },
+      { date: "MAR 29, 2026", note: "Reading log first published" },
+    ],
     books: [
       {
         category: "BUSINESS & MONEY",
@@ -141,6 +147,7 @@ const MISSIONS: Mission[] = [
           { title: "A Simple Path to Wealth", author: "JL Collins" },
           { title: "Dropshipping Make Money Online", author: "Marcus Baumann" },
           { title: "Move Fast and Fix Things", author: "Frances Frei & Anne Morriss" },
+          { title: "The Book on Investing in Real Estate with No (and Low) Money Down", author: "Brandon Turner" },
         ],
       },
       {
@@ -164,6 +171,7 @@ const MISSIONS: Mission[] = [
           { title: "Stop Lying", author: "Dr. Bennett Pologe" },
           { title: "How to Find Yourself", author: "Nick Trenton" },
           { title: "How to Train Your Mind", author: "Chris Bailey" },
+          { title: "The Choice", author: "Edith Eger" },
         ],
       },
       {
@@ -176,6 +184,8 @@ const MISSIONS: Mission[] = [
           { title: "Influencer", author: "Brittany Hennessy" },
           { title: "Crushing It", author: "Gary Vaynerchuk" },
           { title: "Reverse Engineering of Sales", author: "J. Dehar" },
+          { title: "Never Eat Alone", author: "Keith Ferrazzi" },
+          { title: "Surrounded by Psychopaths", author: "Thomas Erikson" },
         ],
       },
       {
@@ -184,6 +194,8 @@ const MISSIONS: Mission[] = [
           { title: "Lone Survivor", author: "Marcus Luttrell" },
           { title: "American Sniper", author: "Chris Kyle" },
           { title: "The Last Punisher", author: "Kevin Lacz" },
+          { title: "The Operator", author: "Robert O'Neill" },
+          { title: "Unafraid", author: "Eddie Penney & Keith Wood" },
         ],
       },
       {
@@ -204,18 +216,15 @@ const MISSIONS: Mission[] = [
       },
       {
         category: "◉ CURRENTLY READING",
+        highlight: true,
         items: [
-          { title: "Surrounded by Psychopaths", author: "Thomas Erikson" },
-          { title: "No More Mr. Nice Guy", author: "Robert Glover" },
+          { title: "Once an Eagle", author: "Anton Myrer" },
+          { title: "Smarter Faster Better", author: "Charles Duhigg" },
         ],
       },
       {
         category: "◇ QUEUE",
         items: [
-          { title: "Never Eat Alone", author: "Keith Ferrazzi" },
-          { title: "The Operator", author: "Robert O'Neill" },
-          { title: "The Choice", author: "Edith Eger" },
-          { title: "Unafraid", author: "Eddie Penney & Keith Wood" },
           { title: "Dare to Lead", author: "Brené Brown" },
           { title: "Unapologetic Ambition", author: "Shellye Archambeau" },
           { title: "Leading with Heart", author: "John Baird & Edward Sullivan" },
@@ -227,9 +236,10 @@ const MISSIONS: Mission[] = [
           { title: "Extreme Ownership", author: "Jocko Willink & Leif Babin" },
           { title: "Power vs. Force", author: "David Hawkins" },
           { title: "Never Split the Difference", author: "Chris Voss" },
-          { title: "Smarter Faster Better", author: "Charles Duhigg" },
           { title: "The Triple Package", author: "Amy Chua & Jed Rubenfeld" },
           { title: "The Personal MBA", author: "Josh Kaufman" },
+          { title: "No More Mr. Nice Guy", author: "Robert Glover" },
+          { title: "Meditations", author: "Marcus Aurelius" },
         ],
       },
     ],
@@ -345,33 +355,57 @@ function MissionModal({
           {/* Book list */}
           {m.books && (
             <div className="flex flex-col gap-5">
-              <h3 className={cn(
-                "font-mono text-[10px] tracking-[0.2em]",
-                m.statusColor === "gold" ? "text-hud-gold" : "text-hud-cyan"
-              )}><span aria-hidden="true">// </span>READING LOG</h3>
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className={cn(
+                  "font-mono text-xs tracking-[0.2em]",
+                  m.statusColor === "gold" ? "text-hud-gold" : "text-hud-cyan"
+                )}><span aria-hidden="true">// </span>READING LOG</h3>
+                {m.updates?.[0] && (
+                  <p className="font-mono text-[11px] tracking-[0.1em] text-hud-muted">
+                    LAST UPDATED: <span className="text-hud-text">{m.updates[0].date}</span>
+                  </p>
+                )}
+              </div>
               {m.books.map((shelf) => (
-                <div key={shelf.category}>
-                  <h4 className="font-mono text-[9px] tracking-[0.2em] text-hud-muted mb-2">
-                    {shelf.category}
+                <div
+                  key={shelf.category}
+                  className={cn(shelf.highlight && "border border-hud-gold/40 bg-hud-gold/[0.04] p-4")}
+                >
+                  <h4 className={cn(
+                    "font-mono text-[11px] tracking-[0.2em] mb-2 flex items-center justify-between",
+                    shelf.highlight ? "text-hud-gold" : "text-hud-text"
+                  )}>
+                    <span>{shelf.category}</span>
+                    <span className="text-hud-muted">{shelf.items.length}</span>
                   </h4>
                   <div className="h-px w-full bg-hud-border mb-3" />
-                  <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4">
+                  <ul role="list" className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
                     {shelf.items.map((book) => (
-                      <li key={book.title} className="flex flex-col">
-                        <span className={cn(
-                          "font-mono text-xs",
-                          m.statusColor === "gold" ? "text-hud-gold-dim" : "text-hud-text"
-                        )}>
+                      <li key={book.title} className="flex flex-col gap-0.5">
+                        <span className="text-sm leading-snug text-hud-text">
                           {book.title}
                         </span>
                         {book.author && (
-                          <span className="font-mono text-[9px] text-hud-muted">{book.author}</span>
+                          <span className="text-xs text-hud-muted">{book.author}</span>
                         )}
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+              {m.updates && (
+                <div>
+                  <h4 className="font-mono text-[11px] tracking-[0.2em] text-hud-text mb-2">UPDATE LOG</h4>
+                  <div className="h-px w-full bg-hud-border mb-3" />
+                  <ul role="list" className="flex flex-col gap-1.5">
+                    {m.updates.map((u) => (
+                      <li key={u.date} className="text-xs text-hud-muted">
+                        <span className="font-mono text-hud-gold-dim">{u.date}</span> — {u.note}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
 
