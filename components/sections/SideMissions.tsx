@@ -127,7 +127,7 @@ const MISSIONS: Mission[] = [
     tags: ["54 BOOKS READ", "2 CURRENTLY READING", "15 IN QUEUE", "ALWAYS GROWING"],
     updates: [
       { date: "OCT 23, 2026", note: "+6 finished · now reading Once an Eagle & Smarter Faster Better" },
-      { date: "MAR 29, 2026", note: "Reading log first published" },
+      { date: "MAR 29, 2026", note: "Now reading Surrounded by Psychopaths, Never Eat Alone, The Operator, The Choice, Unafraid & The Book on Investing in Real Estate" },
     ],
     books: [
       {
