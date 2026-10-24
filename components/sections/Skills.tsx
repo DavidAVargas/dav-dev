@@ -66,7 +66,7 @@ const CATEGORIES: Category[] = [
     color: "cyan",
     description:
       "Where I spend most of my time. I build UIs that feel alive — responsive, polished, and fast. The frontend is where code meets the user, and that handoff matters. If someone notices the interface, it worked.",
-    usedIn: ["QVIL Studios", "DAV Portfolio", "Tex N Wash"],
+    usedIn: ["QVIL Studios", "DAV Portfolio", "Tex N Wash", "Hyperflight", "Buy With Miguel"],
     skills: [
       { name: "React",      level: 70, label: "PROFICIENT", icon: "⚛" },
       { name: "Next.js",    level: 65, label: "PROFICIENT", icon: "▲" },
@@ -75,6 +75,7 @@ const CATEGORIES: Category[] = [
       { name: "Tailwind",   level: 75, label: "PROFICIENT", icon: "≋" },
       { name: "shadcn/ui",  level: 70, label: "PROFICIENT", icon: "◈" },
       { name: "TypeScript", level: 55, label: "DEVELOPING", icon: "TS" },
+      { name: "Open Graph", level: 55, label: "DEVELOPING", icon: "⧠" },
     ],
   },
   {
@@ -119,8 +120,8 @@ const CATEGORIES: Category[] = [
     subtitle: "EXPERIENCE LAYER",
     color: "cyan",
     description:
-      "Motion is what makes an interface feel alive instead of static. I use GSAP for timeline-driven animation and Motion for React component transitions — always purposeful, never in the way, and respectful of reduced-motion settings. Capacitor lets me take a React web app and ship it as a native iOS or Android app, and Mobbin is where I study real-world mobile patterns and user flows before I design one.",
-    usedIn: [],
+      "Motion is what makes an interface feel alive instead of static. I use GSAP for timeline-driven animation and Motion for React component transitions — always purposeful, never in the way, and respectful of reduced-motion settings. Capacitor lets me take a React web app and ship it as a native iOS or Android app — I'm using it now to bring Thoughtspun to the app stores, and Mobbin is where I study real-world mobile patterns and user flows before I design one.",
+    usedIn: ["Thoughtspun", "Hyperflight"],
     skills: [
       { name: "GSAP",       level: 50, label: "DEVELOPING", icon: "≫" },
       { name: "Motion",     level: 55, label: "DEVELOPING", icon: "↝" },

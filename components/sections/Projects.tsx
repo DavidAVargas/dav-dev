@@ -57,11 +57,11 @@ const PROJECTS: ProjectData[] = [
   {
     id: "PRJ-005",
     title: "Vet Finance",
-    description: "A free financial education platform for U.S. military members and veterans — credit cards, credit scores, and financial literacy built to fight veteran homelessness.",
+    description: "A free financial education platform for U.S. military members and veterans — officially launched, invite only, with 12 members already inside. Built to fight veteran homelessness.",
     fullDescription:
-      "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. Vet Finance is a free education platform I'm building to close it. The focus is credit: how it works, how to use it strategically, and how to build a strong financial foundation coming out of the military. The layout and platform architecture are live. The education courses are next. Long-term vision goes further — I want to launch a credit card designed specifically for veterans, with three tiers and a rewards structure that gives back to active troops. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
+      "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. Vet Finance is a free education platform I built to close it. It's officially out — invite only, and 12 members are already inside. The courses are live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned — short sections, real examples, quizzes, and no sales pitch. Finish courses and you unlock more: a step-by-step \"What Would I Do If I…\" playbook and a resource library of videos, tools, and apps. I'm letting people in a few at a time while I build, through member invites and meetups. Long-term vision goes further — I want to launch a credit card designed specifically for veterans, with three tiers and a rewards structure that gives back to active troops. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
-    status: "BETA",
+    status: "INVITE ONLY",
     badge: "INITIATIVE",
     demo: "/projects/vet-finance.jpg",
     links: { live: "https://vet-finance-omega.vercel.app/", github: "" },
@@ -106,11 +106,34 @@ const PROJECTS: ProjectData[] = [
     description: "Bilingual real estate site for a Central New Jersey REALTOR® — built to boost his exposure, drive local traffic, and turn visitors into buyers, sellers, and renters.",
     fullDescription:
       "Miguel is a bilingual REALTOR® with Halo Realty serving Perth Amboy, South Amboy, and the surrounding Central Jersey towns. He needed more than a listing profile — he needed a home base that brings people to him. I built a full English and Spanish site so every visitor gets the experience in their own language, with services broken out for buying, selling, rentals, and commercial, a recent sales showcase, and a service-area section covering twelve towns. Under the hood it's built for local search: structured data that tells Google exactly who he is and where he works, proper language tagging for both versions, and clear calls to action on every page — call, email, or find out what your home is worth. This is an active client build. Miguel and I are shaping it together as he tells me what he needs, so the live site keeps evolving.",
-    tech: [A11Y_TAG, "Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Vercel"],
+    tech: [A11Y_TAG, "Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Open Graph", "Vercel"],
     status: "IN PROGRESS",
     badge: "CLIENT",
     demo: "/projects/buy-with-miguel.jpg",
     links: { live: "https://buy-with-miguel.vercel.app/en", github: "" },
+  },
+  {
+    id: "PRJ-010",
+    title: "Thoughtspun",
+    description: "Untangle what's on your mind. A visual web chart for thoughts, goals, and decisions — inspired by the storytelling web charts my middle school teacher taught us. Native app coming soon.",
+    fullDescription:
+      "In middle school, a teacher taught us to plan stories with a web chart — the main idea in the center, everything else branching out from it. I never forgot it. Thoughtspun takes that idea and turns it into a tool for untangling what's on your mind. You put your life, a project, or a decision in the center bubble and branch it out with six bubble types — areas, goals, blockers, root causes, actions, and thoughts — each with its own color and icon. Then you tie it together with threads: link bubbles across branches, add a note explaining why they connect, and hover a thread to see everything it touches. Actions can be checked off so you see progress on every chart, and templates like Life Map and Problem Solver walk you from a goal to your first step. Drag whole branches, collapse, search, tidy up, undo, redo — and it's touch-friendly, with pinch, drag, and tap on phones. Charts are private to your account. I'm still building it, and next I'm using Capacitor to take the same codebase and ship it as a native iOS and Android app.",
+    tech: [A11Y_TAG, "Next.js", "Tailwind", "Motion", "Capacitor", "Vercel"],
+    status: "IN PROGRESS",
+    demo: "/projects/thoughtspun.jpg",
+    links: { live: "https://mind-web-chart.vercel.app/", github: "" },
+  },
+  {
+    id: "PRJ-011",
+    title: "Hyperflight",
+    description: "Professional home base for a New Jersey boxing coach, fitness coach, and filmmaker with 180K+ followers — built so brands can reach him the right way.",
+    fullDescription:
+      "Hyperflight is a pro boxing coach, fitness coach, and filmmaker with 140K followers on TikTok and 180K+ across platforms. Brands were already reaching out — he needed a professional place to send them. I built a site that works like a pitch: his services (brand partnerships, Hyper Films video production, boxing coaching, and fitness training), real audience stats, past brand work, and a clear path to get in touch. There's a downloadable media kit so a brand can view or save his numbers and offerings in one file, and his email is a click-to-reveal with one-tap copy. I also set up Open Graph previews, so when he sends his link to a business it unfurls as a clean, branded card — like handing over a digital business card. This is a client build for an influencer I work with.",
+    tech: [A11Y_TAG, "Next.js", "Tailwind", "Motion", "Open Graph", "SEO", "Vercel"],
+    status: "DEPLOYED",
+    badge: "CLIENT",
+    demo: "/projects/hyperflight.jpg",
+    links: { live: "https://hyperflight-orcin.vercel.app/", github: "" },
   },
 ];
 

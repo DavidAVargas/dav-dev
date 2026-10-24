@@ -32,14 +32,14 @@ const INITIATIVES: InitiativeCard[] = [
   {
     id: "INI-002",
     industry: "MILITARY / VETERANS",
-    tags: ["BETA — LIVE", "NONPROFIT VISION", "REAL PROBLEM IDENTIFIED"],
+    tags: ["OFFICIALLY LAUNCHED", "INVITE ONLY — 12 MEMBERS", "NONPROFIT VISION"],
     problem:
       "Military members leave service without financial literacy. No one teaches them how credit works, how to use credit cards strategically, or how to build a financial foundation in civilian life. That gap is a direct pipeline to veteran homelessness — and it's completely preventable.",
     built:
-      "Vet Finance — a free financial education platform built specifically for U.S. military members and veterans. Credit cards, credit scores, financial strategy, all in one place at no cost. Platform is live in beta. Education courses are in development. Long-term vision: a veteran-specific credit card with three tiers and a rewards structure that gives back to active troops.",
+      "Vet Finance — a free financial education platform built specifically for U.S. military members and veterans. Credit cards, credit scores, financial strategy, all in one place at no cost. Officially launched and invite only, with four courses live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned. Long-term vision: a veteran-specific credit card with three tiers and a rewards structure that gives back to active troops.",
     outcome:
-      "Platform deployed and live. Education module in development. Pursuing nonprofit structure to keep it free and accessible permanently. Nobody asked me to build this. I saw the gap and I'm closing it.",
-    status: "BETA — IN DEVELOPMENT",
+      "Officially out, invite only, with 12 members already inside — letting people in a few at a time through member invites and meetups while I keep building. Pursuing nonprofit structure to keep it free and accessible permanently. Nobody asked me to build this. I saw the gap and I'm closing it.",
+    status: "LIVE — INVITE ONLY",
     statusColor: "gold",
     live: "https://vet-finance-omega.vercel.app/",
   },
