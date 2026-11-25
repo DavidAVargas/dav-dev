@@ -52,7 +52,7 @@ const PROJECTS: ProjectData[] = [
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind CSS v4", "shadcn/ui", "Vercel"],
     status: "DEPLOYED",
     demo: "/projects/dav-portfolio.jpg",
-    links: { live: "#", github: "https://github.com/DavidAVargas/dav-dev" },
+    links: { live: "https://www.davidavargas.dev", github: "https://github.com/DavidAVargas/dav-dev" },
   },
   {
     id: "PRJ-005",
