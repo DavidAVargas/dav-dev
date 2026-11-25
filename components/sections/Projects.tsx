@@ -67,15 +67,15 @@ const PROJECTS: ProjectData[] = [
   },
   {
     id: "PRJ-006",
-    title: "Vet Finance",
-    description: "A free financial education platform for U.S. military members and veterans — officially launched, invite only, with 12 members already inside. Built to fight veteran homelessness.",
+    title: "Ruck Finance",
+    description: "Free financial education for U.S. military members, veterans, and their families — officially launched on Veterans Day 2026. Invite only, with 20+ live members already using it. Built to fight veteran homelessness.",
     fullDescription:
-      "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. Vet Finance is a free education platform I built to close it. It's officially out — invite only, and 12 members are already inside. The courses are live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned — short sections, real examples, quizzes, and no sales pitch. Finish courses and you unlock more: a step-by-step \"What Would I Do If I…\" playbook and a resource library of videos, tools, and apps. I'm letting people in a few at a time while I build, through member invites and meetups. Long-term vision goes further — I want to launch a credit card designed specifically for veterans, with three tiers and a rewards structure that gives back to active troops. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
+      "Veterans are one of the most underserved groups when it comes to financial literacy — and that gap is a direct pipeline to homelessness. HUD counted 32,495 veterans homeless on a single night in January 2025. Ruck Finance is the platform I built to close that gap. It started as Vet Finance and officially launched as Ruck Finance on Veterans Day, November 11, 2026 — tagline: carry less debt, go further. It's invite only, and 20+ members are already using it — up from 12 before launch. Four courses are live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned — credit, the VA home loan, the GI Bill, VA disability, explained in plain English with short sections, real examples, quizzes, and no sales pitch. Finish courses and you unlock more: a step-by-step \"What Would I Do If I…\" playbook built from 15 guides, and a resource library of the videos, tools, and apps I actually recommend. It's free for the military community, always. Civilians can get lifetime access for a one-time fee. I'm letting people in a few at a time through member invites and meetups. Long-term vision goes further — a military credit card line with three tiers: Combat Black for combat veterans, Platinum for all active duty and veterans, and a Supporter card for civilians whose annual fee funds veteran perks. No bank has done this right. I want to be the one who does. This one isn't about a paycheck. It's about solving something real.",
     tech: [A11Y_TAG, "Next.js", "TypeScript", "Tailwind", "Vercel"],
     status: "INVITE ONLY",
     badge: "INITIATIVE",
-    demo: "/projects/vet-finance.jpg",
-    links: { live: "https://vet-finance-omega.vercel.app/", github: "" },
+    demo: "/projects/ruck-finance.jpg",
+    links: { live: "https://www.ruckfinance.com", github: "" },
   },
   {
     id: "PRJ-007",

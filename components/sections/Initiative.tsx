@@ -32,16 +32,16 @@ const INITIATIVES: InitiativeCard[] = [
   {
     id: "INI-002",
     industry: "MILITARY / VETERANS",
-    tags: ["OFFICIALLY LAUNCHED", "INVITE ONLY — 12 MEMBERS", "NONPROFIT VISION"],
+    tags: ["LAUNCHED VETERANS DAY 2026", "20+ LIVE MEMBERS", "NONPROFIT VISION"],
     problem:
       "Military members leave service without financial literacy. No one teaches them how credit works, how to use credit cards strategically, or how to build a financial foundation in civilian life. That gap is a direct pipeline to veteran homelessness — and it's completely preventable.",
     built:
-      "Vet Finance — a free financial education platform built specifically for U.S. military members and veterans. Credit cards, credit scores, financial strategy, all in one place at no cost. Officially launched and invite only, with four courses live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned. Long-term vision: a veteran-specific credit card with three tiers and a rewards structure that gives back to active troops.",
+      "Ruck Finance (formerly Vet Finance) — free financial education built specifically for U.S. military members, veterans, and their families. Credit, credit cards, the VA home loan, the GI Bill, all explained in plain English at no cost. Officially launched on Veterans Day 2026, invite only, with four courses live: Credit Basics, Credit Cards 101, Debt Traps, and Military Benefits You Earned. Long-term vision: a military credit card line with three tiers — Combat Black, Platinum, and a civilian Supporter card whose fee funds perks for those who served.",
     outcome:
-      "Officially out, invite only, with 12 members already inside — letting people in a few at a time through member invites and meetups while I keep building. Pursuing nonprofit structure to keep it free and accessible permanently. Nobody asked me to build this. I saw the gap and I'm closing it.",
+      "Officially out, invite only, with 20+ members already using it — letting people in a few at a time through member invites and meetups while I keep building. Pursuing nonprofit structure to keep it free and accessible permanently. Nobody asked me to build this. I saw the gap and I'm closing it.",
     status: "LIVE — INVITE ONLY",
     statusColor: "gold",
-    live: "https://vet-finance-omega.vercel.app/",
+    live: "https://www.ruckfinance.com",
   },
   {
     id: "INI-003",
