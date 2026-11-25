@@ -39,7 +39,7 @@ const MARKS = [
       "Hero name centering & equal CTA buttons",
       "SEO metadata & OG image",
       "Particle network (in progress)",
-      "Deployed to davidavargas.com",
+      "Deployed to davidavargas.dev",
     ],
   },
 ];

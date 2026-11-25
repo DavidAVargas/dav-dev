@@ -14,6 +14,7 @@ import { motionPrefScript } from "@/lib/motion-pref";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.davidavargas.dev"),
   title: "David A Vargas — Software Engineer",
   description:
     "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     title: "David A Vargas — Software Engineer",
     description:
       "Software engineer, builder, marathon runner. Based in the US. Open to full-time roles.",
-    url: "https://davidavargas.com",
+    url: "https://www.davidavargas.dev",
     siteName: "David A Vargas",
     images: [
       {
