@@ -105,9 +105,9 @@ const PROJECTS: ProjectData[] = [
     title: "Buy With Miguel",
     description: "Bilingual real estate site for a Central New Jersey REALTOR® — built to boost his exposure, drive local traffic, and turn visitors into buyers, sellers, and renters.",
     fullDescription:
-      "Miguel is a bilingual REALTOR® with Halo Realty serving Perth Amboy, South Amboy, and the surrounding Central Jersey towns. He needed more than a listing profile — he needed a home base that brings people to him. I built a full English and Spanish site so every visitor gets the experience in their own language, with services broken out for buying, selling, rentals, and commercial, a recent sales showcase, and a service-area section covering twelve towns. Under the hood it's built for local search: structured data that tells Google exactly who he is and where he works, proper language tagging for both versions, and clear calls to action on every page — call, email, or find out what your home is worth. This is an active client build. Miguel and I are shaping it together as he tells me what he needs, so the live site keeps evolving.",
+      "Miguel is a bilingual REALTOR® with Halo Realty serving Perth Amboy, South Amboy, and the surrounding Central Jersey towns. He needed more than a listing profile — he needed a home base that brings people to him. I built a full English and Spanish site so every visitor gets the experience in their own language, with services broken out for buying, selling, rentals, and commercial, a recent sales showcase, and a service-area section covering twelve towns. Under the hood it's built for local search: structured data that tells Google exactly who he is and where he works, proper language tagging for both versions, and clear calls to action on every page — call, email, or find out what your home is worth. The site is fully built and live, giving Miguel a bilingual home base that works for him around the clock.",
     tech: [A11Y_TAG, "Next.js", "Tailwind", "i18n (EN/ES)", "SEO", "Open Graph", "Vercel"],
-    status: "IN PROGRESS",
+    status: "DEPLOYED",
     badge: "CLIENT",
     demo: "/projects/buy-with-miguel.jpg",
     links: { live: "https://buy-with-miguel.vercel.app/en", github: "" },
